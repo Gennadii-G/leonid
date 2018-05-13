@@ -1,0 +1,5 @@
+
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: ../partials/variables.\A        Load paths:\A          /Users/Julien/Desktop/MALIN/sass\A          /Users/Julien/Downloads/CodeKit.app/Contents/Resources/engines/bourbon/bourbon/app/assets/stylesheets\A          Sass::Globbing::Importer\A         on line 3 of /Users/Julien/Desktop/MALIN/sass/animated-headlines.scss\A \A 1: @import 'bourbon'; // http://bourbon.io/\A 2: \A 3: @import '../partials/variables'; // colors, fonts etc...\A 4: \A 5: @import '../partials/mixins'; // custom mixins\A 6: \A 7: @import '../partials/layout'; // responsive grid and media queries\A 8: "; }

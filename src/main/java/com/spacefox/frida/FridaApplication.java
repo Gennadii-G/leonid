@@ -13,10 +13,10 @@ public class FridaApplication {
 
 }
 
-class FridaCommandLineRunner implements CommandLineRunner {
-
-	@Override
-	public void run(String... args) throws Exception {
-
-	}
-}
+//class FridaCommandLineRunner implements CommandLineRunner {
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//
+//	}
+//}
