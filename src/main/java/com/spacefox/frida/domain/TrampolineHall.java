@@ -10,6 +10,7 @@ public class TrampolineHall  extends DomainObject {
     private List<Trampoline> tramlins;
     private int price;
     private String name;
+    private String address = "mockAddress";
 
     public TrampolineHall() {}
 
@@ -26,6 +27,10 @@ public class TrampolineHall  extends DomainObject {
         this.price = price;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -36,6 +41,10 @@ public class TrampolineHall  extends DomainObject {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getFreeTramps(){
+        return freeTramps();
     }
 
     public boolean orderTramp(){

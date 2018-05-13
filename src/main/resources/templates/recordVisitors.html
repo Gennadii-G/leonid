@@ -9,14 +9,10 @@
 	<body>
 
 		<div class="loading-part animated-quick">
-
 			<div class="loader-part opacity-0 animated-quick">
-
 				<div class="loader-circle"></div>
 				<div class="loader-text">Loading</div>
-
 			</div>
-
 		</div>
 
 		<button class="open-menu-mobile">
@@ -29,22 +25,44 @@
 		<section id="content-part">
 		<section id="home-part" class="scale-max">
 			<div class="overlay">
-
 			<div class="content-place">
-				<h2>Информация о залах</h2>
-                <table style="width:80%">
-                    <tr>
-                        <th><a>Название зала</a></th>
-                        <th><a>Адрес</a></th>
-                        <th><a>Цена аренды</a></th>
-                        <th><a>свободных мест на сегодня</a></th>
-                    </tr>
-					<tr th:each="hall : ${halls}">
-						<td ><p><a th:text="${hall.name}" href="/"></a></p></td>
-						<td ><a th:text="${hall.address}" href="/"></a></td>
-						<td ><a th:text="${hall.price}" href="/"></a></td>
-						<td ><a th:text="${hall.freeTramps}" href="/"></a></td>
-					</tr>
+				<h2>Запись посетителей</h2>
+				<form>
+					<fieldset>
+						<h2>Информация о пасетителе:</h2>
+						<th:input name="name" type="text" value="Frank" /> <br />
+						<textarea cols="30" rows="2">Long text.</textarea><br />
+						<input name="democheckbox" type="checkbox" value="1" /> Checkbox<br />
+						<button type="submit" value="Submit">Submit</button>
+					</fieldset>
+				</form>
+
+				<!--<form method="get" action="/org/create-default-blocks">-->
+					<!--<input name="default_blocks_add" type="submit" value="Добавить блоки"/>-->
+				<!--</form>-->
+				<!--<form name="org">-->
+					<!--<p>Название</p>-->
+					<!--<input type="text" name="name" th:value="${1234}"/>-->
+				<!--</form>-->
+
+				<!--<h2>Записи в зал [какой-то]</h2>-->
+                <!--<table style="width:80%">-->
+                    <!--<tr>-->
+                        <!--<th><a>Имя</a></th>-->
+                        <!--<th><a>Фамилия</a></th>-->
+                        <!--<th><a>Возраст</a></th>-->
+                        <!--<th><a>Время</a></th>-->
+                        <!--<th><a>Стоимость</a></th>-->
+						<!--<th><a>Скидка</a></th>-->
+						<!--<th><a>Комментарий</a></th>-->
+                    <!--</tr>-->
+					<!--TODO реализовать вывод записей-->
+					<!--<tr th:each="order : ${orders}">-->
+						<!--<td ><p><a th:text="${hall.name}" href="/"></a></p></td>-->
+						<!--<td ><a th:text="${hall.address}" href="/"></a></td>-->
+						<!--<td ><a th:text="${hall.price}" href="/"></a></td>-->
+						<!--<td ><a th:text="${hall.freeTramps}" href="/"></a></td>-->
+					<!--</tr>-->
                 </table>
 			</div> <!-- CLOSE content-place -->
 			</div>

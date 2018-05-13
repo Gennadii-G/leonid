@@ -2,10 +2,11 @@ package com.spacefox.frida.domain;
 
 import java.util.Date;
 
-public class Order  extends DomainObject {
+public class Order extends DomainObject {
 
     private int price;
+    private int minuteAmount;
+    private int hoursAmount;
     private Contact consumer;
-    private int timeAmount;
     private Date date;
 }

@@ -1,4 +1,4 @@
-package com.spacefox.frida.dao;
+package com.spacefox.frida.daoInMem;
 
 
 import com.spacefox.frida.domain.Trampoline;

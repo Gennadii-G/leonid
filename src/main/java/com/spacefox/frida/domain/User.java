@@ -3,6 +3,7 @@ package com.spacefox.frida.domain;
 import java.util.Date;
 
 public class User extends DomainObject {
+
     private int id;
     private String name;
     private String secondName;
