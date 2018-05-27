@@ -1,20 +1,25 @@
 package com.spacefox.frida.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TrampolineHall  extends DomainObject {
+public class TrampolineHall extends DomainObject {
 
     private List<Order> orders;
     private List<Discount> discounts;
     private List<Trampoline> tramlins;
     private int price;
     private String name;
-    private String address = "mockAddress";
+    private String publicId;
+    private String address;
 
-    public TrampolineHall() {}
+    public TrampolineHall() {
+        this.orders = new ArrayList<>();
+    }
 
     public TrampolineHall(String name, List<Trampoline> tramlins, int price) {
+        this.orders = new ArrayList<>();
         this.name = name;
         this.price = price;
     }
@@ -29,6 +34,10 @@ public class TrampolineHall  extends DomainObject {
 
     public String getAddress() {
         return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setName(String name) {
@@ -47,10 +56,15 @@ public class TrampolineHall  extends DomainObject {
         return freeTramps();
     }
 
-    public boolean orderTramp(){
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public boolean orderTramp(Order order){
         List<Trampoline> tramlins = this.tramlins.stream().filter(t -> !t.isOrdered()).collect(Collectors.toList());
         if(!tramlins.isEmpty()){
             tramlins.get(0).setOrdered(true);
+            orders.add(order);
             return true;
         }else{
             return false;

@@ -1,6 +1,6 @@
 package com.spacefox.frida.domain;
 
-public class Trampoline {
+public class Trampoline extends DomainObject {
     private int id;
     private boolean isBroken;
     private boolean isOrdered;
@@ -28,6 +28,5 @@ public class Trampoline {
     public void setOrdered(boolean ordered) {
         isOrdered = ordered;
     }
-
 
 }

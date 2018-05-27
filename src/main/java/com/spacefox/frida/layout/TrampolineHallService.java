@@ -4,12 +4,12 @@ package com.spacefox.frida.layout;
 
 import com.spacefox.frida.domain.TrampolineHall;
 
-import java.util.Set;
+import java.util.List;
 
 
 public interface TrampolineHallService {
 
-    public Set<TrampolineHall> getAll();
+    public List<TrampolineHall> getAll();
 
     public TrampolineHall getByName(String name);
 }

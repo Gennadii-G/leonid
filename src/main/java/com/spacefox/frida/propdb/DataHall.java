@@ -1,4 +1,4 @@
-package com.spacefox.frida.inmemdb;
+package com.spacefox.frida.propdb;
 
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;

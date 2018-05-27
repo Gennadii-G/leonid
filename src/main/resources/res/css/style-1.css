@@ -329,11 +329,11 @@ th {
 }
 
 .content-place {
-  position: absolute;
+  position: ;
   z-index: 0;
   left: 0;
   padding: 0;
-  top: 10vh;
+  top: 15%;
   width: 100%;
   padding: 0 9%;
   -webkit-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
@@ -341,11 +341,6 @@ th {
   -ms-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
   -o-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
   transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
   text-align: left;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
