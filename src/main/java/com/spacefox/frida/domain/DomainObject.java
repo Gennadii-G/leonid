@@ -1,13 +1,23 @@
 package com.spacefox.frida.domain;
 
-public class DomainObject  {
-    private int id;
+import javax.persistence.*;
+import java.io.Serializable;
 
-    public int getId() {
-        return id;
+@MappedSuperclass
+public class DomainObject implements Serializable {
+
+    public DomainObject() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long publicid;
+
+    public Long getPublicId() {
+        return publicid;
+    }
+
+    public void setPublicId(Long publicId) {
+        this.publicid = publicId;
     }
 }

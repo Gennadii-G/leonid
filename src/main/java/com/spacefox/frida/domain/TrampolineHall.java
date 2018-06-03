@@ -1,31 +1,35 @@
 package com.spacefox.frida.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name="jh_trampoline_hall")
 public class TrampolineHall extends DomainObject {
 
+
+    @OneToMany(mappedBy = "hall")
     private List<Order> orders;
-    private List<Discount> discounts;
-    private List<Trampoline> tramlins;
+//    private List<Discount> availableDiscounts;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+    @JoinColumn(name="trampoline_id")
+    private List<Trampoline> trampolines = new ArrayList<>();
     private int price;
     private String name;
-    private String publicId;
     private String address;
+    private String phone;
 
     public TrampolineHall() {
-        this.orders = new ArrayList<>();
     }
 
-    public TrampolineHall(String name, List<Trampoline> tramlins, int price) {
-        this.orders = new ArrayList<>();
-        this.name = name;
-        this.price = price;
+    public List<Trampoline> getTrampolines() {
+        return trampolines;
     }
 
-    public void setTramlins(List<Trampoline> tramlins) {
-        this.tramlins = tramlins;
+    public void setTrampolines(List<Trampoline> trampolines) {
+        this.trampolines = trampolines;
     }
 
     public void setPrice(int price) {
@@ -53,34 +57,49 @@ public class TrampolineHall extends DomainObject {
     }
 
     public int getFreeTramps(){
-        return freeTramps();
+        return freeTrampsAmount();
     }
 
     public List<Order> getOrders() {
         return orders;
     }
 
-    public boolean orderTramp(Order order){
-        List<Trampoline> tramlins = this.tramlins.stream().filter(t -> !t.isOrdered()).collect(Collectors.toList());
-        if(!tramlins.isEmpty()){
-            tramlins.get(0).setOrdered(true);
-            orders.add(order);
-            return true;
-        }else{
-            return false;
-        }
+    public String getPhone() {
+        return phone;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+//    //    todo убрать к чертям
+//    public boolean orderTramp(Order order){
+//        List<Trampoline> tramlins = this.trampolines.stream()
+//                .filter(t -> !t.isOrdered())
+//                .collect(Collectors.toList());
+//        if(!tramlins.isEmpty()){
+//            tramlins.get(0).setOrdered(true);
+//            orders.add(order);
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 
     @Override
     public String toString() {
         return "TrampolineHall: " +
                 name + ", free tramps: " +
-                freeTramps() + " / " +
-                tramlins.size() + ", price:" +
+                freeTrampsAmount() + " / " +
+                trampolines.size() + ", price:" +
                 price;
     }
 
-    public int freeTramps(){
-        return (int) tramlins.stream().filter(t -> !t.isOrdered()).count();
+    public int freeTrampsAmount(){
+        int res = 0;
+        if(!trampolines.isEmpty()){
+            res = (int) trampolines.stream().filter(t -> !t.isOrdered()).count();
+        }
+        return res;
     }
 }

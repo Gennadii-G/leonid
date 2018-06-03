@@ -1,7 +1,6 @@
 package com.spacefox.frida.propdb;
 
 import com.spacefox.frida.domain.Discount;
-import com.spacefox.frida.layout.DiscountService;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.stereotype.Component;
@@ -10,24 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DataDiscount implements DiscountService {
+public class DataDiscount {
 
     private PropertiesConfiguration props;
     private int discAmount;
     private List<Discount> discounts;
 
-    @Override
     public List<Discount> getAll() {
         return discounts;
     }
 
-    @Override
     public Discount getByName(String name) {
         return discounts.stream().filter(dis -> dis.getName().equals(name)).findFirst().get();
     }
 
     public DataDiscount() throws ConfigurationException {
-        props = new PropertiesConfiguration("vata.properties");
+        props = new PropertiesConfiguration("dummyData.properties");
         init();
     }
 

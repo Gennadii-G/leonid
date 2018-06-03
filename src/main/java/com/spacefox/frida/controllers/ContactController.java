@@ -1,4 +1,4 @@
-package com.spacefox.frida.controllers.unnecessary;
+package com.spacefox.frida.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

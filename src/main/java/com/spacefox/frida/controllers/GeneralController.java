@@ -1,7 +1,7 @@
 package com.spacefox.frida.controllers;
 
 import com.spacefox.frida.domain.TrampolineHall;
-import com.spacefox.frida.layout.TrampolineHallService;
+import com.spacefox.frida.repository.TrampolineHallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class GeneralController {
 
-    private TrampolineHallService hallService;
-
     @Autowired
-    public GeneralController(TrampolineHallService hallService) {
-        this.hallService = hallService;
-    }
+    private TrampolineHallRepository hallRepository;
+    private String page = "index";
 
     @GetMapping
     public String main(ModelMap model){
-        int freeTrampolinesAmount = hallService.getAll().stream().mapToInt(TrampolineHall::freeTramps).sum();
+        int freeTrampolinesAmount = hallRepository.findAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
+//        int freeTrampolinesAmount1 = hallService.getAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
         model.addAttribute("freeTrampolinesAmount", freeTrampolinesAmount);
-        return "index";
+        return page;
     }
 }

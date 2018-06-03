@@ -26,47 +26,7 @@
 		<section id="home-part" class="scale-max">
 			<div class="overlay">
 			<div class="content-place">
-				<h2>Запись посетителей</h2>
-				<form id="generalOrderInfo" th:action="@{/recordVisitors}" method="POST">
-					<fieldset>
-						<a>Информация о посетителе:</a><br/>
-						<input type="text" th:field="${order.contact.firstName}" placeholder="имя"required /> <br/>
-						<input type="text" th:field="${order.contact.lastName}" placeholder="фамилия" /> <br />
-						<a>телефон:</a><br/>
-						<input type="text"
-							   th:field="${order.contact.phoneNumber}"
-							   placeholder="8800-555-35-35" required /> <br />
 
-						<a>продолжительность:</a><br/>
-						<input type="number" th:field="${order.minuteAmount}" placeholder="в минутах" required /> <br/>
-
-						<a>сколько батутов:</a><br/>
-						<input type="number" th:field="${order.trampsAmount}" placeholder="кол-во батутов" required /> <br/>
-
-						<a>дата:</a><br/>
-						<input type="datetime-local" th:field="${order.eventDate}" placeholder="дата" required /> <br/>
-
-						<a>зал:</a><br/>
-						<select th:field="${order.hall}">
-							<option th:each="hall : ${halls}" th:value="${hall.name}" th:text="${hall.name}">
-						</select>
-
-						<a>акция:</a><br/>
-						<select th:field="${order.discountId}">
-							<option th:each="discount : ${discounts}" th:value="${discount.name}" th:text="${discount.name}">
-						</select><br/>
-
-						<a>комментарий:</a><br/>
-						<input type="text" th:field="${order.comment}"> </input><br/>
-
-						<input type="checkbox" th:checked="${order.isCustomerAdult}" />
-						<a>старше 16?</a><br/>
-
-						<button type="submit" value="Submit">Записать</button>
-					</fieldset>
-				</form>
-
-                </table>
 			</div> <!-- CLOSE content-place -->
 			</div>
 		</section> <!-- CLOSE #home-part -->

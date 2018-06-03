@@ -1,6 +1,14 @@
 package com.spacefox.frida.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="jh_contact")
 public class Contact extends DomainObject {
+
+    public Contact() {
+    }
 
     private String firstName;
     private String lastName;

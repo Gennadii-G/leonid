@@ -1,4 +1,4 @@
-package com.spacefox.frida.layout;
+package com.spacefox.frida.services;
 
 
 
@@ -12,4 +12,8 @@ public interface TrampolineHallService {
     public List<TrampolineHall> getAll();
 
     public TrampolineHall getByName(String name);
+
+    public void save(TrampolineHall hall);
+
+    public void save(TrampolineHall hall, int trampsAmount);
 }

@@ -20,7 +20,7 @@ public class DataHall {
     private int trampsAmount;
 
     public DataHall() throws ConfigurationException {
-        props = new PropertiesConfiguration("vata.properties");
+        props = new PropertiesConfiguration("dummyData.properties");
         init();
     }
 
@@ -34,7 +34,7 @@ public class DataHall {
             TrampolineHall tHall = new TrampolineHall();
             tHall.setName(props.getString(i + ".hall.name"));
             tHall.setPrice(props.getInt(i + ".hall.price"));
-            tHall.setTramlins(loadTrompalines());
+            tHall.setTrampolines(loadTrompalines());
             halls.add(tHall);
         }
     }

@@ -2,31 +2,39 @@ package com.spacefox.frida.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="jh_order")
 public class Order extends DomainObject {
 
     public Order() {
-        this.contact = new Contact();
     }
 
-    private String discountId;
+    @ManyToOne
+    @JoinColumn(name="trampolineHall_id", referencedColumnName = "publicid")
+    private TrampolineHall hall;
+    @ManyToOne
+    @JoinColumn(name="discount_id", referencedColumnName = "publicid")
+    private Discount discount;
+    @OneToOne
+    private Employee employee;
+    @ManyToOne
+    @JoinColumn(name="contact_id")
+    private Contact contact;
     private int price;
     private int minuteAmount;
     private int trampsAmount;
-    private int employeeId;
-    private Contact contact;
-    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventDate;
     private Date regDate;
-    private String hallId;
     private String comment;
     private boolean isCustomerAdult;
 
 
 //  getters and setters
+
     public Contact getContact() {
         return contact;
     }
@@ -71,22 +79,6 @@ public class Order extends DomainObject {
         isCustomerAdult = customerAdult;
     }
 
-    public String getDiscountId() {
-        return discountId;
-    }
-
-    public void setDiscountId(String discountId) {
-        this.discountId = discountId;
-    }
-
-    public String getHallId() {
-        return hallId;
-    }
-
-    public void setHallId(String hallId) {
-        this.hallId = hallId;
-    }
-
     public Date getRegDate() {
         return regDate;
     }
@@ -103,8 +95,33 @@ public class Order extends DomainObject {
         this.price = price;
     }
 
+    public TrampolineHall getHall() {
+        return hall;
+    }
 
+    public void setHall(TrampolineHall hall) {
+        this.hall = hall;
+    }
 
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     @Override
     public String toString() {
@@ -116,11 +133,10 @@ public class Order extends DomainObject {
                 "price=" + price +
                 ", minuteAmount=" + minuteAmount +
                 ", trampsAmount=" + trampsAmount +
-                ", employeeId=" + employeeId +
+                ", employeeId=" + 123 +
                 ", contact=" + contact +
                 ", eventDate=" + eventDate +
                 ", regDate=" + regDate +
-                ", hallId='" + hallId + '\'' +
                 ", comment='" + comment + '\'' +
                 ", isCustomerAdult=" + isCustomerAdult +
                 '}';

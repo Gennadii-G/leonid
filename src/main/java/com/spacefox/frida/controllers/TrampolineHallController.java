@@ -2,7 +2,7 @@ package com.spacefox.frida.controllers;
 
 
 import com.spacefox.frida.domain.TrampolineHall;
-import com.spacefox.frida.layout.TrampolineHallService;
+import com.spacefox.frida.services.TrampolineHallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,24 +15,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/trampolineHalls")
 public class TrampolineHallController {
 
-    private TrampolineHallService hallDao;
-
     @Autowired
-    public TrampolineHallController(TrampolineHallService hallDao) {
-        this.hallDao = hallDao;
-    }
+    private TrampolineHallService service;
+    private String page = "trampolineHalls";
 
     @GetMapping
     public String generalHallsPage(Model model){
-        model.addAttribute("halls", hallDao.getAll());
-        return "trampolineHalls";
+        model.addAttribute("halls", service.getAll());
+        return page;
     }
 
-    @RequestMapping(value = "/{hallid}", method = RequestMethod.GET)
-    public String getInformationHall(Model model, @PathVariable("hallid") String hallid){
-        TrampolineHall hall = hallDao.getByName(hallid);
-        model.addAttribute("id", hallid);
-        model.addAttribute("hall", hall);
-        return "infohall";
-    }
+//      todo позже удалить
+//    @RequestMapping(value = "/{hallid}", method = RequestMethod.GET)
+//    public String getInformationHall(Model model, @PathVariable("hallid") String hallid){
+//        TrampolineHall hall = service.getByName(hallid);
+//        model.addAttribute("id", hallid);
+//        model.addAttribute("hall", hall);
+//        return "infohall";
+//    }
 }
