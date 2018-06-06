@@ -2,6 +2,8 @@ package com.spacefox.frida.controllers;
 
 import com.spacefox.frida.domain.Order;
 
+import com.spacefox.frida.services.DiscountService;
+import com.spacefox.frida.services.OrderService;
 import com.spacefox.frida.services.TrampolineHallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,26 +17,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/recordVisitors")
 public class RecordVisitorsController {
 
-    private TrampolineHallService hallDao;
-//    private DiscountService discounts;
-//    private OrderHandler handler;
-
     @Autowired
-    public RecordVisitorsController(TrampolineHallService hallDao) {
-        this.hallDao = hallDao;
-    }
+    private TrampolineHallService hallService;
+    @Autowired
+    private DiscountService discountService;
+    @Autowired
+    private OrderService orderService;
 
 
     @GetMapping
     public String get(Model model){
         model.addAttribute("order", new Order());
-        model.addAttribute("halls", hallDao.getAll());
-//        model.addAttribute("discounts", discounts.getAll());
+        model.addAttribute("halls", hallService.getAll());
+        model.addAttribute("discounts", discountService.getAll());
         return "recordVisitors";
     }
 
     @PostMapping
     public String post(@ModelAttribute Order order, Model model){
+        orderService.save(order);
         return "redirect:/recordVisitors";
     }
 

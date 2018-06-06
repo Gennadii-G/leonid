@@ -44,7 +44,7 @@
 						<input type="number" th:field="${order.trampsAmount}" placeholder="кол-во батутов" required /> <br/>
 
 						<a>дата:</a><br/>
-						<input type="datetime-local" th:field="${order.eventDate}" placeholder="дата" required /> <br/>
+						<input type="date" th:field="${order.eventDate}" placeholder="дата" required /> <br/>
 
 						<a>зал:</a><br/>
 						<select th:field="${order.hall}">
@@ -52,7 +52,7 @@
 						</select>
 
 						<a>акция:</a><br/>
-						<select th:field="${order.discountId}">
+						<select th:field="${order.discount}">
 							<option th:each="discount : ${discounts}" th:value="${discount.name}" th:text="${discount.name}">
 						</select><br/>
 
@@ -109,6 +109,7 @@
 	<script src="js/main.js"></script>
 	<!--[if lt IE 10]><script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
 
+		<script src="js/custom.js"></script>
 	</body>
 
 </html>

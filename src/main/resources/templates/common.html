@@ -10,7 +10,6 @@
     <title>JH3</title>
     <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Madeon08">
 
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
@@ -43,6 +42,29 @@
         <li><a class="nav-link contact-content" href="/contacts">Контакты</a></li>
         <li><a class="nav-link contact-content" href="/recordVisitors">Запись посетителей</a></li>
         <li><a class="nav-link contact-content" href="/recordsManagement">Управление записями</a></li>
+        <!--<li class="newsletter-color" href="/fly/"><a class="open-newsletter">Newsletter</a></li>-->
+    </ul> <!-- CLOSE Main nav -->
+    <ul class="bottom-nav">
+        <li class="twitter-color">
+            <a href="#" title="">
+                <i class="icon ion-social-twitter-outline"></i>
+                щебет
+            </a>
+        </li>
+        <li class="facebook-color">
+            <a href="#" title="">
+                <i class="icon ion-social-facebook-outline"></i>
+                лицокнига
+            </a>
+        </li>
+    </ul> <!-- CLOSE .bottom-nav -->
+</div> <!-- CLOSE #navigation -->
+
+<div th:fragment="adminmenu" id="admin-navigation" class="mobile-nav animated-middle">
+    <ul class="main-navigation">
+        <li><a class="nav-link-close" href="/">Основная</a></li>
+        <li><a class="nav-link contact-content" href="/addHall">Добавление зала</a></li>
+        <li><a class="nav-link contact-content" href="/addDiscount">Добавление скидки</a></li>
         <!--<li class="newsletter-color" href="/fly/"><a class="open-newsletter">Newsletter</a></li>-->
     </ul> <!-- CLOSE Main nav -->
     <ul class="bottom-nav">

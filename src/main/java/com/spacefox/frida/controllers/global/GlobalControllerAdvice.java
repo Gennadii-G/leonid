@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@ControllerAdvice(basePackages = {"com.spacefox.frida.controllers"} )
+@ControllerAdvice(basePackages = {"com.spacefox.frida.controllers"} )
 public class GlobalControllerAdvice {
 
 //    @InitBinder
@@ -24,11 +24,11 @@ public class GlobalControllerAdvice {
 //    public void globalAttributes(Model model) {
 //        model.addAttribute("msg", "Welcome to My World!");
 //    }
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView ero(Exception exception) {
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("exception", exception);
-//        mav.setViewName("error");
-//        return mav;
-//    }
+    @ExceptionHandler(Exception.class)
+    public ModelAndView ero(Exception exception) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", exception);
+        mav.setViewName("error");
+        return mav;
+    }
 }

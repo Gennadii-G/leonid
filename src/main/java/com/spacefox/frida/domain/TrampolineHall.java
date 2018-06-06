@@ -72,20 +72,6 @@ public class TrampolineHall extends DomainObject {
         this.phone = phone;
     }
 
-//    //    todo убрать к чертям
-//    public boolean orderTramp(Order order){
-//        List<Trampoline> tramlins = this.trampolines.stream()
-//                .filter(t -> !t.isOrdered())
-//                .collect(Collectors.toList());
-//        if(!tramlins.isEmpty()){
-//            tramlins.get(0).setOrdered(true);
-//            orders.add(order);
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
-
     @Override
     public String toString() {
         return "TrampolineHall: " +

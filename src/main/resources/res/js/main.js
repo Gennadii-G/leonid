@@ -42,6 +42,7 @@ $(window).load(function() {
 });
 
 $(document).ready(function(){
+HideAllPopUp();
 
 /* ------------------------------------- */
 /* 2. Fullscreen Div ................... */

@@ -27,14 +27,26 @@
 		<div th:replace="common::menu"></div>
 
 		<section id="content-part">
-		<section id="home-part" class="scale-max">
-			<div class="overlay"></div>
+			<section id="home-part" class="scale-max">
+				<div class="overlay">
 
-			<div class="content-place">
-				<h2>discounts</h2>
-
-			</div> <!-- CLOSE content-place -->
-		</section> <!-- CLOSE #home-part -->
+					<div class="content-place">
+						<h2>Информация об акциях</h2>
+						<table style="width:80%">
+							<tr>
+								<th><a>Название</a></th>
+								<th><a>описание</a></th>
+								<th><a> % </a></th>
+							</tr>
+							<tr th:each="disc : ${discounts}">
+								<td ><p><a th:text="${disc.name}" href="/"></a></p></td>
+								<td ><a th:text="${disc.description}" href="/"></a></td>
+								<td ><a th:text="${disc.discountFactor}" href="/"></a></td>
+							</tr>
+						</table>
+					</div> <!-- CLOSE content-place -->
+				</div>
+			</section> <!-- CLOSE #home-part -->
 		</section> <!-- CLOSE #content-part -->
 
 		<!-- Language selection -->
@@ -74,6 +86,7 @@
 	<script src="js/main.js"></script>
 	<!--[if lt IE 10]><script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
 
+	<script src="js/custom.js"></script>
 	</body>
 
 </html>

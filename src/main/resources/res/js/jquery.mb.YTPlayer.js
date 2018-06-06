@@ -1,5 +1,5 @@
 $(document).ready(function($) {
-
+    PopUpHide();
     var onMobile = false;
             
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { onMobile = true; }

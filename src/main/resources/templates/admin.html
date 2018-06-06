@@ -26,23 +26,47 @@
 		<section id="home-part" class="scale-max">
 			<div class="overlay">
 			<div class="content-place">
-				<h2>Добавить новый зал</h2>
-				<form id="generalOrderInfo" th:action="@{/admin}" method="POST">
-					<fieldset>
-						<a>Информация о зале:</a><br/>
-						<input type="text" th:field="${hall.name}" placeholder="название" required /> <br/>
-						<input type="text" th:field="${hall.address}" placeholder="адрес" required /> <br />
-						<input type="number" th:field="${hall.price}" placeholder="цена" required /> <br />
-						<input type="number" name="trampsAmount" placeholder="количество батутов" required /> <br />
-						<a>телефон:</a><br/>
-						<input type="text"
-							   th:field="${hall.phone}"
-							   placeholder="8800-555-35-35" required /> <br />
+				<button class="button" onclick="javascript:PopUpShowAddHall()">Добавить новый зал</button>
+				<div class="b-popup" id="popupaddhall">
+					<div class="b-popup-content">
+						<h2>Добавить новый зал</h2>
+						<form id="addHall" th:action="@{/admin/addHall}" method="POST">
+							<fieldset>
+								<a>Информация о зале:</a><br/>
+								<input type="text" th:field="${hall.name}" placeholder="название" required /> <br/>
+								<input type="text" th:field="${hall.address}" placeholder="адрес" required /> <br />
+								<input type="number" th:field="${hall.price}" placeholder="цена" required /> <br />
+								<input type="number" name="trampsAmount" placeholder="количество батутов" required /> <br />
+								<a>телефон:</a><br/>
+								<input type="text"
+									   th:field="${hall.phone}"
+									   placeholder="8800-555-35-35" required /> <br />
 
-						<button type="submit" value="Submit">Сохранить</button>
-					</fieldset>
-				</form>
-                </table>
+								<button class="button" type="submit" value="Submit">Сохранить</button><br/>
+							</fieldset>
+						</form>
+						<button class="button" onclick="javascript:PopUpHideAddHall()">cancel</button>
+					</div>
+				</div><br/>
+
+				<button class="button" onclick="javascript:PopUpShow()">Добавить акцию</button>
+				<div class="b-popup" id="popup1">
+					<div class="b-popup-content">
+						<h2>Добавить акцию</h2>
+						<form id="generalOrderInfo" th:action="@{/admin/addDiscount}" method="POST">
+							<fieldset>
+								<a>Скидка:</a><br/>
+								<input type="text" th:field="${discount.name}" placeholder="название" required /> <br/>
+								<input type="text" th:field="${discount.description}" placeholder="описание" required /> <br/>
+								<input type="number" th:field="${discount.discountFactor}" placeholder="процент скидки" required /> <br />
+
+								<button class="button" type="submit" value="Submit">Сохранить</button>
+							</fieldset>
+						</form>
+						<button class="button" onclick="javascript:PopUpHide()">cancel</button>
+					</div>
+				</div>
+
 			</div> <!-- CLOSE content-place -->
 			</div>
 		</section> <!-- CLOSE #home-part -->
@@ -53,7 +77,6 @@
 			<!--<a href="" class="active">EN</a><span> | </span>-->
 			<!--<a href="">DE</a>-->
 		<!--</p>-->
-
 
 	<!-- ///////////////////\\\\\\\\\\\\\\\\\\\ -->
     <!-- ********** Resources jQuery ********** -->
@@ -85,6 +108,7 @@
 	<script src="js/main.js"></script>
 	<!--[if lt IE 10]><script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
 
+	<script src="js/custom.js"></script>
 	</body>
 
 </html>
