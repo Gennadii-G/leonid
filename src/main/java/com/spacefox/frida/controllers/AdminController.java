@@ -15,9 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final String page = "admin";
-//    private Logger logger = new L
-
     @Autowired
     private TrampolineHallService hallService;
     @Autowired
@@ -28,7 +25,7 @@ public class AdminController {
     public String getAdm(ModelAndView model,
                           @ModelAttribute(name = "hall") TrampolineHall hall,
                           @ModelAttribute(name = "discount") Discount discount){
-        return page;
+        return "admin";
     }
 
     @PostMapping("/addHall")

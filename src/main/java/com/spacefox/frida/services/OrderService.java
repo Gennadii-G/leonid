@@ -7,8 +7,8 @@ public interface OrderService {
 
     public List<Order> getAll();
 
-    public Order getByName(String name);
-
     public void save(Order order);
+
+    public void saveWithRegDate(Order order);
 
 }

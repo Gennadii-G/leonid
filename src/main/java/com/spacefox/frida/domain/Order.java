@@ -1,5 +1,6 @@
 package com.spacefox.frida.domain;
 
+import com.spacefox.frida.utils.DateFormatterJH;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,16 +12,17 @@ public class Order extends DomainObject {
 
     public Order() {
     }
+//    yyyy-MM-dd'T'hh:mm:ss.SSSZ
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="trampolineHall_id", referencedColumnName = "publicid")
     private TrampolineHall hall;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="discount_id", referencedColumnName = "publicid")
     private Discount discount;
     @OneToOne
     private Employee employee;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="contact_id")
     private Contact contact;
     private int price;
@@ -32,6 +34,10 @@ public class Order extends DomainObject {
     private String comment;
     private boolean isCustomerAdult;
 
+
+    public String mediumRegDate(){
+        return DateFormatterJH.dateTimeFormat(this.regDate);
+    }
 
 //  getters and setters
 
@@ -84,6 +90,7 @@ public class Order extends DomainObject {
     }
 
     public void setRegDate(Date regDate) {
+
         this.regDate = regDate;
     }
 
@@ -123,22 +130,5 @@ public class Order extends DomainObject {
         this.employee = employee;
     }
 
-    @Override
-    public String toString() {
 
-//        SimpleDateFormat formatter = new SimpleDateFormat();
-//        formatter.applyPattern("yyyy-MM-dd");
-
-        return "Order{" +
-                "price=" + price +
-                ", minuteAmount=" + minuteAmount +
-                ", trampsAmount=" + trampsAmount +
-                ", employeeId=" + 123 +
-                ", contact=" + contact +
-                ", eventDate=" + eventDate +
-                ", regDate=" + regDate +
-                ", comment='" + comment + '\'' +
-                ", isCustomerAdult=" + isCustomerAdult +
-                '}';
-    }
 }

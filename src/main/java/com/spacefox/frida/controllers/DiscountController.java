@@ -1,6 +1,5 @@
 package com.spacefox.frida.controllers;
 
-
 import com.spacefox.frida.repository.DiscountRepository;
 import com.spacefox.frida.services.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@ControllerAdvice(basePackages = {"com.spacefox.frida.controllers"} )
+@ControllerAdvice
 public class GlobalControllerAdvice {
 
 //    @InitBinder
@@ -27,8 +27,9 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(Exception.class)
     public ModelAndView ero(Exception exception) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", exception);
-        mav.setViewName("error");
+        String mes = exception.getMessage().replaceAll(";", ";\n");
+        mav.addObject("mes", mes);
+        mav.setViewName("oherror");
         return mav;
     }
 }
