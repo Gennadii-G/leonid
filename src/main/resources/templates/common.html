@@ -34,14 +34,22 @@
 
 <body>
 
+<div th:fragment="loading" class="loading-part animated-quick">
+    <div class="loader-part opacity-0 animated-quick">
+        <div class="loader-circle"></div>
+        <div class="loader-text">Loading</div>
+    </div>
+</div>
+
 <div th:fragment="menu" id="navigation" class="mobile-nav animated-middle">
     <ul class="main-navigation">
         <li><a class="nav-link-close" href="/">Основная</a></li>
         <li><a class="nav-link about-content" href="/trampolineHalls">Залы</a></li>
         <li><a class="nav-link services-content" href="/discounts" >Акции</a></li>
         <li><a class="nav-link contact-content" href="/contacts">Контакты</a></li>
-        <li><a class="nav-link contact-content" href="/recordVisitors">Запись посетителей</a></li>
-        <li><a class="nav-link contact-content" href="/recordsManagement">Управление записями</a></li>
+        <!--<li><a class="nav-link contact-content" href="/recordVisitors">Запись посетителей</a></li>-->
+        <li th:if="${perm==localPerm}"><a class="nav-link contact-content" href="/recordsManagement">Управление записями</a></li>
+        <li th:if="${perm==localPerm}"><a class="nav-link contact-content" href="/admin">Админка</a></li>
         <!--<li class="newsletter-color" href="/fly/"><a class="open-newsletter">Newsletter</a></li>-->
     </ul> <!-- CLOSE Main nav -->
     <ul class="bottom-nav">
@@ -59,3 +67,6 @@
         </li>
     </ul> <!-- CLOSE .bottom-nav -->
 </div> <!-- CLOSE #navigation -->
+
+</body>
+</html>

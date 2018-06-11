@@ -29,7 +29,7 @@ public class GlobalControllerAdvice {
         ModelAndView mav = new ModelAndView();
         String mes = exception.getMessage().replaceAll(";", ";\n");
         mav.addObject("mes", mes);
-        mav.setViewName("oherror");
+        mav.setViewName("error");
         return mav;
     }
 }

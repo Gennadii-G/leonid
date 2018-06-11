@@ -16,7 +16,15 @@ function PopUpHideAddHall(){
     $("#popupaddhall").hide();
 }
 
+function PopUpShowAddOrder(){
+    $("#popupaddorder").show();
+}
+function PopUpHideAddOrder(){
+    $("#popupaddorder").hide();
+}
+
 function HideAllPopUp(){
     PopUpHide();
     PopUpHideAddHall();
+    PopUpHideAddOrder();
 }

@@ -18,9 +18,10 @@ public class GeneralController {
 
     @GetMapping
     public String main(ModelMap model){
-        int freeTrampolinesAmount = hallRepository.findAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
-//        int freeTrampolinesAmount1 = hallService.getAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
-        model.addAttribute("freeTrampolinesAmount", freeTrampolinesAmount);
+//        int freeTrampolinesAmount = hallRepository.findAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
+//        model.addAttribute("freeTrampolinesAmount", freeTrampolinesAmount);
+        model.addAttribute("perm", "12");
+        model.addAttribute("localPerm", "12");
         return page;
     }
 }

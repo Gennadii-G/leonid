@@ -7,13 +7,7 @@
 	<head th:include="common::template"></head>
 	
 	<body>
-
-		<div class="loading-part animated-quick">
-			<div class="loader-part opacity-0 animated-quick">
-				<div class="loader-circle"></div>
-				<div class="loader-text">Loading</div>
-			</div>
-		</div>
+		<div th:replace="common::loading"/>
 
 		<button class="open-menu-mobile">
 			<i class="icon ion-navicon-round opening-menu"></i>

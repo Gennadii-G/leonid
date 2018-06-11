@@ -18,6 +18,8 @@ public class DiscountController {
     @GetMapping
     public String generalDiscountsPage(Model model){
         model.addAttribute("discounts", service.getAll());
+        model.addAttribute("perm", "123");
+        model.addAttribute("localPerm", "12");
         return "discounts";
     }
 }

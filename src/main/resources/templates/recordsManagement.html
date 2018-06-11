@@ -7,13 +7,7 @@
 	<head th:include="common::template"></head>
 	
 	<body>
-
-		<div class="loading-part animated-quick">
-			<div class="loader-part opacity-0 animated-quick">
-				<div class="loader-circle"></div>
-				<div class="loader-text">Loading</div>
-			</div>
-		</div>
+		<div th:replace="common::loading"/>
 
 		<button class="open-menu-mobile">
 			<i class="icon ion-navicon-round opening-menu"></i>
@@ -27,7 +21,10 @@
 			<div class="overlay">
 			<div class="content-place">
 
-				<h2>Управление записями зала [какого-то]</h2>
+				<h2>Управление записями</h2>
+				<button class="button" onclick="javascript:PopUpShowAddOrder()">Добавить запись</button>
+				<div th:replace="common-popup::addOrder"></div>
+
                 <table class="records-table" style="width:80%">
                     <tr>
                         <th><a>Дата регистрации</a></th>
@@ -40,17 +37,17 @@
 						<th><a>Скидка</a></th>
 						<th><a>Комментарий</a></th>
                     </tr>
-					<!--TODO реализовать вывод записей-->
+
 					<tr th:each="order : ${orders}">
-						<td ><p><a th:text="${order.mediumRegDate()}" href="/"></a></p></td>
-						<td ><p><a th:text="${order.contact.firstName}" href="/"></a></p></td>
-						<td ><a th:text="${order.contact.lastName}" href="/"></a></td>
+						<td ><p><a th:text="${order.mediumRegDate()}"></a></p></td>
+						<td ><p><a th:text="${order.contact.firstName}"></a></p></td>
+						<td ><a th:text="${order.contact.lastName}"></a></td>
 						<td ><a th:text=" --- " href="/"></a></td>
-						<td ><a th:text="${order.minuteAmount}" href="/"></a></td>
-						<td ><a th:text="${order.trampsAmount}" href="/"></a></td>
-						<td ><a th:text="${order.price}" href="/"></a></td>
-						<td ><a th:text=" --- " href="/"></a></td>
-						<td ><a th:text="${order.comment}" href="/"></a></td>
+						<td ><a th:text="${order.minuteAmount}"></a></td>
+						<td ><a th:text="${order.trampsAmount}"></a></td>
+						<td ><a th:text="${order.price}"></a></td>
+						<td ><a th:text=" --- "></a></td>
+						<td ><a th:text="${order.comment}"></a></td>
 					</tr>
                 </table>
 			</div> <!-- CLOSE content-place -->

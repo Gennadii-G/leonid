@@ -8,16 +8,7 @@
 	
 	<body>
 
-		<div class="loading-part animated-quick">
-
-			<div class="loader-part opacity-0 animated-quick">
-
-				<div class="loader-circle"></div>
-				<div class="loader-text">Loading</div>
-
-			</div>
-
-		</div>
+		<div th:replace="common::loading"/>
 
 		<button class="open-menu-mobile">
 			<i class="icon ion-navicon-round opening-menu"></i>
@@ -28,16 +19,17 @@
 
 		<section id="content-part">
 		<section id="home-part" class="scale-max">
-			<div class="overlay"></div>
+			<div class="overlay">
 
-			<div class="content-place">
-				<h2>Our contacts</h2>
-				<p></p>
-				<p>Vasilii Ivanovich</p>
-				<p>Phone: +7 88888888</p>
-				<p>Email: IvanovichTheBest@jh3.com</p>
-				<p>Office address: Ivanovich street 13-13</p>
-			</div> <!-- CLOSE content-place -->
+				<div class="content-place">
+					<h2>Our contacts</h2>
+					<p></p>
+					<p>Vasilii Ivanovich</p>
+					<p>Phone: +7 88888888</p>
+					<p>Email: IvanovichTheBest@jh3.com</p>
+					<p>Office address: Ivanovich street 13-13</p>
+				</div> <!-- CLOSE content-place -->
+			</div>
 		</section> <!-- CLOSE #home-part -->
 		</section> <!-- CLOSE #content-part -->
 

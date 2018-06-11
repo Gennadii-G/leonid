@@ -30,8 +30,8 @@ public class RecordVisitorsController {
     @GetMapping
     public String get(Model model,
                       @ModelAttribute(name = "order") Order order){
-        model.addAttribute("halls", hallService.getAll());
-        model.addAttribute("discounts", discountService.getAll());
+            model.addAttribute("halls", hallService.getAll());
+            model.addAttribute("discounts", discountService.getAll());
         return "recordVisitors";
     }
 
