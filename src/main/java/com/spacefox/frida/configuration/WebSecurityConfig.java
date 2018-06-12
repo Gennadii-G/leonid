@@ -31,17 +31,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-// todo убрать
-//                .and().formLogin().defaultSuccessUrl("/", false)
 
                 .antMatchers(freeAccessPages).permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/recordsManagement/**").hasRole("EMPLOYEE")
-                .antMatchers("/recordsManagement/**").hasRole("ADMIN")
+//                .antMatchers("/recordsManagement/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/login").failureUrl("/login?error=true")
+                    .loginPage("/login")
+                    .failureUrl("/")
                     .defaultSuccessUrl("/")
                     .permitAll()
                 .and()
@@ -60,13 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authoritiesByUsernameQuery(
 ////                        "select u.login, r.roles from jh_user u inner join user_roles r on u.publicid = r.user_id where u.login=?");
 //                        "select u.login, u.role from jh_user u where u.login=?");
-//    }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("us").password("1").roles("GUEST");
-//        auth.inMemoryAuthentication().withUser("odmen").password("1").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("emp").password("1").roles("EMPLOYEE");
 //    }
 
         @Bean

@@ -81,16 +81,23 @@
         <li th:if="${accessLevel > 0}"><a class="nav-link contact-content" href="/admin">Админка</a></li>
         <!--<li class="newsletter-color" href="/fly/"><a class="open-newsletter">Newsletter</a></li>-->
     </ul> <!-- CLOSE Main nav -->
+
     <ul class="bottom-nav">
+        <li th:if="${accessLevel == 0}" class="facebook-color">
+            <a href="/login" title="">войти</a>
+        </li>
+        <li th:if="${accessLevel > 0}" class="facebook-color">
+            <form th:action="@{/logout}" method="post">
+            <input class="button" type="submit" value="выйти"/>
+            </form>
+        </li>
         <li class="twitter-color">
             <a href="#" title="">
-                <i class="icon ion-social-twitter-outline"></i>
                 щебет
             </a>
         </li>
         <li class="facebook-color">
             <a href="#" title="">
-                <i class="icon ion-social-facebook-outline"></i>
                 лицокнига
             </a>
         </li>
