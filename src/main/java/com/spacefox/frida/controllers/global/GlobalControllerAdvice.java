@@ -1,6 +1,5 @@
 package com.spacefox.frida.controllers.global;
 
-import com.spacefox.frida.services.UserService;
 import com.spacefox.frida.utils.SecUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -12,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private SecUtil secUtil;
 

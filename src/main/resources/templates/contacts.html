@@ -8,16 +8,11 @@
 	
 	<body>
 
-		<div th:replace="common::loading"/>
+	<div th:replace="common::loading"/>
 
-		<button class="open-menu-mobile">
-			<i class="icon ion-navicon-round opening-menu"></i>
-			<i class="icon ion-close-round closing-menu display-none"></i>
-		</button>
+	<div th:replace="common::menu"></div>
 
-		<div th:replace="common::menu"></div>
-
-		<section id="content-part">
+	<section id="content-part">
 		<section id="home-part" class="scale-max">
 			<div class="overlay">
 
@@ -31,7 +26,7 @@
 				</div> <!-- CLOSE content-place -->
 			</div>
 		</section> <!-- CLOSE #home-part -->
-		</section> <!-- CLOSE #content-part -->
+	</section> <!-- CLOSE #content-part -->
 
 		<!-- Language selection -->
 		<!--<p class="lang">-->
