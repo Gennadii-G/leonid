@@ -4,7 +4,7 @@
 	  xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 
-	<head th:include="common::template"></head>
+	<head th:replace="common::template"></head>
 	
 	<body>
 		<div th:replace="common::loading"/>
@@ -22,6 +22,7 @@
 
 			<div class="content-place">
 				<h2>Информация о залах</h2>
+				<a th:text="${hasAccess}"></a>
                 <table style="width:80%">
                     <tr>
                         <th><a>Название зала</a></th>

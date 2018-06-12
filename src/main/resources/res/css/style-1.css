@@ -2360,3 +2360,30 @@ input[type="submit"] { cursor: pointer; }
     padding: 3px;
     text-align: left;
 }}
+
+div.lang {
+  top: 0;
+  right: 15px;
+  height: 30px;
+  font-size: 0.7em;
+  letter-spacing: 0px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 15px;
+  line-height: 30px;
+  font-weight: 600;
+  text-align: right;
+  position: fixed;
+  z-index: 5;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.login-center {
+    width: 200px; /* Ширина элемента в пикселах */
+    padding: 0px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background-color: transparent;
+    border: 1px solid #a8afaf;
+    color: black;
+  }

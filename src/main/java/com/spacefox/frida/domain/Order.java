@@ -4,6 +4,7 @@ import com.spacefox.frida.utils.DateFormatterJH;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -14,10 +15,11 @@ public class Order extends DomainObject {
     }
 //    yyyy-MM-dd'T'hh:mm:ss.SSSZ
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @ManyToOne
     @JoinColumn(name="trampolineHall_id", referencedColumnName = "publicid")
     private TrampolineHall hall;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="discount_id", referencedColumnName = "publicid")
     private Discount discount;
     @OneToOne
@@ -27,19 +29,37 @@ public class Order extends DomainObject {
     private Contact contact;
     private int price;
     private int minuteAmount;
+    @Min(1)
     private int trampsAmount;
+    @NotNull
+    @Future
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventDate;
     private Date regDate;
     private String comment;
-    private boolean isCustomerAdult;
-
+    @Min(9)
+    @Max(21)
+    private int startHour;
 
     public String mediumRegDate(){
         return DateFormatterJH.dateTimeFormat(this.regDate);
     }
 
+    public String shortEventDate(){
+        return DateFormatterJH.dateOnlyFormat(this.eventDate);
+    }
+
 //  getters and setters
+
+
+    public int getStartHour() {
+        return startHour;
+    }
+
+    public void setStartHour(int startHour) {
+        this.startHour = startHour;
+    }
 
     public Contact getContact() {
         return contact;
@@ -75,14 +95,6 @@ public class Order extends DomainObject {
 
     public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
-    }
-
-    public boolean getIsCustomerAdult() {
-        return isCustomerAdult;
-    }
-
-    public void setIsCustomerAdult(boolean customerAdult) {
-        isCustomerAdult = customerAdult;
     }
 
     public Date getRegDate() {

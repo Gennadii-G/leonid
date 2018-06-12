@@ -2,6 +2,8 @@ package com.spacefox.frida.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="jh_contact")
@@ -14,6 +16,17 @@ public class Contact extends DomainObject {
     private String lastName;
     private String phoneNumber;
     private String Address;
+    @NotNull
+    @Min(18)
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getFirstName() {
         return firstName;

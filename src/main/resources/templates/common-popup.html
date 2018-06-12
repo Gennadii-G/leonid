@@ -8,11 +8,14 @@
 
 <div th:fragment="addOrder" class="b-popup" id="popupaddorder">
     <div class="b-popup-content">
-        <form id="addOrder" th:action="@{/recordVisitors/addOrder}" method="POST">
+        <form id="addOrder" th:action="@{/recordsManagement}" method="POST">
             <fieldset>
                 <a>Информация о посетителе:</a><br/>
                 <input type="text" th:field="${order.contact.firstName}" placeholder="имя"required /> <br/>
                 <input type="text" th:field="${order.contact.lastName}" placeholder="фамилия" /> <br />
+                <a>возраст:</a><br/>
+                <input type="number" th:field="${order.contact.age}" placeholder="возраст" />
+                <a th:if="${#fields.hasErrors('order.contact.age')}" th:errors="${order.contact.age}"></a><br/>
                 <a>телефон:</a><br/>
                 <input type="text"
                        th:field="${order.contact.phoneNumber}"
@@ -26,19 +29,26 @@
 
                 <a>дата:</a><br/>
                 <input type="date" th:field="${order.eventDate}" placeholder="дата" required /> <br/>
+                <a th:if="${#fields.hasErrors('order.eventDate')}" th:errors="${order.eventDate}"></a><br/>
 
-                <a>зал:</a><br/>
+                <a>начало в:</a><br/>
+                <input type="number" th:field="${order.startHour}" placeholder="час" required />
+                <a th:if="${#fields.hasErrors('order.startHour')}" th:errors="${order.startHour}"></a><br/>
+
+                <a>зал:</a>
                 <select th:field="${order.hall}">
+                    <!--<option selected value="null">не выбран</option>-->
                     <option th:each="hall : ${halls}" th:value="${hall.publicId}"  th:text="${hall.name}">
-                </select>
+                </select><br/>
 
-                <a>акция:</a><br/>
+                <a>акция:</a>
                 <select th:field="${order.discount}">
+                    <!--<option selected value="null">не выбран</option>-->
                     <option th:each="discount : ${discounts}" th:value="${discount.publicId}" th:text="${discount.name}">
                 </select><br/>
 
                 <a>комментарий:</a><br/>
-                <input type="text" th:field="${order.comment}"> </input><br/>
+                <input type="text" rows="3" th:field="${order.comment}"> </input><br/>
 
                 <button class="button" type="submit" value="Submit">Сохранить</button>
             </fieldset>
@@ -74,10 +84,10 @@
 
                     <!--создание скидки-->
 
-<div th:fragment="addDiscount" class="b-popup" id="popup1">
+<div th:fragment="addDiscount" class="b-popup" id="popupadddisc">
     <div class="b-popup-content">
         <h2>Добавить акцию</h2>
-        <form id="generalOrderInfo" th:action="@{/admin/addDiscount}" method="POST">
+        <form th:action="@{/admin/addDiscount}" method="POST">
             <fieldset>
                 <a>Скидка:</a><br/>
                 <input type="text" th:field="${discount.name}" placeholder="название" required /> <br/>
@@ -87,7 +97,28 @@
                 <button class="button" type="submit" value="Submit">Сохранить</button>
             </fieldset>
         </form>
-        <button class="button" onclick="javascript:PopUpHide()">Отмена</button>
+        <button class="button" onclick="javascript:PopUpHideAddDisc()">Отмена</button>
+    </div>
+</div>
+
+                    <!--создание пользователя-->
+
+<div th:fragment="addUser" class="b-popup" id="popupadduser">
+    <div class="b-popup-content">
+        <h2>Добавить пользователя</h2>
+        <form th:action="@{/admin/addUser}" method="POST">
+            <fieldset>
+                <a>Пользователь:</a><br/>
+                <input type="text" th:field="${user.login}" placeholder="логин" required /> <br/>
+                <input type="password" th:field="${user.password}" placeholder="пароль" required /> <br/>
+                <select th:field="${user.roles}">
+                    <option th:each="role : ${roles}" th:value="${role}"  th:text="${role.getName()}">
+                </select><br/>
+
+                <button class="button" type="submit" value="Submit">Сохранить</button>
+            </fieldset>
+        </form>
+        <button class="button" onclick="javascript:PopUpHideAddUser()">Отмена</button>
     </div>
 </div>
 

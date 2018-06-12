@@ -2,11 +2,11 @@
 $(document).ready(function(){
     HideAllPopUp();
 });
-function PopUpShow(){
-    $("#popup1").show();
+function PopUpShowAddDisc(){
+    $("#popupadddisc").show();
 }
-function PopUpHide(){
-    $("#popup1").hide();
+function PopUpHideAddDisc(){
+    $("#popupadddisc").hide();
 }
 
 function PopUpShowAddHall(){
@@ -23,8 +23,16 @@ function PopUpHideAddOrder(){
     $("#popupaddorder").hide();
 }
 
+function PopUpShowAddUser(){
+    $("#popupadduser").show();
+}
+function PopUpHideAddUser(){
+    $("#popupadduser").hide();
+}
+
 function HideAllPopUp(){
-    PopUpHide();
+    PopUpHideAddDisc();
     PopUpHideAddHall();
     PopUpHideAddOrder();
+    PopUpHideAddUser();
 }

@@ -2,6 +2,7 @@ package com.spacefox.frida.controllers;
 
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.repository.TrampolineHallRepository;
+import com.spacefox.frida.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,8 +19,7 @@ public class GeneralController {
 
     @GetMapping
     public String main(ModelMap model){
-//        int freeTrampolinesAmount = hallRepository.findAll().stream().mapToInt(TrampolineHall::freeTrampsAmount).sum();
-//        model.addAttribute("freeTrampolinesAmount", freeTrampolinesAmount);
+        UserUtil.currentUser();
         model.addAttribute("perm", "12");
         model.addAttribute("localPerm", "12");
         return page;

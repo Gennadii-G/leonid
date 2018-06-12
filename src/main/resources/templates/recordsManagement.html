@@ -4,7 +4,7 @@
 	  xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 
-	<head th:include="common::template"></head>
+	<head th:replace="common::template"></head>
 	
 	<body>
 		<div th:replace="common::loading"/>
@@ -24,29 +24,23 @@
 				<h2>Управление записями</h2>
 				<button class="button" onclick="javascript:PopUpShowAddOrder()">Добавить запись</button>
 				<div th:replace="common-popup::addOrder"></div>
-
+				<a th:if="${hasError}" color="red">Запись не сохранена</a><br/>
                 <table class="records-table" style="width:80%">
                     <tr>
-                        <th><a>Дата регистрации</a></th>
+                        <th><a>Дата записи</a></th>
                         <th><a>Имя</a></th>
                         <th><a>Фамилия</a></th>
-                        <th><a>Возраст</a></th>
                         <th><a>Время</a></th>
-                        <th><a>Количество батутов</a></th>
                         <th><a>Стоимость</a></th>
-						<th><a>Скидка</a></th>
 						<th><a>Комментарий</a></th>
                     </tr>
 
 					<tr th:each="order : ${orders}">
-						<td ><p><a th:text="${order.mediumRegDate()}"></a></p></td>
+						<td ><p><a th:text="${order.shortEventDate()}"></a></p></td>
 						<td ><p><a th:text="${order.contact.firstName}"></a></p></td>
 						<td ><a th:text="${order.contact.lastName}"></a></td>
-						<td ><a th:text=" --- " href="/"></a></td>
 						<td ><a th:text="${order.minuteAmount}"></a></td>
-						<td ><a th:text="${order.trampsAmount}"></a></td>
 						<td ><a th:text="${order.price}"></a></td>
-						<td ><a th:text=" --- "></a></td>
 						<td ><a th:text="${order.comment}"></a></td>
 					</tr>
                 </table>

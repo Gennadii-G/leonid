@@ -4,7 +4,7 @@
 	  xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 
-	<head th:include="common::template"></head>
+	<head th:replace="common::template"></head>
 	
 	<body>
 
@@ -40,11 +40,17 @@
 		</section> <!-- CLOSE #home-part -->
 
 
-		<!-- Language selection -->
+		 <!--Language selection-->
 		<!--<p class="lang">-->
 			<!--<a href="" class="active">EN</a><span> | </span>-->
 			<!--<a href="">DE</a>-->
 		<!--</p>-->
+		<!--<div class="lang">-->
+			<!--<form th:action="@{/logout}" method="post">-->
+				<!--<input type="submit" value="Sign Out"/>-->
+			<!--</form>-->
+		<!--</div>-->
+
 
 
 	<!-- ///////////////////\\\\\\\\\\\\\\\\\\\ -->
