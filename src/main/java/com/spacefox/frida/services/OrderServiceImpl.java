@@ -31,4 +31,14 @@ public class OrderServiceImpl implements OrderService {
         order.setRegDate(new Date());
         save(order);
     }
+
+    @Override
+    public Order getById(Long id) {
+        return repository.getOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

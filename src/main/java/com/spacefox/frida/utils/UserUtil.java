@@ -1,8 +1,6 @@
 package com.spacefox.frida.utils;
 
-import com.spacefox.frida.domain.catalogs.Roles;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserUtil {
 

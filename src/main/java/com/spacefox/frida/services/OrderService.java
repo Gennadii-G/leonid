@@ -5,10 +5,13 @@ import java.util.List;
 
 public interface OrderService {
 
-    public List<Order> getAll();
+    List<Order> getAll();
 
-    public void save(Order order);
+    void save(Order order);
 
-    public void saveWithRegDate(Order order);
+    void saveWithRegDate(Order order);
 
+    Order getById(Long id);
+
+    void delete(Long id);
 }

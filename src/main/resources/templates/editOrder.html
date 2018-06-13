@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html lang="en-us" class="no-js"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="common::template"/>
+	
+	<body>
+
+		<div th:replace="common::loading"/>
+
+		<button class="open-menu-mobile">
+			<i class="icon ion-navicon-round opening-menu"></i>
+			<i class="icon ion-close-round closing-menu display-none"></i>
+		</button>
+
+		<div th:replace="common::menu"></div>
+
+		<section id="content-part">
+		<section id="home-part" class="scale-max">
+			<div class="overlay">
+				<div class="content-place">
+
+					<form id="addOrder" th:action="@{/recordsManagement/edit/} + ${id}" method="POST">
+						<fieldset>
+							<a>Информация о посетителе:</a><br/>
+							<input type="text" th:field="${order.contact.firstName}" placeholder="имя"required /> <br/>
+							<input type="text" th:field="${order.contact.lastName}" placeholder="фамилия" /> <br />
+							<a>возраст:</a><br/>
+							<input type="number" th:field="${order.contact.age}" placeholder="возраст" />
+							<a th:if="${#fields.hasErrors('order.contact.age')}" th:errors="${order.contact.age}"></a><br/>
+							<a>телефон:</a><br/>
+							<input type="text"
+								   th:field="${order.contact.phoneNumber}"
+								   placeholder="8800-555-35-35" required /> <br />
+
+							<a>продолжительность:</a><br/>
+							<input type="number" th:field="${order.minuteAmount}" placeholder="в минутах" required /> <br/>
+
+							<a>сколько батутов:</a><br/>
+							<input type="number" th:field="${order.trampsAmount}" placeholder="кол-во батутов" required /> <br/>
+
+							<a>дата:</a><br/>
+							<input type="date" th:field="${order.eventDate}" placeholder="дата" required /> <br/>
+							<a th:if="${#fields.hasErrors('order.eventDate')}" th:errors="${order.eventDate}"></a><br/>
+
+							<a>начало в:</a><br/>
+							<input type="number" th:field="${order.startHour}" placeholder="час" required />
+							<a th:if="${#fields.hasErrors('order.startHour')}" th:errors="${order.startHour}"></a><br/>
+
+							<a>зал:</a>
+							<select th:field="${order.hall}">
+								<!--<option selected value="null">не выбран</option>-->
+								<option th:each="hall : ${halls}" th:value="${hall.publicId}"  th:text="${hall.name}">
+							</select><br/>
+
+							<a>акция:</a>
+							<select th:field="${order.discount}">
+								<!--<option selected value="null">не выбран</option>-->
+								<option th:each="discount : ${discounts}" th:value="${discount.publicId}" th:text="${discount.name}">
+							</select><br/>
+
+							<a>комментарий:</a><br/>
+							<input type="text" rows="3" th:field="${order.comment}"> </input><br/>
+
+							<button class="button" type="submit" value="Submit">Сохранить</button>
+						</fieldset>
+					</form>
+
+				</div>
+			</div>
+		</section>
+		</section>
+
+	</body>
+
+</html>

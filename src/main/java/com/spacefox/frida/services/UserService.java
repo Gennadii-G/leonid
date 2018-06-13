@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> getAll();
+    List<User> getAll();
 
-    public void save(User user);
+    void save(User user);
 
-    public User currentUser();
+    User currentUser();
 
-    public boolean exists(String login);
+    boolean exists(String login);
 
-    public User getByLogin(String login);
+    User getByLogin(String login);
 }

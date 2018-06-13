@@ -1,11 +1,9 @@
 package com.spacefox.frida.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name="jh_employee")
 public class Employee extends DomainObject  {
 
     public Employee() {

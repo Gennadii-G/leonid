@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface DiscountService {
 
-    public List<Discount> getAll();
+    List<Discount> getAll();
 
-    public Discount getByName(String name);
+    Discount getByName(String name);
 
-    public void save(Discount disc);
+    void save(Discount disc);
 
 }

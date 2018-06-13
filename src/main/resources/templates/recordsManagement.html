@@ -24,7 +24,7 @@
 				<h2>Управление записями</h2>
 				<button class="button" onclick="javascript:PopUpShowAddOrder()">Добавить запись</button>
 				<div th:replace="common-popup::addOrder"></div>
-				<a th:if="${hasError}" color="red">Запись не сохранена</a><br/>
+				<a th:if="${hasError}">Запись не сохранена</a><br/>
                 <table class="records-table" style="width:80%">
                     <tr>
                         <th><a>Дата записи</a></th>
@@ -42,18 +42,15 @@
 						<td ><a th:text="${order.minuteAmount}"></a></td>
 						<td ><a th:text="${order.price}"></a></td>
 						<td ><a th:text="${order.comment}"></a></td>
+						<!--<td ><button class="button" th:if="${accessLevel > 0}" )>-->
+						<td><a class="button" th:href="@{/recordsManagement/edit/} + ${order.getPublicId()}" th:text="редактировать"/><a class="button" th:href="@{/recordsManagement/delete/} + ${order.getPublicId()}" th:text="удалить"/>
+						</td>
 					</tr>
                 </table>
-			</div> <!-- CLOSE content-place -->
 			</div>
-		</section> <!-- CLOSE #home-part -->
-		</section> <!-- CLOSE #content-part -->
-
-		<!-- Language selection -->
-		<!--<p class="lang">-->
-			<!--<a href="" class="active">EN</a><span> | </span>-->
-			<!--<a href="">DE</a>-->
-		<!--</p>-->
+			</div>
+		</section>
+		</section>
 
 	</body>
 

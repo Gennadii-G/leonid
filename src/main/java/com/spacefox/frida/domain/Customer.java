@@ -3,8 +3,10 @@ package com.spacefox.frida.domain;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="jh_customer")
 public class Customer extends DomainObject {
 
     @OneToOne

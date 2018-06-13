@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TrampolineHallRepository extends JpaRepository<TrampolineHall, Long> {
 
-    public TrampolineHall findByName(String name);
+    TrampolineHall findByName(String name);
 }

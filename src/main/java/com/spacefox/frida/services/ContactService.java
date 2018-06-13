@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ContactService {
 
-    public List<Contact> getAll();
+    List<Contact> getAll();
 
-    public void save(Contact disc);
+    void save(Contact disc);
 
 }

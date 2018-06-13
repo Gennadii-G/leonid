@@ -1,6 +1,5 @@
 package com.spacefox.frida.controllers;
 
-import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.repository.TrampolineHallRepository;
 import com.spacefox.frida.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;

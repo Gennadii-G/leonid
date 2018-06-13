@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -65,4 +62,42 @@ public class RecordsManagementController {
         return "redirect:/recordsManagement";
     }
 
+    @GetMapping("/edit/{orderid}")
+    public String editGet(Model model, @PathVariable Long orderid){
+        Order order = orderService.getById(orderid);
+        model.addAttribute("halls", hallService.getAll());
+        model.addAttribute("discounts", discountService.getAll());
+        model.addAttribute("order", order);
+        model.addAttribute("id", orderid);
+        return "editOrder";
+    }
+
+    @PostMapping("/edit/{orderid}")
+    public String editPost(Model model,
+                    @PathVariable Long orderid,
+                    @ModelAttribute(name = "order") Order order,
+                    @ModelAttribute(name = "discount") Discount discount,
+                    @ModelAttribute(name = "hall") TrampolineHall hall,
+                    BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("hasError", true);
+            model.addAttribute("halls", hallService.getAll());
+            model.addAttribute("discounts", discountService.getAll());
+            return "editOrder";
+        }
+
+        order.setHall(hall);
+        order.setDiscount(discount);
+        order.setPublicId(orderid);
+        orderService.save(order);
+
+        return "redirect:/recordsManagement";
+    }
+
+    @GetMapping("/delete/{orderid}")
+    public String deleteO(Model model, @PathVariable Long orderid) {
+        orderService.delete(orderid);
+        return "redirect:/recordsManagement";
+    }
 }

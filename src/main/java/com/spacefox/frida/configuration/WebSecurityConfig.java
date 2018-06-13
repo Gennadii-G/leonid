@@ -17,6 +17,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //todo password encoder
+
     @Autowired
     private DataSource dataSource;
 
@@ -33,9 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
                 .antMatchers(freeAccessPages).permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/recordsManagement/**").hasRole("EMPLOYEE")
-//                .antMatchers("/recordsManagement/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/recordsManagement/**").hasRole("EMPLOYEE")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -64,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withDefaultPasswordEncoder().username("us").password("1").roles("GUEST").build());
-        manager.createUser(User.withDefaultPasswordEncoder().username("odmen").password("1").roles("ADMIN").build());
+        manager.createUser(User.withDefaultPasswordEncoder().username("odmen").password("1").roles("ADMIN", "EMPLOYEE").build());
         manager.createUser(User.withDefaultPasswordEncoder().username("emp").password("1").roles("EMPLOYEE").build());
         return manager;
     }
