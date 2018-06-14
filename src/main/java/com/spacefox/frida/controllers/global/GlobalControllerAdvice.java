@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
@@ -20,14 +24,26 @@ public class GlobalControllerAdvice {
     }
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView ero(Exception exception) {
+    public ModelAndView ero(Exception exception, HttpServletRequest request) {
         exception.printStackTrace();
+
 
         ModelAndView mav = new ModelAndView();
         String mes = exception.getMessage().replaceAll(";", ";\n");
+        mav.addObject("status", request.getAttribute("javax.servlet.error.status_code"));
+        mav.addObject("reason", request.getAttribute("javax.servlet.error.message"));
         mav.addObject("mes", mes);
         mav.setViewName("error");
         return mav;
+    }
+
+    @RequestMapping(path = "/error")
+    public String handle(Model model, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("status", request.getAttribute("javax.servlet.error.status_code"));
+        map.put("reason", request.getAttribute("javax.servlet.error.message"));
+        model.addAllAttributes(map);
+        return "error";
     }
 
     @RequestMapping("/403")

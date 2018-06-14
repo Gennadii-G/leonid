@@ -45,8 +45,12 @@ public class RecordsManagementController {
                        @ModelAttribute(name = "order") Order order,
                        BindingResult bindingResult,
                        @ModelAttribute(name = "discount") Discount discount,
-                       @ModelAttribute(name = "hall") TrampolineHall hall){
+                       @ModelAttribute(name = "hall") TrampolineHall hall)
+                        throws IllegalAccessException{
 
+        if(order.getComment().equals("exc")){
+            throw new IllegalAccessException("wah-wah");
+        }
         if(bindingResult.hasErrors()){
             model.addAttribute("hasError", true);
             model.addAttribute("halls", hallService.getAll());

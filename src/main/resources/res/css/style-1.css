@@ -2387,3 +2387,10 @@ div.lang {
     border: 1px solid #a8afaf;
     color: black;
   }
+
+.center-error-img {
+    width: 60%; /* Шири на элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    border: 1px solid #a8afaf;
+}
