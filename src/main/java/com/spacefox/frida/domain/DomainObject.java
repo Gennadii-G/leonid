@@ -1,23 +1,17 @@
 package com.spacefox.frida.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
+@Getter @Setter @NoArgsConstructor
 public class DomainObject implements Serializable {
-
-    public DomainObject() {
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long publicid;
-
-    public Long getPublicId() {
-        return publicid;
-    }
-
-    public void setPublicId(Long publicId) {
-        this.publicid = publicId;
-    }
 }

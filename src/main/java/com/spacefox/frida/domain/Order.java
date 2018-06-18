@@ -1,6 +1,9 @@
 package com.spacefox.frida.domain;
 
 import com.spacefox.frida.utils.DateFormatterJH;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,10 +12,9 @@ import java.util.Date;
 
 @Entity
 @Table(name="jh_order")
+@NoArgsConstructor
 public class Order extends DomainObject {
 
-    public Order() {
-    }
 //    yyyy-MM-dd'T'hh:mm:ss.SSSZ
 
     @NotNull
