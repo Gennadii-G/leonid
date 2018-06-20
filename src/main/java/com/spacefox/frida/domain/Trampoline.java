@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Getter @Setter @NoArgsConstructor
 public class Trampoline extends DomainObject {
 
+    public Trampoline(TrampolineType type) {
+        this.type = type;
+    }
+
     private boolean isBroken;
     private boolean isOrdered;
     @Enumerated(EnumType.STRING)

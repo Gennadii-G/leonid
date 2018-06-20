@@ -4,11 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-public class Domenko extends DomainObject {
+import javax.persistence.Entity;
 
-    private String name;
-    private int number;
-    private boolean isYes;
+@Entity(name="jh_news")
+@Getter @Setter @NoArgsConstructor
+public class News extends DomainObject {
+
+
+
+    private PictureJH picture;
 
 }

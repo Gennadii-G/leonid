@@ -18,8 +18,6 @@ public class Contact extends DomainObject {
     private String lastName;
     private String phoneNumber;
     private String Address;
-    @NotNull
-    @Min(18)
     private int age;
 
 }

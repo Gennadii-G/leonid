@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter @Setter @NoArgsConstructor
 public class Employee extends DomainObject  {
 
-    @OneToOne
-    @JoinColumn(name="contact_id")
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable()
     private Contact contact;
     private String details;
 

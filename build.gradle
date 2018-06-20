@@ -32,6 +32,7 @@ dependencies {
     compile 'commons-configuration:commons-configuration:+'
 
     compileOnly 'org.projectlombok:lombok:1.18.0'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
 
 //    runtime 'org.springframework.boot:spring-boot-devtools'
     runtime 'org.postgresql:postgresql:42.1.1'
