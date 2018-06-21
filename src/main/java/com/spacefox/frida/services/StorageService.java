@@ -1,8 +1,10 @@
 package com.spacefox.frida.services;
 
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,14 +12,16 @@ import java.util.stream.Stream;
 
 public interface StorageService {
 
-    void init();
-
-    void save(MultipartFile file) throws IOException;
+    boolean save(MultipartFile file);
 
     boolean delete(String filename);
 
-    Resource load(String filename) throws IOException;
+    Path loadPath(String filename);
 
     boolean exist(String fileName);
+
+    FileInputStream download(String filename);
+
+    long size(String filename);
 
 }

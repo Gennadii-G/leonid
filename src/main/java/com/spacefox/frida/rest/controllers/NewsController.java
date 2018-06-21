@@ -20,34 +20,39 @@ public class NewsController {
     private StorageService storageService;
 
     @GetMapping("/pictures/{filename}")
-    @ResponseBody
-    public ResponseEntity<Resource> pictureFile(@PathVariable String filename){
-
-        Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
-
-    @PostMapping("/api/upload")
-    // If not @RestController, uncomment this
-    //@ResponseBody
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-        log.debug("загрузка файла " + file.getOriginalFilename());
-
-        if (file.isEmpty()) {
-            return new ResponseEntity<>("please select a file!", HttpStatus.OK);
-        }
-
+    public ResponseEntity<Resource> loadPicture(@PathVariable String filename){
+        Resource file = null;
+        ResponseEntity<Resource> responseEntity;
         try {
-            storageService.save(file);
+            file = storageService.load(filename);
+            responseEntity = ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"" + file.getFilename() + "\"").body(file);
         } catch (IOException e) {
-            log.error("Ошибка при сохранении файла " + file.getName());
+            log.error("ошибка при загрузке файла "+ filename);
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>("успешно загружен - " +
-                file.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
-
+        return responseEntity;
     }
+
+    @PostMapping("/pictures/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("uploadPicture") MultipartFile file) {
+        return storageService.save(file);
+    }
+
+//    @GetMapping("/pictures/download/{filename}")
+//    public ResponseEntity<Resource> downloadPicture(@PathVariable String filename){
+//        return storageService.download(filename);
+//
+//        ResponseEntity<Resource> responseEntity;
+//        try {
+//            responseEntity = storageService.download(filename);
+//        } catch (IOException e) {
+//            log.error("ошибка при загрузке файла "+ filename);
+//            e.printStackTrace();
+//            responseEntity = new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
+//        }
+//        return responseEntity;
+//    }
+
 }
