@@ -1,58 +1,39 @@
 package com.spacefox.frida.rest.controllers;
 
-import com.spacefox.frida.services.StorageService;
+import com.spacefox.frida.adapter.RestPictureAdapter;
+import com.spacefox.frida.domain.Domenko;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
-@RestController("/news")
+@RestController
 @Slf4j
 public class NewsController {
 
     @Autowired
-    private StorageService storageService;
+    private RestPictureAdapter pictureAdapter;
 
-    @GetMapping("/pictures/{filename}")
-    public ResponseEntity<Resource> loadPicture(@PathVariable String filename){
-        Resource file = null;
-        ResponseEntity<Resource> responseEntity;
-        try {
-            file = storageService.load(filename);
-            responseEntity = ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-        } catch (IOException e) {
-            log.error("ошибка при загрузке файла "+ filename);
-            e.printStackTrace();
-            responseEntity = new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
-        }
-        return responseEntity;
+    @RequestMapping("/picture/{filename}")
+    public Resource loadPicture(@PathVariable String filename){
+        return pictureAdapter.loadPicture(filename);
     }
 
-    @PostMapping("/pictures/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("uploadPicture") MultipartFile file) {
-        return storageService.save(file);
+    @PostMapping("/picture/upload")
+    public ResponseEntity<?> savePicture(@RequestParam("uploadPicture") MultipartFile file) {
+        return pictureAdapter.savePicture(file);
     }
 
-//    @GetMapping("/pictures/download/{filename}")
-//    public ResponseEntity<Resource> downloadPicture(@PathVariable String filename){
-//        return storageService.download(filename);
-//
-//        ResponseEntity<Resource> responseEntity;
-//        try {
-//            responseEntity = storageService.download(filename);
-//        } catch (IOException e) {
-//            log.error("ошибка при загрузке файла "+ filename);
-//            e.printStackTrace();
-//            responseEntity = new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
-//        }
-//        return responseEntity;
-//    }
+    @GetMapping("/picture/download/{filename}")
+    public ResponseEntity downloadPicture(@PathVariable String filename){
+        return pictureAdapter.downloadPicture(filename);
+    }
+
+    @PostMapping("/picture/delete/{filename}")
+    public ResponseEntity deletePicture(@PathVariable String filename){
+        return pictureAdapter.deletePicture(filename);
+    }
 
 }

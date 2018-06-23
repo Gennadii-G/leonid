@@ -16,11 +16,11 @@ public interface StorageService {
 
     boolean delete(String filename);
 
-    Path loadPath(String filename);
+    Path path(String filename);
 
     boolean exist(String fileName);
 
-    FileInputStream download(String filename);
+    FileInputStream download(String filename) throws FileNotFoundException;
 
     long size(String filename);
 

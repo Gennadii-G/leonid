@@ -93,7 +93,7 @@ public class RecordsManagementController {
 
         order.setHall(hall);
         order.setDiscount(discount);
-        order.setPublicId(orderid);
+        order.setPublicid(orderid);
         orderService.save(order);
 
         return "redirect:/recordsManagement";

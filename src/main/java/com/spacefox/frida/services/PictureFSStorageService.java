@@ -4,13 +4,6 @@ import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,11 +25,12 @@ public class PictureFSStorageService implements StorageService {
     private Path targetDir;
     @Value("${pictures.dir.name}")
     private String dirName;
-    private final String FULL_DIR_NAME = System.getProperty("user.dir") + dirName;
+    private String fullDirPath;
 
     @PostConstruct
     private void init() {
-        targetDir = Paths.get(FULL_DIR_NAME);
+        fullDirPath = System.getProperty("user.dir") + dirName;
+        targetDir = Paths.get(fullDirPath);
         if(Files.notExists(targetDir)){
             try {
                 Files.createDirectories(targetDir);
@@ -55,10 +48,11 @@ public class PictureFSStorageService implements StorageService {
         boolean res = false;
         String filename = "";
         try{
-            if(file.getOriginalFilename() == null || file.isEmpty()){
+            if(file.isEmpty()){
                 log.warn("файл пуст");
                 throw new IOException();
             }
+            filename = file.getOriginalFilename();
             if (filename.contains("..")) {
                 log.warn("нельзя использовать относительный путь при загрузке файла " + filename);
                 throw new IOException();
@@ -87,12 +81,13 @@ public class PictureFSStorageService implements StorageService {
             }
         } catch (IOException e) {
             log.error("ошибка удаления файла");
-            e.printStackTrace(); }
+            e.printStackTrace();
+        }
         return res;
     }
 
     @Override
-    public Path loadPath(String filename) {
+    public Path path(String filename) {
         log.debug("Чтение файла: " + filename);
         Path pic;
         pic = this.targetDir.resolve(filename);
@@ -104,19 +99,18 @@ public class PictureFSStorageService implements StorageService {
     }
 
     @Override
-    public FileInputStream download(String filename) {
+    public FileInputStream download(String filename) throws FileNotFoundException {
         log.debug("Процесс выгрузки файла: " + filename);
-        @Cleanup FileInputStream in = null;
         try {
             Path pic = this.targetDir.resolve(filename);
-            in = new FileInputStream(pic.toFile());
-            InputStreamResource resource = new InputStreamResource(in);
+            @Cleanup FileInputStream in = new FileInputStream(pic.toFile());
+            return in;
         }
         catch (IOException e) {
             log.error("Ошибка выгрузки файла " + filename);
-            log.error(e.getCause().toString());
+            e.printStackTrace();
+            throw new FileNotFoundException();
         }
-        return in;
     }
 
     @Override
