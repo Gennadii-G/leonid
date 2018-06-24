@@ -37,7 +37,7 @@ public class AdminController {
     @PostMapping("/addHall")
     public String postHall(ModelAndView model,
                            @ModelAttribute(name = "hall") TrampolineHall hall,
-                           @RequestParam("trampsAmount") int trAmount){
+                           @RequestParam("trampsAmount") int trAmount) {
 
         hallService.save(hall, trAmount);
         return "redirect:/trampolineHalls";

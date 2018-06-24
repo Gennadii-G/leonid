@@ -30,6 +30,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
 //    compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'commons-configuration:commons-configuration:+'
+    compile 'org.modelmapper:modelmapper:2.0.0'
 
     compileOnly 'org.projectlombok:lombok:1.18.0'
     compile 'ch.qos.logback:logback-classic:1.2.3'
