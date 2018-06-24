@@ -13,14 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 
 @Service
 @Slf4j
-public class RestPictureAdapterImpl implements RestPictureAdapter{
+public class RestPictureAdapterImpl implements RestPictureAdapter {
 
     @Autowired
     private StorageService storageService;
@@ -30,6 +32,7 @@ public class RestPictureAdapterImpl implements RestPictureAdapter{
         return isSave ? okResponse("Файл сохранен") : badResponse("Ошибка сохранения");
     }
 
+    @Override
     public Resource loadPicture(String filename) {
         Resource res = null;
         Path pic = storageService.path(filename);
@@ -45,11 +48,15 @@ public class RestPictureAdapterImpl implements RestPictureAdapter{
         return res;
     }
 
+    @Override
     public ResponseEntity downloadPicture(String filename){
         ResponseEntity responseEntity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+
         try {
-            InputStream in = storageService.download(filename);
+            File file = storageService.download(filename).toFile();
+            InputStream in = new FileInputStream(file);
             InputStreamResource resource = new InputStreamResource(in);
+
             if (resource.exists() || resource.isReadable()) {
                 responseEntity = ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_DISPOSITION)
@@ -57,13 +64,15 @@ public class RestPictureAdapterImpl implements RestPictureAdapter{
                         .contentType(MediaType.parseMediaType("application/octet-stream"))
                         .body(resource);
             }
-        }catch(FileNotFoundException e) {
-            log.error("файл не найден");
+        }catch(IOException e) {
+            log.error("Ошибка загрузки файла " + filename);
             e.printStackTrace();
         }
         return responseEntity;
+
     }
 
+    @Override
     public ResponseEntity deletePicture(String filename) {
         ResponseEntity resp;
         boolean isDelete = storageService.delete(filename);

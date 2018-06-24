@@ -20,8 +20,8 @@ public interface StorageService {
 
     boolean exist(String fileName);
 
-    FileInputStream download(String filename) throws FileNotFoundException;
+    Path download(String filename);
 
-    long size(String filename);
+    int size(String filename);
 
 }

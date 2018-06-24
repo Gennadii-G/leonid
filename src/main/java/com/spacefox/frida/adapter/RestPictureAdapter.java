@@ -9,9 +9,9 @@ public interface  RestPictureAdapter {
 
     ResponseEntity savePicture(MultipartFile file);
 
-    public Resource loadPicture(String filename);
+    Resource loadPicture(String filename);
 
-    public ResponseEntity downloadPicture(String filename);
+    ResponseEntity downloadPicture(String filename);
 
-    public ResponseEntity deletePicture(String filename);
+    ResponseEntity deletePicture(String filename);
 }

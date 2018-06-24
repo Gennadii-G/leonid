@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -20,7 +18,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 @NoArgsConstructor
 @Slf4j
-public class PictureFSStorageService implements StorageService {
+public class FSPictureStorageService implements StorageService {
 
     private Path targetDir;
     @Value("${pictures.dir.name}")
@@ -99,26 +97,18 @@ public class PictureFSStorageService implements StorageService {
     }
 
     @Override
-    public FileInputStream download(String filename) throws FileNotFoundException {
+    public Path download(String filename) {
         log.debug("Процесс выгрузки файла: " + filename);
-        try {
-            Path pic = this.targetDir.resolve(filename);
-            @Cleanup FileInputStream in = new FileInputStream(pic.toFile());
-            return in;
-        }
-        catch (IOException e) {
-            log.error("Ошибка выгрузки файла " + filename);
-            e.printStackTrace();
-            throw new FileNotFoundException();
-        }
+        return path(filename);
+
     }
 
     @Override
-    public long size(String filename) {
-        long size = 0;
+    public int size(String filename) {
+        int size = 0;
         try {
             Path p = this.targetDir.resolve(filename);
-            size = Files.size(p);
+            size = (int) Files.size(p);
         }catch(IOException e){
             log.error("ошибка проверки размера файла " + filename);
             e.printStackTrace();

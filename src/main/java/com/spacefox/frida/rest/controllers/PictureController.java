@@ -1,7 +1,6 @@
 package com.spacefox.frida.rest.controllers;
 
 import com.spacefox.frida.adapter.RestPictureAdapter;
-import com.spacefox.frida.domain.Domenko;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -9,14 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @Slf4j
-public class NewsController {
+public class PictureController {
 
     @Autowired
     private RestPictureAdapter pictureAdapter;
 
-    @RequestMapping("/picture/{filename}")
+    @GetMapping("/picture/{filename}")
     public Resource loadPicture(@PathVariable String filename){
         return pictureAdapter.loadPicture(filename);
     }
@@ -27,7 +28,7 @@ public class NewsController {
     }
 
     @GetMapping("/picture/download/{filename}")
-    public ResponseEntity downloadPicture(@PathVariable String filename){
+    public ResponseEntity downloadPicture(@PathVariable String filename, HttpServletResponse response){
         return pictureAdapter.downloadPicture(filename);
     }
 
