@@ -1,4 +1,4 @@
-package com.spacefox.frida.rest.DTO;
+package com.spacefox.frida.domain.DTO;
 
 import com.spacefox.frida.domain.DomainObject;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.News;
-import com.spacefox.frida.rest.DTO.NewsDTO;
+import com.spacefox.frida.domain.DTO.NewsDTO;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.spacefox.frida.rest.controllers;
 
 import com.spacefox.frida.domain.News;
-import com.spacefox.frida.rest.DTO.NewsDTO;
+import com.spacefox.frida.domain.DTO.NewsDTO;
 import com.spacefox.frida.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +33,7 @@ public class NewsController {
         return newsService.getDTO(news);
     }
 
-    @PostMapping("/news/save")
+    @PostMapping("/news/add")
     public ResponseEntity postNews(@ModelAttribute NewsDTO newsDTO, BindingResult bindingResult){
         newsService.save(newsDTO);
         return new ResponseEntity<String>("новость сохранена", HttpStatus.OK);

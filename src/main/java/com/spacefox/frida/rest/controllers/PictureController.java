@@ -22,7 +22,7 @@ public class PictureController {
         return pictureAdapter.loadPicture(filename);
     }
 
-    @PostMapping("/picture/upload")
+    @PostMapping("/picture/add")
     public ResponseEntity<?> savePicture(@RequestParam("uploadPicture") MultipartFile file) {
         return pictureAdapter.savePicture(file);
     }
