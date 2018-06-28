@@ -1,13 +1,10 @@
 package com.spacefox.frida.utils;
 
+import com.spacefox.frida.domain.DTO.DomenkoDTO;
 import com.spacefox.frida.domain.Domenko;
 import com.spacefox.frida.domain.PictureJH;
-import com.spacefox.frida.rest.DTO.DomenkoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-
-import java.io.File;
-import java.nio.file.Paths;
 
 @Slf4j
 public class Test {
@@ -31,5 +28,4 @@ public class Test {
         pic.setFilename("fileName2222");
         pic.setSize(3000000);
     }
-
 }

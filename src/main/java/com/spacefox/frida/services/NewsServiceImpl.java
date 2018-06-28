@@ -3,10 +3,13 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.News;
 import com.spacefox.frida.repository.NewsRepository;
 import com.spacefox.frida.domain.DTO.NewsDTO;
+import com.spacefox.frida.utils.REBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.Date;
 import java.util.List;
@@ -33,15 +36,16 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void save(News news) {
-        repository.save(news);
+    public News save(News news) {
+        return repository.save(news);
     }
 
     @Override
-    public void save(NewsDTO newsDTO) {
+    public boolean save(NewsDTO newsDTO) {
         News news = mapper.map(newsDTO, News.class);
         news.setCreatedDate(new Date());
-        repository.save(news);
+        news = repository.save(news);
+        return news.getId() != null;
     }
 
     @Override
@@ -53,5 +57,16 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<NewsDTO> getDTO(List<News> news) {
         return news.stream().map(this::getDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public News getById(long id) {
+        return repository.getOne(id);
+    }
+
+    @Override
+    public NewsDTO getDTOById(long id) {
+        News news = repository.getOne(id);
+        return mapper.map(news, NewsDTO.class);
     }
 }

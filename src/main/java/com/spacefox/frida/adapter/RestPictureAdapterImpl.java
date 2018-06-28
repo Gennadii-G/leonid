@@ -1,6 +1,7 @@
 package com.spacefox.frida.adapter;
 
 import com.spacefox.frida.services.StorageService;
+import com.spacefox.frida.utils.REBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -29,7 +30,9 @@ public class RestPictureAdapterImpl implements RestPictureAdapter {
 
     public ResponseEntity savePicture(MultipartFile file){
         boolean isSave = storageService.save(file);
-        return isSave ? okResponse("Файл сохранен") : badResponse("Ошибка сохранения");
+        return isSave ?
+                REBuilder.okResponse("Файл сохранен") :
+                REBuilder.badResponse("Ошибка сохранения");
     }
 
     @Override
@@ -77,23 +80,13 @@ public class RestPictureAdapterImpl implements RestPictureAdapter {
         ResponseEntity resp;
         boolean isDelete = storageService.delete(filename);
         if(!storageService.exist(filename)){
-            resp = badResponse("Файл с таким именем не найден");
+            resp = REBuilder.badResponse("Файл с таким именем не найден");
         }else if(storageService.delete(filename)) {
-            resp = okResponse("Файл удален");
+            resp = REBuilder.okResponse("Файл удален");
         }else {
-            resp = badResponse("Ошибка удаления");
+            resp = REBuilder.badResponse("Ошибка удаления");
         }
         return resp;
     }
-
-    private ResponseEntity badResponse(String body){
-        return new ResponseEntity<String>(body, HttpStatus.BAD_REQUEST);
-    }
-
-    private ResponseEntity okResponse(String body){
-        return new ResponseEntity<String>(body, HttpStatus.OK);
-    }
-
-
 
 }
