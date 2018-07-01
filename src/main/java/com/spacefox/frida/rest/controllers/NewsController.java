@@ -1,18 +1,17 @@
 package com.spacefox.frida.rest.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spacefox.frida.domain.DTO.Transfer;
-import com.spacefox.frida.domain.News;
 import com.spacefox.frida.domain.DTO.NewsDTO;
+import com.spacefox.frida.domain.News;
 import com.spacefox.frida.services.NewsService;
 import com.spacefox.frida.utils.REBuilder;
+import com.spacefox.frida.utils.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,40 +19,51 @@ public class NewsController {
 
     @Autowired
     private NewsService newsService;
-    @Autowired
 
     @JsonView(Transfer.Info.class)
     @GetMapping("/news/all")
-    public List<NewsDTO> getAllNews(){
+    public List<NewsDTO> addNews(){
         List<News> news = newsService.getAll();
         return newsService.getDTO(news);
     }
 
+    @JsonView(Transfer.Info.class)
     @GetMapping("/news")
-    public List<NewsDTO> getFreshNews(){
+    public List<NewsDTO> currentNews(){
         List<News> news = newsService.getLastNews();
         return newsService.getDTO(news);
     }
 
+    @JsonView({Transfer.Update.class, Transfer.Info.class})
     @PostMapping("/news/add")
-    public ResponseEntity postNews(@ModelAttribute NewsDTO newsDTO, BindingResult bindingResult){
+    public ResponseEntity postNews(@Validated NewsDTO newsDTO, BindingResult bindingResult){
         newsService.save(newsDTO);
         return REBuilder.okResponse("новость сохранена");
     }
 
-    @JsonView({Transfer.Update.class, Transfer.Info.class})
+    @JsonView({Transfer.Update.class})
     @GetMapping("/news/{id}")
+    @ResponseBody
     public NewsDTO getNewsForUpdate(@PathVariable long id){
         return newsService.getDTOById(id);
     }
 
-    @PostMapping("/news/update")
-    public ResponseEntity updateNews(@ModelAttribute @Valid NewsDTO newsDTO, BindingResult bindingResult) {
+
+    @JsonView({Transfer.Update.class})
+    @PutMapping("/news/update")
+    public ResponseEntity updateNews(@Validated NewsDTO newsDTO, BindingResult bindingResult) {
         ResponseEntity resp = REBuilder.okResponse("новость сохранена");
         boolean isSave = newsService.save(newsDTO);
         if(!isSave){
             resp = REBuilder.badResponse("ошибка сохранения");
         }
         return resp;
+    }
+
+    @JsonView({Transfer.Update.class})
+    @DeleteMapping("/news/delete")
+    @ResponseBody
+    public NewsDTO getNewsForUpdate(NewsDTO newsDTO){
+        return newsService.delete(newsDTO);
     }
 }

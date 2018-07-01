@@ -52,13 +52,13 @@
 							<a>зал:</a>
 							<select th:field="${order.hall}">
 								<!--<option selected value="null">не выбран</option>-->
-								<option th:each="hall : ${halls}" th:value="${hall.publicId}"  th:text="${hall.name}">
+								<option th:each="hall : ${halls}" th:value="${hall.Id}"  th:text="${hall.name}">
 							</select><br/>
 
 							<a>акция:</a>
 							<select th:field="${order.discount}">
 								<!--<option selected value="null">не выбран</option>-->
-								<option th:each="discount : ${discounts}" th:value="${discount.publicId}" th:text="${discount.name}">
+								<option th:each="discount : ${discounts}" th:value="${discount.Id}" th:text="${discount.name}">
 							</select><br/>
 
 							<a>комментарий:</a><br/>

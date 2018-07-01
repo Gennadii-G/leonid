@@ -3,13 +3,10 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.News;
 import com.spacefox.frida.repository.NewsRepository;
 import com.spacefox.frida.domain.DTO.NewsDTO;
-import com.spacefox.frida.utils.REBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.Date;
 import java.util.List;
@@ -45,7 +42,7 @@ public class NewsServiceImpl implements NewsService {
         News news = mapper.map(newsDTO, News.class);
         news.setCreatedDate(new Date());
         news = repository.save(news);
-        return news.getId() != null;
+        return repository.existsById(news.getId());
     }
 
     @Override
@@ -68,5 +65,12 @@ public class NewsServiceImpl implements NewsService {
     public NewsDTO getDTOById(long id) {
         News news = repository.getOne(id);
         return mapper.map(news, NewsDTO.class);
+    }
+
+    @Override
+    public NewsDTO delete(NewsDTO dto) {
+        News news = mapper.map(dto, News.class);
+          repository.delete(news);
+        return dto;
     }
 }

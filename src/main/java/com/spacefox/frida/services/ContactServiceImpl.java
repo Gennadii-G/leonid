@@ -20,7 +20,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void save(Contact discount) {
-        discount.getPublicid();
+        discount.getId();
         repository.save(discount);
     }
 }

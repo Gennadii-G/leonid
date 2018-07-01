@@ -1,6 +1,5 @@
 package com.spacefox.frida.domain.DTO;
 
-import com.spacefox.frida.domain.DomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class DomenkoDTO extends DomainObject {
+public class DomenkoDTO {
 
     private String name;
     private int number;

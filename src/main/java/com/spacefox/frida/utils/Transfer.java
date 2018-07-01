@@ -1,4 +1,4 @@
-package com.spacefox.frida.domain.DTO;
+package com.spacefox.frida.utils;
 
 public class Transfer {
 

@@ -32,7 +32,7 @@ public class PictureController {
         return pictureAdapter.downloadPicture(filename);
     }
 
-    @PostMapping("/picture/delete/{filename}")
+    @DeleteMapping("/picture/delete/{filename}")
     public ResponseEntity deletePicture(@PathVariable String filename){
         return pictureAdapter.deletePicture(filename);
     }

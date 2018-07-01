@@ -2,8 +2,6 @@ package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.News;
 import com.spacefox.frida.domain.DTO.NewsDTO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -24,4 +22,6 @@ public interface NewsService {
     NewsDTO getDTO(News news);
 
     List<NewsDTO> getDTO(List<News> news);
+
+    NewsDTO delete(NewsDTO dto);
 }

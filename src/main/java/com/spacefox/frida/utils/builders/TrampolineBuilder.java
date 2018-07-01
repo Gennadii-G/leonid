@@ -1,4 +1,4 @@
-package com.spacefox.frida.utils.factory;
+package com.spacefox.frida.utils.builders;
 
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.catalogs.TrampolineType;

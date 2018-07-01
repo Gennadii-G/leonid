@@ -12,17 +12,20 @@ import java.util.Date;
 
 @Entity
 @Table(name="jh_order")
-@NoArgsConstructor
-public class Order extends DomainObject {
+@NoArgsConstructor @Setter @Getter
+public class Order {
 
 //    yyyy-MM-dd'T'hh:mm:ss.SSSZ
 
-    @NotNull
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+
     @ManyToOne
-    @JoinColumn(name="trampolineHall_id", referencedColumnName = "publicid")
+    @JoinColumn(name="trampolineHall_id", referencedColumnName = "id")
     private TrampolineHall hall;
     @ManyToOne
-    @JoinColumn(name="discount_id", referencedColumnName = "publicid")
+    @JoinColumn(name="discount_id", referencedColumnName = "id")
     private Discount discount;
     @OneToOne
     private Employee employee;
@@ -31,17 +34,12 @@ public class Order extends DomainObject {
     private Contact contact;
     private int price;
     private int minuteAmount;
-    @Min(1)
     private int trampsAmount;
-    @NotNull
-    @Future
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventDate;
     private Date regDate;
     private String comment;
-    @Min(9)
-    @Max(21)
     private int startHour;
 
     public String mediumRegDate(){

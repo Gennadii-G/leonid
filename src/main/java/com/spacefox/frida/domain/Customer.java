@@ -5,13 +5,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="jh_customer")
 @Getter @Setter @NoArgsConstructor
-public class Customer extends DomainObject {
+public class Customer {
 
-    private Contact contact;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="customer_id")
+    private List<Contact> contacts;
     private String details;
 
 

@@ -11,11 +11,14 @@ import java.util.List;
 @Entity
 @Table(name="jh_trampoline_hall")
 @Getter @Setter @NoArgsConstructor
-public class TrampolineHall extends DomainObject {
+public class TrampolineHall{
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @OneToMany(mappedBy = "hall")
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "hall")
+//    private List<Order> orders;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name="trampoline_id")
     private List<Trampoline> trampolines = new ArrayList<>();

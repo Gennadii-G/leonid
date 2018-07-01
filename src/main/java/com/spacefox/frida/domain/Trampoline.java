@@ -5,20 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="jh_trampoline")
 @Getter @Setter @NoArgsConstructor
-public class Trampoline extends DomainObject {
+public class Trampoline {
 
     public Trampoline(TrampolineType type) {
         this.type = type;
     }
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
     private boolean isBroken;
     private boolean isOrdered;
     @Enumerated(EnumType.STRING)
