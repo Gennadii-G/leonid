@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/discounts")
-public class DiscountController {
+@RequestMapping("/123/discounts")
+public class SimpleDiscountController {
 
     @Autowired
     private DiscountService service;

@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class NewsController {
 
     @JsonView({Transfer.Update.class, Transfer.Info.class})
     @PostMapping("/news/add")
-    public ResponseEntity postNews(@Validated NewsDTO newsDTO, BindingResult bindingResult){
+    public ResponseEntity postNews(@Valid NewsDTO newsDTO){
         newsService.save(newsDTO);
         return REBuilder.okResponse("новость сохранена");
     }
@@ -51,7 +52,7 @@ public class NewsController {
 
     @JsonView({Transfer.Update.class})
     @PutMapping("/news/update")
-    public ResponseEntity updateNews(@Validated NewsDTO newsDTO, BindingResult bindingResult) {
+    public ResponseEntity updateNews(@Validated NewsDTO newsDTO) {
         ResponseEntity resp = REBuilder.okResponse("новость сохранена");
         boolean isSave = newsService.save(newsDTO);
         if(!isSave){

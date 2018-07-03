@@ -28,7 +28,7 @@ public class AdminController {
     public String getAdm(Model model,
                           @ModelAttribute(name = "hall") TrampolineHall hall,
                           @ModelAttribute(name = "discount") Discount discount,
-                          @ModelAttribute(name = "user") User user){
+                          @ModelAttribute(name = "user") User user) {
 
         model.addAttribute("roles", Roles.values());
         return "admin";

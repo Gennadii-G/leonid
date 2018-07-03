@@ -20,7 +20,7 @@ public class NewsDTO {
     private Long id;
 
     @JsonView({Transfer.Info.class, Transfer.Update.class})
-    @Pattern(regexp = "^([a-zА-Я0-9_-]{0,90})(.)(jpg|jpeg|JPG|png|PNG)$",
+    @Pattern(regexp = "^([a-zА-Я0-9_-]{2,90})(.)(jpg|jpeg|JPG|png|PNG)$",
             message = "Неподходящее название изображения")
     private String picture;
 
