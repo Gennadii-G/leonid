@@ -16,6 +16,10 @@ public interface TrampolineHallService {
 
     void save(TrampolineHall hall, int trampsAmount);
 
+    void createTrampolineHall(TrampolineHall hall, int trampsAmount);
+
+    void createTrampolineHall(TrampolineHallDTO hallDTO);
+
     void save(TrampolineHallDTO dto);
 
     void update(TrampolineHallDTO dto);

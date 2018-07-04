@@ -4,12 +4,13 @@ import com.spacefox.frida.domain.catalogs.TrampolineType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="jh_trampoline")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class Trampoline {
 
     public Trampoline(TrampolineType type) {

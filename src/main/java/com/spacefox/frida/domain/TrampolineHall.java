@@ -3,6 +3,7 @@ package com.spacefox.frida.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name="jh_trampoline_hall")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class TrampolineHall{
 
     @Id
@@ -19,9 +20,9 @@ public class TrampolineHall{
 
 //    @OneToMany(mappedBy = "hall")
 //    private List<Order> orders;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(orphanRemoval=true)
     @JoinColumn(name="trampoline_id")
-    private List<Trampoline> trampolines = new ArrayList<>();
+    private List<Trampoline> trampolines;
     private int price;
     private String name;
     private String address;

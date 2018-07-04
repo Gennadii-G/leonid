@@ -17,7 +17,7 @@ public class TrampolineHallController {
 
     @GetMapping("/trampolineHalls")
     @ResponseStatus(HttpStatus.OK)
-    public List<TrampolineHallDTO> getAllHalls(){
+    public List<TrampolineHallDTO> getAllHalls() {
         List<TrampolineHall> halls = hallService.getAll();
         return hallService.getDTO(halls);
     }
@@ -25,7 +25,7 @@ public class TrampolineHallController {
     @PostMapping("trampolineHall/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addTrampHall(TrampolineHallDTO hallDTO){
-        hallService.save(hallDTO);
+        hallService.createTrampolineHall(hallDTO);
     }
 
     @PutMapping("trampolineHall/update")
