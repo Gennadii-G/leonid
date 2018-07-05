@@ -104,4 +104,14 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
         trampolineRepository.saveAll(tramps);
         hall.setTrampolines(tramps);
     }
+
+    @Override
+    public boolean exists(long id) {
+        return repository.existsById(id);
+    }
+
+    @Override
+    public TrampolineHall getById(long id) {
+        return repository.getOne(id);
+    }
 }

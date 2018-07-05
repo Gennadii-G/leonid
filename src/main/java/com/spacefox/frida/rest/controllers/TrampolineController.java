@@ -20,6 +20,11 @@ public class TrampolineController {
         return trampolineService.getAll();
     }
 
+    @GetMapping("/trampolines/{id}")
+    public Trampoline getAllTramps(@PathVariable long id){
+        return trampolineService.getById(id);
+    }
+
     @PostMapping("trampoline/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addTrampoline(TrampolineDTO trampDTO){

@@ -16,8 +16,8 @@ public class Employee {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="Employee_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="employee_id", referencedColumnName = "id")
     private List<Contact> contacts;
     private String details;
 

@@ -1,17 +1,15 @@
 package com.spacefox.frida.domain;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="jh_discount")
-@Getter @Setter @NoArgsConstructor
-@ToString(callSuper=true, includeFieldNames=true)
+@Data @Builder
 public class Discount {
 
     @Id

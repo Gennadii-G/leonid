@@ -7,8 +7,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-@Entity
+@Entity(name = "Trampoline")
 @Table(name="jh_trampoline")
 @Getter @Setter @NoArgsConstructor @ToString
 public class Trampoline {
@@ -20,9 +21,18 @@ public class Trampoline {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @Column(length=40)
+    private String name;
+    @Column(length=250)
+    private String Desc;
     private boolean isBroken;
-    private boolean isOrdered;
+    private LocalDate lastMaintenance;
+    private LocalDate nextMaintenance;
     @Enumerated(EnumType.STRING)
     private TrampolineType type;
+//    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="hall_id", referencedColumnName = "id")
+    private TrampolineHall hall;
 
 }

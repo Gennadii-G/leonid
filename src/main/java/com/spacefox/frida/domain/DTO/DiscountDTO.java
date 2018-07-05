@@ -1,16 +1,19 @@
 package com.spacefox.frida.domain.DTO;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter @Setter @NoArgsConstructor
+@Data
+@Builder
 public class DiscountDTO {
+
+    public DiscountDTO() {
+    }
 
     private Long id;
     @NotNull(message = "Необходимо указать фактор от 0 до 100")

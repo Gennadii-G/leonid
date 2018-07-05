@@ -29,4 +29,8 @@ public interface TrampolineHallService {
     TrampolineHallDTO getDTO(TrampolineHall hall);
 
     List<TrampolineHallDTO> getDTO(List<TrampolineHall> halls);
+
+    boolean exists(long id);
+
+    TrampolineHall getById(long id);
 }
