@@ -33,4 +33,6 @@ public interface TrampolineHallService {
     boolean exists(long id);
 
     TrampolineHall getById(long id);
+
+    void addTrampsById(String targetHall, String trampsIds);
 }

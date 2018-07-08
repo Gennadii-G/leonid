@@ -15,6 +15,8 @@ public interface TrampolineService {
 
     void save(Trampoline tramp);
 
+    void save(List<Trampoline> tramps);
+
     void save(TrampolineDTO dto);
 
     void update(TrampolineDTO dto);

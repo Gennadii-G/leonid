@@ -78,4 +78,9 @@ public class TrampolineServiceImpl implements TrampolineService {
             repository.delete(tramp);
         }
     }
+
+    @Override
+    public void save(List<Trampoline> tramps) {
+        repository.saveAll(tramps);
+    }
 }

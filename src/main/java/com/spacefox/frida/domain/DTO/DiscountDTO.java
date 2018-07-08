@@ -8,12 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
-@Builder
+@Data @Builder
 public class DiscountDTO {
-
-    public DiscountDTO() {
-    }
 
     private Long id;
     @NotNull(message = "Необходимо указать фактор от 0 до 100")

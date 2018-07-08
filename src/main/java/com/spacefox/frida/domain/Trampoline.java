@@ -1,22 +1,20 @@
 package com.spacefox.frida.domain;
 
 import com.spacefox.frida.domain.catalogs.TrampolineType;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity(name = "Trampoline")
+@Entity
 @Table(name="jh_trampoline")
-@Getter @Setter @NoArgsConstructor @ToString
+@Data
+@NoArgsConstructor @ToString
 public class Trampoline {
 
-    public Trampoline(TrampolineType type) {
-        this.type = type;
-    }
+//    public Trampoline(TrampolineType type) {
+//        this.type = type;
+//    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,7 +22,7 @@ public class Trampoline {
     @Column(length=40)
     private String name;
     @Column(length=250)
-    private String Desc;
+    private String description;
     private boolean isBroken;
     private LocalDate lastMaintenance;
     private LocalDate nextMaintenance;

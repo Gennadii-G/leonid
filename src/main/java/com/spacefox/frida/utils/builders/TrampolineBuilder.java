@@ -10,8 +10,10 @@ public class TrampolineBuilder {
 
     public static List<Trampoline> create(int trampsAmount, TrampolineType type) {
         List<Trampoline> tramps = new ArrayList<>();
-        for(int i = 0; i < trampsAmount; i++){
-            tramps.add(new Trampoline(type));
+        for(int i = 0; i < trampsAmount; i++) {
+            Trampoline tramp = new Trampoline();
+            tramp.setType(type);
+            tramps.add(tramp);
         }
         return tramps;
     }

@@ -1,5 +1,6 @@
 package com.spacefox.frida.rest.controllers;
 
+import com.spacefox.frida.domain.DTO.IdentifierDTO;
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.services.TrampolineHallService;
@@ -38,5 +39,11 @@ public class TrampolineHallController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteTrampHall(TrampolineHallDTO hallDTO){
         hallService.delete(hallDTO);
+    }
+
+    @PostMapping("trampolineHall/tramps/add")
+    @ResponseStatus(HttpStatus.OK)
+    public void addTramps(IdentifierDTO dto){
+        hallService.addTrampsById(dto.getTargetId(), dto.getIdentifiers());
     }
 }
