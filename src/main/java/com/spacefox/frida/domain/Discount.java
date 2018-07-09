@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="jh_discount")
@@ -19,5 +20,7 @@ public class Discount {
     @ToString.Exclude
     private String description;
     private String name;
+    private LocalDate start;
+    private LocalDate end;
 
 }

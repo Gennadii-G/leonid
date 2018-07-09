@@ -1,10 +1,13 @@
 package com.spacefox.frida.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Entity(name="jh_news")
@@ -26,7 +29,7 @@ public class News {
     private String body;
 
     @Column(nullable = false)
-    private Date createdDate;
-    private Date publicationDate;
+    private LocalDate createdDate;
+    private LocalDateTime publicationDate;
 
 }

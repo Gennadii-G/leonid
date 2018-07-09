@@ -2,11 +2,13 @@ package com.spacefox.frida.domain.DTO;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Data @Builder
 public class DiscountDTO {
@@ -20,5 +22,9 @@ public class DiscountDTO {
     private String description;
     @NotNull(message = "У скидки обязательно должно быть название")
     private String name;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate start;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate end;
 
 }

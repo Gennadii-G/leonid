@@ -33,7 +33,7 @@ public class NewsDTO {
     private String body;
 
     @JsonView({Transfer.Info.class, Transfer.Update.class})
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date publicationDate;
 
     @JsonView({Transfer.Admin.class})

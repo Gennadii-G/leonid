@@ -32,7 +32,7 @@ public class Order {
     private Discount discount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    private Employee employee;
+    private User employee;
     private int price;
 //    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 //    private LocalDate eventDate;
