@@ -1,16 +1,17 @@
 package com.spacefox.frida.domain;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="jh_discount")
-@Data @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder()
 public class Discount {
 
     @Id
@@ -20,7 +21,7 @@ public class Discount {
     @ToString.Exclude
     private String description;
     private String name;
-    private LocalDate start;
-    private LocalDate end;
+    private LocalDate startAvailability;
+    private LocalDate endAvailability;
 
 }

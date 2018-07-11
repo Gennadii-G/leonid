@@ -9,9 +9,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name="jh_trampoline")
 @Data
-@NoArgsConstructor @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Trampoline {
 
+//todo if don't need delete
 //    public Trampoline(TrampolineType type) {
 //        this.type = type;
 //    }
@@ -30,7 +33,6 @@ public class Trampoline {
     private TrampolineType type;
 //    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="hall_id", referencedColumnName = "id")
     private TrampolineHall hall;
 
 }

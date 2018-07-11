@@ -31,5 +31,4 @@ public class News {
     @Column(nullable = false)
     private LocalDate createdDate;
     private LocalDateTime publicationDate;
-
 }

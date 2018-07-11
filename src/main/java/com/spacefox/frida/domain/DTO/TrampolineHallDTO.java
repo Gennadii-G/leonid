@@ -1,5 +1,6 @@
 package com.spacefox.frida.domain.DTO;
 
+import com.spacefox.frida.domain.Trampoline;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @NoArgsConstructor @Getter
 @Setter
@@ -28,4 +30,6 @@ public class TrampolineHallDTO {
     private String phone;
     @Min(value = 1, message = "Должен быть минимум 1 батут")
     private int trampsAmount;
+    private List<Trampoline> trampolines;
+
 }

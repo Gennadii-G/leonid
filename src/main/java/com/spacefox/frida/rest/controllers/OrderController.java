@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-public class OrederController {
+public class OrderController {
 
     @Autowired
     private OrderService orderService;

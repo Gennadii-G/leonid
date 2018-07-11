@@ -5,11 +5,14 @@ import com.spacefox.frida.domain.Discount;
 import com.spacefox.frida.domain.TrampolineHall;
 
 import java.io.DataInput;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DiscountService {
 
     List<Discount> getAll();
+
+    List<DiscountDTO> availableDiscounts();
 
     Discount getByName(String name);
 
@@ -26,4 +29,6 @@ public interface DiscountService {
     List<DiscountDTO> getDTO(List<Discount> discounts);
 
     void update(DiscountDTO dto);
+
+    List<Discount> availableDiscounts(LocalDate date);
 }

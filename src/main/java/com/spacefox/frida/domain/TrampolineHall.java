@@ -1,6 +1,6 @@
 package com.spacefox.frida.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +8,9 @@ import java.util.List;
 @Entity
 @Table(name="jh_trampoline_hall")
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class TrampolineHall{
 
     @Id
@@ -17,7 +20,9 @@ public class TrampolineHall{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall")
     private List<Trampoline> trampolines;
     private int price;
+    @Column(length=40)
     private String name;
+    @Column(length=120)
     private String address;
     private String phone;
 }

@@ -7,6 +7,8 @@ import com.spacefox.frida.services.converter.DiscountToDiscountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +20,29 @@ public class DiscountServiceImpl implements DiscountService {
     @Autowired
     private DiscountToDiscountDTO converter;
 
+
     @Override
     public List<Discount> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<DiscountDTO> availableDiscounts() {
+        return repository
+                .findAvailableDiscounts(LocalDate.now())
+                .stream()
+                .map(this::getDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Discount> availableDiscounts(LocalDate date) {
+        List<Discount> list = getAll();
+        list = list.stream().filter(discount -> {
+            return discount.getStartAvailability().isBefore(date) &&
+                    discount.getEndAvailability().isAfter(date);
+        }).collect(Collectors.toList());
+        return list;
     }
 
     @Override
