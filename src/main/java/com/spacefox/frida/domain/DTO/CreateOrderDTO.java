@@ -14,13 +14,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class OrderDTO {
+public class CreateOrderDTO {
 
-    private TrampolineHall hall;
-    private Discount discount;
-    private User employee;
-    private Customer customer;
-    private int price;
+    private long hall;
+    private long discount;
+    private long employee;
+    private long customer;
     @NotNull(message = "Поле продолжительности обязательно к заполнению")
     private int minuteAmount;
     @Min(value = 1, message = "Должно быть указано количество батутов")
@@ -33,8 +32,10 @@ public class OrderDTO {
     private LocalDate regDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate eventDate;
+    @NotNull(message = "Должнобыть указано время начала записи")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime bookingFrom;
+    @NotNull(message = "Должнобыть указано время окончания записи")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime bookingTo;
 }

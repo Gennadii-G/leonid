@@ -2,13 +2,18 @@ package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.DTO.UserDTO;
 import com.spacefox.frida.domain.User;
+import com.spacefox.frida.domain.catalogs.Roles;
 import com.spacefox.frida.repository.UserRepository;
 import com.spacefox.frida.utils.UserUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,5 +99,20 @@ public class UserServiceImpl implements UserService {
         if(repository.existsById(user.getId())){
             repository.save(user);
         }
+    }
+
+    @Override
+    public User getSU() {
+        return repository.findByName("su").orElse(createSU());
+    }
+
+    private User createSU(){
+        Set<Roles> roles = new HashSet<>();
+        roles.add(Roles.ODMEN);
+        User su = User.builder()
+                .active(true).birthday(LocalDate.now()).name("su").login("su")
+                .password("su").roles(roles).build();
+        repository.save(su);
+        return su;
     }
 }

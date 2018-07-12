@@ -1,5 +1,6 @@
 package com.spacefox.frida.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name="jh_customer")
-@Getter @Setter @NoArgsConstructor
+@Data
 public class Customer {
 
     @Id

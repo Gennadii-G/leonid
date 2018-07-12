@@ -1,5 +1,6 @@
 package com.spacefox.frida.services;
 
+import com.spacefox.frida.domain.DTO.CreateOrderDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.Order;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +33,6 @@ public interface OrderService {
     List<OrderDTO> findByDate(Date date);
 
     void update(OrderDTO dto);
+
+    void createOrder(CreateOrderDTO dto);
 }

@@ -1,8 +1,8 @@
 package com.spacefox.frida.services;
 
+import com.spacefox.frida.domain.*;
+import com.spacefox.frida.domain.DTO.CreateOrderDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
-import com.spacefox.frida.domain.Discount;
-import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.utils.DateFormatterJH;
 import org.modelmapper.ModelMapper;
@@ -21,6 +21,14 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository repository;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private TrampolineHallService hallService;
+    @Autowired
+    private DiscountService discountService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CustomerService customerService;
 
     @Override
     public List<Order> getAll() {
@@ -89,5 +97,21 @@ public class OrderServiceImpl implements OrderService {
         if(repository.existsById(order.getId())){
             repository.delete(order);
         }
+    }
+
+    @Override
+    public void createOrder(CreateOrderDTO dto) {
+        TrampolineHall hall = hallService.getById(dto.getHall());
+        Discount discount = discountService.getById(dto.getDiscount());
+        User employee = userService.getSU();
+        Customer customer = customerService.getById(dto.getCustomer());
+
+        Order order = Order.builder()
+                .regDate(LocalDate.now())
+                .bookingFrom(dto.getBookingFrom()).bookingTo(dto.getBookingTo())
+                .comment("comment")
+                .discount(discount).employee(employee).hall(hall).customer(customer)
+                .build();
+        repository.save(order);
     }
 }

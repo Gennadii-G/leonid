@@ -1,5 +1,7 @@
 package com.spacefox.frida.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,10 +14,11 @@ import java.util.List;
 
 @Entity
 @Table(name="jh_order")
-@NoArgsConstructor @Data
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+@Builder
 public class Order {
-
-//    yyyy-MM-dd'T'hh:mm:ss.SSS
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,12 +36,11 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private User employee;
+    private Customer customer;
     private int price;
 //    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 //    private LocalDate eventDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDate regDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime bookingFrom;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime bookingTo;

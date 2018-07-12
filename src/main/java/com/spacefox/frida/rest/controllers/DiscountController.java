@@ -1,6 +1,6 @@
 package com.spacefox.frida.rest.controllers;
 
-import com.spacefox.frida.domain.DTO.DiscountDateStubDTO;
+import com.spacefox.frida.domain.DTO.DateStubDTO;
 import com.spacefox.frida.domain.DTO.DiscountDTO;
 import com.spacefox.frida.services.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class DiscountController {
     }
 
     @GetMapping("/discounts/available/date")
-    public List<DiscountDTO> allAvailableDiscountsForDate(DiscountDateStubDTO dto) {
+    public List<DiscountDTO> allAvailableDiscountsForDate(DateStubDTO dto) {
         return discountService.getDTO(discountService.availableDiscounts(dto.getDate()));
     }
 
