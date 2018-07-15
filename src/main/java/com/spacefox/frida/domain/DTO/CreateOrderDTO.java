@@ -29,9 +29,7 @@ public class CreateOrderDTO {
     private String comment;
     @NotNull(message = "Не указан час посещения")
     private int startHour;
-    private LocalDate regDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate eventDate;
+    private LocalDateTime regDate;
     @NotNull(message = "Должнобыть указано время начала записи")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime bookingFrom;

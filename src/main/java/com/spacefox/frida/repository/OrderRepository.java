@@ -1,8 +1,24 @@
 package com.spacefox.frida.repository;
 
 import com.spacefox.frida.domain.Order;
+import com.spacefox.frida.domain.TrampolineHall;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
+    @Query(value =
+            "SELECT * FROM jh_order o WHERE :eveDate = o.event_date",
+            nativeQuery = true)
+    List<Order> findOrdersForDate(@Param("eveDate") LocalDate eveDate);
+
+    @Query(value =
+            "SELECT * FROM jh_order o WHERE :eveDate = o.event_date AND :hall = o.hall",
+            nativeQuery = true)
+    List<Order> findOrdersForDateAndHall(@Param("eveDate") LocalDate eveDate,
+                                         @Param("hall") TrampolineHall hall);
 }

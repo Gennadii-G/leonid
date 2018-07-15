@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class OrderController {
     @GetMapping("/orders/date")
     @ResponseStatus(HttpStatus.OK)
     public List<OrderDTO> allOrdersForDate(Date date){
-        return orderService.findByDate(date);
+        List<Order> dtos = orderService.findByDate(LocalDate.now());
+        return orderService.getDTO(dtos);
     }
 
     @PostMapping("/order/add")
@@ -43,7 +45,8 @@ public class OrderController {
     @PostMapping("/order/add/neworder")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveOrder(CreateOrderDTO dto) {
-        orderService.createNew(dto);
+//        orderService.createNew(dto);
+        System.out.println("123");
     }
 
     @GetMapping("/order/{id}")

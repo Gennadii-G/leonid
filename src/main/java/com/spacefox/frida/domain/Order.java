@@ -18,6 +18,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
+
 public class Order {
 
     @Id
@@ -36,6 +37,8 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private User employee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     private int price;
 //    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

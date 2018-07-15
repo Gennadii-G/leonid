@@ -13,9 +13,7 @@ public interface DiscountRepository extends JpaRepository<Discount, Long> {
     Discount findByName(String name);
 
     @Query(value =
-            "SELECT * FROM jh_discount AS d WHERE :someDate BETWEEN d.start_availability AND d.end_availability",
+            "SELECT * FROM jh_discount AS d WHERE :availabilityDate BETWEEN d.start_availability AND d.end_availability",
             nativeQuery = true)
-    List<Discount> findAvailableDiscounts(@Param("someDate") LocalDate someDate);
-
-
+    List<Discount> findAvailableDiscounts(@Param("availabilityDate") LocalDate availabilityDate);
 }

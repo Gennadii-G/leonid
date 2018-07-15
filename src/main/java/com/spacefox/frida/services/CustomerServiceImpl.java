@@ -4,9 +4,9 @@ import com.spacefox.frida.domain.Contact;
 import com.spacefox.frida.domain.Customer;
 import com.spacefox.frida.domain.DTO.CustomerDTO;
 import com.spacefox.frida.repository.CustomerRepository;
-import org.jvnet.hk2.annotations.Service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,9 +1,11 @@
 package com.spacefox.frida.services;
 
+import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.domain.catalogs.TrampolineType;
+import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.repository.TrampolineHallRepository;
 import com.spacefox.frida.utils.builders.TrampolineHallBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +32,8 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     private ModelMapper mapper;
     @Autowired
     private TrampolineService trampolineService;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public List<TrampolineHall> getAll() {
@@ -141,5 +146,14 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
         });
         repository.save(hall);
         log.info("В зал " + hall.getName() + " добавлено " + tramps.size() + " батутов.");
+    }
+
+    @Override
+    public boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount) {
+        boolean res = false;
+
+
+
+        return res;
     }
 }

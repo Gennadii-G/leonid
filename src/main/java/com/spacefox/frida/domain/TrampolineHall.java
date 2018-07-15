@@ -18,7 +18,11 @@ public class TrampolineHall{
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall")
+    private List<Order> orders;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall")
     private List<Trampoline> trampolines;
+
     private int price;
     @Column(length=40)
     private String name;

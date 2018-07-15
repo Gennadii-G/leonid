@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ValidationException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -87,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
 
 //    todo
     @Override
-    public List<OrderDTO> findByDate(Date date) {
+    public List<Order> findByDate(LocalDate date) {
         return null;
     }
 
@@ -105,6 +107,7 @@ public class OrderServiceImpl implements OrderService {
         Discount discount = discountService.getById(dto.getDiscount());
         User employee = userService.getSU();
         Customer customer = customerService.getById(dto.getCustomer());
+        validate(dto);
 
         Order order = Order.builder()
                 .regDate(LocalDate.now())
@@ -113,5 +116,11 @@ public class OrderServiceImpl implements OrderService {
                 .discount(discount).employee(employee).hall(hall).customer(customer)
                 .build();
         repository.save(order);
+    }
+
+    private void validate(CreateOrderDTO dto){
+        if(dto.getBookingTo().getDayOfYear() != dto.getBookingFrom().getDayOfYear()){
+            throw new ValidationException();
+        }
     }
 }

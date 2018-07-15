@@ -3,9 +3,8 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.DTO.CreateOrderDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.Order;
-import org.springframework.http.ResponseEntity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
@@ -30,7 +29,7 @@ public interface OrderService {
 
     void delete(OrderDTO dto);
 
-    List<OrderDTO> findByDate(Date date);
+    List<Order> findByDate(LocalDate date);
 
     void update(OrderDTO dto);
 
