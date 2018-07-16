@@ -1,8 +1,10 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.DTO.TrampolineDTO;
+import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
+import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.repository.TrampolineRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.transaction.TransactionalException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,6 +24,8 @@ public class TrampolineServiceImpl implements TrampolineService {
     private ModelMapper mapper;
     @Autowired
     private TrampolineHallService hallService;
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public List<Trampoline> getAll() {
@@ -82,5 +87,18 @@ public class TrampolineServiceImpl implements TrampolineService {
     @Override
     public void save(List<Trampoline> tramps) {
         repository.saveAll(tramps);
+    }
+
+    @Override
+    public boolean isBooked(Trampoline trampoline, LocalDateTime from, LocalDateTime to) {
+        boolean result = false;
+        TrampolineHall hall = trampoline.getHall();
+        List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
+        int count = orders.stream().filter(ord -> {
+            return ord.getTrampolines().contains(trampoline) &&
+
+        });
+
+        return result;
     }
 }

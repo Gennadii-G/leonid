@@ -1,6 +1,5 @@
 package com.spacefox.frida.services;
 
-import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
@@ -149,9 +148,11 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     }
 
     @Override
-    public boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount) {
+    public boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount, TrampolineHall hall) {
         boolean res = false;
-
+        List<Trampoline> trampolines = hall.getTrampolines().stream().filter(trampoline -> {
+            return trampolineService.isBooked(trampoline, from, to);
+        });
 
 
         return res;

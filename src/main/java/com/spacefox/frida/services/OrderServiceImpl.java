@@ -4,15 +4,14 @@ import com.spacefox.frida.domain.*;
 import com.spacefox.frida.domain.DTO.CreateOrderDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.repository.OrderRepository;
-import com.spacefox.frida.utils.DateFormatterJH;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,5 +121,21 @@ public class OrderServiceImpl implements OrderService {
         if(dto.getBookingTo().getDayOfYear() != dto.getBookingFrom().getDayOfYear()){
             throw new ValidationException();
         }
+    }
+
+    @Override
+    public List<Order> getByHallandDate(TrampolineHall hall, LocalDate date) {
+        return repository.findOrdersForDateAndHall(date, hall);
+    }
+
+    @Override
+    public boolean hasIntersection(Order order, LocalDateTime from, LocalDateTime to) {
+        boolean result = false;
+        Duration orderDuration = Duration.between(order.getBookingFrom(), order.getBookingTo());
+        Duration duration = Duration.between(from, to);
+
+        duration.compareTo(orderDuration);
+
+        return result;
     }
 }

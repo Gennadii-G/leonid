@@ -17,8 +17,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findOrdersForDate(@Param("eveDate") LocalDate eveDate);
 
     @Query(value =
-            "SELECT * FROM jh_order o WHERE :eveDate = o.event_date AND :hall = o.hall",
+            "SELECT * FROM jh_order o WHERE :eventDate = o.event_date AND :hall = o.hall",
             nativeQuery = true)
-    List<Order> findOrdersForDateAndHall(@Param("eveDate") LocalDate eveDate,
+    List<Order> findOrdersForDateAndHall(@Param("eventDate") LocalDate eveDate,
                                          @Param("hall") TrampolineHall hall);
 }

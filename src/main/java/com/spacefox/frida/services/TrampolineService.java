@@ -1,10 +1,9 @@
 package com.spacefox.frida.services;
 
-
-
 import com.spacefox.frida.domain.DTO.TrampolineDTO;
 import com.spacefox.frida.domain.Trampoline;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TrampolineService {
@@ -27,4 +26,5 @@ public interface TrampolineService {
 
     void delete(Trampoline tramp);
 
+    boolean isBooked(Trampoline trampoline, LocalDateTime from, LocalDateTime to);
 }

@@ -3,8 +3,10 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.DTO.CreateOrderDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.Order;
+import com.spacefox.frida.domain.TrampolineHall;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderService {
@@ -34,4 +36,8 @@ public interface OrderService {
     void update(OrderDTO dto);
 
     void createOrder(CreateOrderDTO dto);
+
+    List<Order> getByHallandDate(TrampolineHall hall, LocalDate date);
+
+    boolean hasIntersection(Order order, LocalDateTime from, LocalDateTime to);
 }

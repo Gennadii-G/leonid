@@ -1,6 +1,5 @@
 package com.spacefox.frida.services;
 
-import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
 import com.spacefox.frida.domain.TrampolineHall;
 
@@ -39,5 +38,5 @@ public interface TrampolineHallService {
 
     void addTrampsById(String targetHall, String trampsIds);
 
-    boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount);
+    boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount, TrampolineHall hall);
 }
