@@ -26,6 +26,8 @@ public interface TrampolineHallService {
 
     void update(TrampolineHallDTO dto);
 
+    void update(TrampolineHall hall);
+
     void delete(TrampolineHallDTO dto);
 
     TrampolineHallDTO getDTO(TrampolineHall hall);

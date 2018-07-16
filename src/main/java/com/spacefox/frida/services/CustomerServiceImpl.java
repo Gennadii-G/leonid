@@ -20,8 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
     private ModelMapper mapper;
 
     @Override
-    public List<Contact> getAll() {
-        return null;
+    public List<Customer> getAll() {
+        return repository.findAll();
     }
 
     @Override
@@ -63,5 +63,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> getDTO(List<Customer> customers) {
         return customers.stream().map(this::getDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Customer getCustomerStub() {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
+import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.domain.catalogs.TrampolineType;
@@ -32,7 +33,7 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     @Autowired
     private TrampolineService trampolineService;
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @Override
     public List<TrampolineHall> getAll() {
@@ -66,6 +67,11 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     @Override
     public void update(TrampolineHallDTO dto) {
         TrampolineHall hall = mapper.map(dto, TrampolineHall.class);
+        update(hall);
+    }
+
+    @Override
+    public void update(TrampolineHall hall) {
         if(repository.existsById(hall.getId())){
             repository.save(hall);
         }
@@ -148,13 +154,14 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     }
 
     @Override
-    public boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount, TrampolineHall hall) {
-        boolean res = false;
-        List<Trampoline> trampolines = hall.getTrampolines().stream().filter(trampoline -> {
-            return trampolineService.isBooked(trampoline, from, to);
-        });
+    public boolean hasEnoughTramps(LocalDateTime from,
+                                   LocalDateTime to,
+                                   int requiredAmount,
+                                   TrampolineHall hall) {
 
+            List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
+            long count = orders.stream().filter(ord -> !orderService.hasIntersection(ord, from, to)).count();
 
-        return res;
+        return count >= requiredAmount;
     }
 }

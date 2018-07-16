@@ -27,7 +27,7 @@ public class TestDataCreator {
 
     @Transactional
     public void createTestDiscounts(int amount){
-        for(int i = 0; i < amount; i++){
+        for(int i = 0; i < amount; i++) {
             Discount discount = Discount.builder()
                     .name("Discount_" + i)
                     .discountFactor(random(0, 50))

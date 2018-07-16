@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<Contact> getAll();
+    List<Customer> getAll();
 
     void save(Customer customer);
 
@@ -19,6 +19,8 @@ public interface CustomerService {
     void delete(Customer customer);
 
     Customer getById(long id);
+
+    Customer getCustomerStub();
 
     CustomerDTO getDTO(Customer customer);
 

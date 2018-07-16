@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class ServiceAspect {
-    
+
     @Before("allServicesMethods()")
     public void beforeAdvice(JoinPoint joinPoint) {
         log.info("halilua");

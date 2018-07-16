@@ -7,6 +7,7 @@ import com.spacefox.frida.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ValidationException;
 import java.time.Duration;
@@ -100,13 +101,15 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Transactional
     @Override
     public void createOrder(CreateOrderDTO dto) {
         TrampolineHall hall = hallService.getById(dto.getHall());
         Discount discount = discountService.getById(dto.getDiscount());
         User employee = userService.getSU();
         Customer customer = customerService.getById(dto.getCustomer());
-        validate(dto);
+        validate(dto, hall);
+        validate(dto, discount);
 
         Order order = Order.builder()
                 .regDate(LocalDate.now())
@@ -114,12 +117,21 @@ public class OrderServiceImpl implements OrderService {
                 .comment("comment")
                 .discount(discount).employee(employee).hall(hall).customer(customer)
                 .build();
+
         repository.save(order);
+        hall.getOrders().add(order);
+        hallService.update(hall);
     }
 
-    private void validate(CreateOrderDTO dto){
-        if(dto.getBookingTo().getDayOfYear() != dto.getBookingFrom().getDayOfYear()){
-            throw new ValidationException();
+    private void validate(CreateOrderDTO dto, TrampolineHall hall) {
+        if(!hallService.hasEnoughTramps(dto.getBookingFrom(), dto.getBookingTo(), dto.getTrampsAmount(), hall)) {
+            throw new ValidationException("недостаточно свободных батутов на указанное время");
+        }
+    }
+
+    private void validate(CreateOrderDTO dto, Discount discount){
+        if(!discountService.availableDiscounts(LocalDate.now()).contains(discount)){
+            throw new ValidationException("указанная акция в данный момент не активна");
         }
     }
 
@@ -130,11 +142,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean hasIntersection(Order order, LocalDateTime from, LocalDateTime to) {
-        boolean result = false;
-        Duration orderDuration = Duration.between(order.getBookingFrom(), order.getBookingTo());
-        Duration duration = Duration.between(from, to);
-
-        duration.compareTo(orderDuration);
+        boolean result = true;
+        if(order.getBookingFrom().isBefore(to) || order.getBookingTo().isAfter(from)){
+            result = false;
+        }
 
         return result;
     }

@@ -4,7 +4,6 @@ import com.spacefox.frida.domain.DTO.TrampolineDTO;
 import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
-import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.repository.TrampolineRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,14 +90,12 @@ public class TrampolineServiceImpl implements TrampolineService {
 
     @Override
     public boolean isBooked(Trampoline trampoline, LocalDateTime from, LocalDateTime to) {
-        boolean result = false;
         TrampolineHall hall = trampoline.getHall();
         List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
-        int count = orders.stream().filter(ord -> {
-            return ord.getTrampolines().contains(trampoline) &&
+        long count = orders.stream().filter(ord -> {
+            return orderService.hasIntersection(ord, from, to);
+        }).count();
 
-        });
-
-        return result;
+        return count > 0;
     }
 }
