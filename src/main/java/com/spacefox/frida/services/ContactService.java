@@ -22,4 +22,6 @@ public interface ContactService {
     ContactDTO getDTO(Contact contact);
 
     List<ContactDTO> getDTO(List<Contact> contact);
+
+    long contactCount();
 }

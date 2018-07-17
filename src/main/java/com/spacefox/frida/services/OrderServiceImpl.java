@@ -115,14 +115,10 @@ public class OrderServiceImpl implements OrderService {
                 .bookingFrom(dto.getBookingFrom()).bookingTo(dto.getBookingTo())
                 .comment("comment")
                 .discount(discount).employee(employee).hall(hall).customer(customer)
+                .hall(hall)
                 .build();
 
-//        Order order = mapper.map(dto, Order.class);
-//        order.setRegDate(LocalDate.now());
-
         repository.save(order);
-        hall.getOrders().add(order);
-        hallService.update(hall);
     }
 
     private void validate(OrderCreateDTO dto, TrampolineHall hall) {

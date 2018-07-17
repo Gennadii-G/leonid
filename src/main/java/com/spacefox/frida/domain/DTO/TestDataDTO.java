@@ -8,5 +8,6 @@ public class TestDataDTO {
     private int discountAmount;
     private int trampolinesAmount;
     private int hallsAmount;
+    private int ordersAmount;
 
 }

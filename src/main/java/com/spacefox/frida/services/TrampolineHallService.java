@@ -1,6 +1,7 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.DTO.TrampolineHallDTO;
+import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
 
 import java.time.LocalDateTime;
@@ -41,4 +42,8 @@ public interface TrampolineHallService {
     void addTrampsById(String targetHall, String trampsIds);
 
     boolean hasEnoughTramps(LocalDateTime from, LocalDateTime to, int amount, TrampolineHall hall);
+
+    long hallsCount();
+
+    TrampolineHall getByTrampoline(Trampoline trampoline);
 }

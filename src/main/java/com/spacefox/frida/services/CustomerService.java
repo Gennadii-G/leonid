@@ -1,6 +1,5 @@
 package com.spacefox.frida.services;
 
-import com.spacefox.frida.domain.Contact;
 import com.spacefox.frida.domain.Customer;
 import com.spacefox.frida.domain.DTO.CustomerDTO;
 
@@ -20,10 +19,10 @@ public interface CustomerService {
 
     Customer getById(long id);
 
-    Customer getCustomerStub();
-
     CustomerDTO getDTO(Customer customer);
 
     List<CustomerDTO> getDTO(List<Customer> customers);
+
+    long customersCount();
 
 }

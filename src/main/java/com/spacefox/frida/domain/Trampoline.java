@@ -14,11 +14,6 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Trampoline {
 
-//todo if don't need delete
-//    public Trampoline(TrampolineType type) {
-//        this.type = type;
-//    }
-
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -31,8 +26,5 @@ public class Trampoline {
     private LocalDate nextMaintenance;
     @Enumerated(EnumType.STRING)
     private TrampolineType type;
-//    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TrampolineHall hall;
 
 }

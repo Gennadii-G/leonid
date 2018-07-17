@@ -17,7 +17,7 @@ public class AdminContrller {
     @PostMapping("/admin/createtestdata/tendiscounts")
     @ResponseStatus(HttpStatus.OK)
     public void createTenDiscounts(){
-        dataCreator.createTestDiscounts(10);
+        dataCreator.createDiscounts(10);
     }
 
     @PostMapping("/admin/createtestdata/tentrampolines")
@@ -35,8 +35,9 @@ public class AdminContrller {
     @PostMapping("/admin/createtestdata")
     @ResponseStatus(HttpStatus.OK)
     public void createDiscounts(TestDataDTO dto){
-        dataCreator.createTestDiscounts(dto.getDiscountAmount());
+        dataCreator.createDiscounts(dto.getDiscountAmount());
         dataCreator.createTrampolines(dto.getTrampolinesAmount());
         dataCreator.createTrampolineHalls(dto.getHallsAmount());
+        dataCreator.createOrdersForLastMonth(dto.getOrdersAmount());
     }
 }

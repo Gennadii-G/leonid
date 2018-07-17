@@ -65,9 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerStub() {
-        if (repository.findByName)
-
-            return null;
+    public long customersCount() {
+        return repository.count();
     }
 }

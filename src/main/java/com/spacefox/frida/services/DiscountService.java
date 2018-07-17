@@ -29,4 +29,6 @@ public interface DiscountService {
     void update(DiscountDTO dto);
 
     List<Discount> availableDiscounts(LocalDate date);
+
+    long discountCount();
 }

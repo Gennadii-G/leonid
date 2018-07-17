@@ -18,7 +18,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-
 public class Order {
 
     @Id

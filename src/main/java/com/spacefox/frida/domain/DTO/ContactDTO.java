@@ -1,5 +1,8 @@
 package com.spacefox.frida.domain.DTO;
 
+import lombok.Data;
+
+@Data
 public class ContactDTO {
 
     private Long id;

@@ -89,4 +89,9 @@ public class DiscountServiceImpl implements DiscountService {
             repository.save(discount);
         }
     }
+
+    @Override
+    public long discountCount() {
+        return repository.count();
+    }
 }

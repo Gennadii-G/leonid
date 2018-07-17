@@ -17,10 +17,8 @@ public class TrampolineHall {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall")
-    private List<Order> orders;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "hall_id", referencedColumnName = "id")
     private List<Trampoline> trampolines;
 
     private int price;

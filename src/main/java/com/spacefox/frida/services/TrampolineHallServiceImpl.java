@@ -146,7 +146,6 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
 
         hall.setTrampolines(tramps);
         tramps.stream().forEach(tramp -> {
-            tramp.setHall(hall);
             trampolineService.save(tramp);
         });
         repository.save(hall);
@@ -163,5 +162,15 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
             long count = orders.stream().filter(ord -> !orderService.hasIntersection(ord, from, to)).count();
 
         return count >= requiredAmount;
+    }
+
+    @Override
+    public long hallsCount() {
+        return repository.count();
+    }
+
+    @Override
+    public TrampolineHall getByTrampoline(Trampoline trampoline) {
+        return repository.findByTrampoline(trampoline.getId());
     }
 }

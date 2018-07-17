@@ -49,7 +49,6 @@ public class TrampolineServiceImpl implements TrampolineService {
 
         if(hallService.exists(hallId)) {
             TrampolineHall hall = hallService.getById(hallId);
-            tramp.setHall(hall);
         }
         repository.save(tramp);
     }
@@ -90,7 +89,7 @@ public class TrampolineServiceImpl implements TrampolineService {
 
     @Override
     public boolean isBooked(Trampoline trampoline, LocalDateTime from, LocalDateTime to) {
-        TrampolineHall hall = trampoline.getHall();
+        TrampolineHall hall = hallService.getByTrampoline(trampoline);
         List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
         long count = orders.stream().filter(ord -> {
             return orderService.hasIntersection(ord, from, to);

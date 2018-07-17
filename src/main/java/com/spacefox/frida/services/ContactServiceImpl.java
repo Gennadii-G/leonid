@@ -64,4 +64,9 @@ public class ContactServiceImpl implements ContactService {
     public List<ContactDTO> getDTO(List<Contact> contact) {
         return contact.stream().map(this::getDTO).collect(Collectors.toList());
     }
+
+    @Override
+    public long contactCount() {
+        return repository.count();
+    }
 }
