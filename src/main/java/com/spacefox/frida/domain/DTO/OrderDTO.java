@@ -21,8 +21,6 @@ public class OrderDTO {
     private User employee;
     private Customer customer;
     private int price;
-    @NotNull(message = "Поле продолжительности обязательно к заполнению")
-    private int minuteAmount;
     @Min(value = 1, message = "Должно быть указано количество батутов")
     private int trampsAmount;
     @NotNull(message = "Не указана дата записи")

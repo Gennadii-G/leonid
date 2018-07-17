@@ -1,7 +1,7 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.*;
-import com.spacefox.frida.domain.DTO.CreateOrderDTO;
+import com.spacefox.frida.domain.DTO.OrderCreateDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ValidationException;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -103,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void createOrder(CreateOrderDTO dto) {
+    public void createOrder(OrderCreateDTO dto) {
         TrampolineHall hall = hallService.getById(dto.getHall());
         Discount discount = discountService.getById(dto.getDiscount());
         User employee = userService.getSU();
@@ -118,18 +117,21 @@ public class OrderServiceImpl implements OrderService {
                 .discount(discount).employee(employee).hall(hall).customer(customer)
                 .build();
 
+//        Order order = mapper.map(dto, Order.class);
+//        order.setRegDate(LocalDate.now());
+
         repository.save(order);
         hall.getOrders().add(order);
         hallService.update(hall);
     }
 
-    private void validate(CreateOrderDTO dto, TrampolineHall hall) {
+    private void validate(OrderCreateDTO dto, TrampolineHall hall) {
         if(!hallService.hasEnoughTramps(dto.getBookingFrom(), dto.getBookingTo(), dto.getTrampsAmount(), hall)) {
             throw new ValidationException("недостаточно свободных батутов на указанное время");
         }
     }
 
-    private void validate(CreateOrderDTO dto, Discount discount){
+    private void validate(OrderCreateDTO dto, Discount discount){
         if(!discountService.availableDiscounts(LocalDate.now()).contains(discount)){
             throw new ValidationException("указанная акция в данный момент не активна");
         }

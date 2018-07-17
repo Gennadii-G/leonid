@@ -41,8 +41,6 @@ public class Order {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     private int price;
-//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-//    private LocalDate eventDate;
     private LocalDate regDate;
     private LocalDateTime bookingFrom;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

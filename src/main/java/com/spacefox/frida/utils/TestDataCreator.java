@@ -1,18 +1,20 @@
 package com.spacefox.frida.utils;
 
+import com.spacefox.frida.domain.DTO.OrderCreateDTO;
 import com.spacefox.frida.domain.Discount;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.domain.catalogs.TrampolineType;
-import com.spacefox.frida.services.DiscountService;
-import com.spacefox.frida.services.TrampolineHallService;
-import com.spacefox.frida.services.TrampolineService;
+import com.spacefox.frida.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Component
 public class TestDataCreator {
@@ -24,6 +26,10 @@ public class TestDataCreator {
     private DiscountService discountService;
     @Autowired
     private TrampolineHallService hallService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CustomerService customerService;
 
     @Transactional
     public void createTestDiscounts(int amount){
@@ -77,8 +83,30 @@ public class TestDataCreator {
         }
     }
 
+    @Transactional
+    public void createOrdersForLastMonth(int amount){
+        List<TrampolineHall> hallIds = hallService.getAll();
+        Collections.shuffle(hallIds);
+        List<Discount> discounts = discountService.getAll();
+        Collections.shuffle(discounts);
+        LocalDateTime bt = randomDayInLastMonth();
+
+        OrderCreateDTO dto = OrderCreateDTO.builder()
+                .hall(hallIds.get(random(0, hallIds.size())).getId())
+                .employee(userService.getSU().getId())
+                .discount(discounts.get(random(0, discounts.size())).getId())
+                .bookingFrom(bt)
+                .bookingTo(bt.plusMinutes(random(15, 180)))
+                .comment(String.valueOf(random(20, 4000)))
+                .customer(customerService.getCustomerStub())
+    }
+
     private int random(int from, int to){
         return rand.nextInt((to - from)) + from;
+    }
+
+    private LocalDateTime randomDayInLastMonth(){
+        return LocalDateTime.now().minusMonths(1).withDayOfMonth(random(0, 25));
     }
 
     private LocalDate randomLocalDate(int fromYear, int toYear){

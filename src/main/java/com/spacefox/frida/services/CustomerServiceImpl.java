@@ -1,6 +1,5 @@
 package com.spacefox.frida.services;
 
-import com.spacefox.frida.domain.Contact;
 import com.spacefox.frida.domain.Customer;
 import com.spacefox.frida.domain.DTO.CustomerDTO;
 import com.spacefox.frida.repository.CustomerRepository;
@@ -31,21 +30,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void update(Customer customer) {
-        if(repository.existsById(customer.getId())){
+        if (repository.existsById(customer.getId())) {
             repository.save(customer);
         }
     }
 
     @Override
     public void delete(long id) {
-        if(repository.existsById(id)){
+        if (repository.existsById(id)) {
             repository.deleteById(id);
         }
     }
 
     @Override
     public void delete(Customer customer) {
-        if(repository.existsById(customer.getId())){
+        if (repository.existsById(customer.getId())) {
             repository.delete(customer);
         }
     }
@@ -67,6 +66,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerStub() {
-        return null;
+        if (repository.findByName)
+
+            return null;
     }
 }

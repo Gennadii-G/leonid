@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
-public class TrampolineHall{
+public class TrampolineHall {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

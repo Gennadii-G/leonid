@@ -1,27 +1,24 @@
 package com.spacefox.frida.domain.DTO;
 
-import com.spacefox.frida.domain.Customer;
-import com.spacefox.frida.domain.Discount;
-import com.spacefox.frida.domain.TrampolineHall;
-import com.spacefox.frida.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
-public class CreateOrderDTO {
+@Data @NoArgsConstructor @AllArgsConstructor
+@Builder
+public class OrderCreateDTO {
 
     private long hall;
     private long discount;
     private long employee;
     private long customer;
-    @NotNull(message = "Поле продолжительности обязательно к заполнению")
-    private int minuteAmount;
     @Min(value = 1, message = "Должно быть указано количество батутов")
     private int trampsAmount;
     @NotNull(message = "Не указана дата записи")

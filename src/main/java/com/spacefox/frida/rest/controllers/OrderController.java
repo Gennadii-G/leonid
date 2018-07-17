@@ -1,6 +1,6 @@
 package com.spacefox.frida.rest.controllers;
 
-import com.spacefox.frida.domain.DTO.CreateOrderDTO;
+import com.spacefox.frida.domain.DTO.OrderCreateDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.services.OrderService;
@@ -44,7 +44,7 @@ public class OrderController {
 
     @PostMapping("/order/add/neworder")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveOrder(CreateOrderDTO dto) {
+    public void saveOrder(OrderCreateDTO dto) {
 //        orderService.createNew(dto);
         System.out.println("123");
     }

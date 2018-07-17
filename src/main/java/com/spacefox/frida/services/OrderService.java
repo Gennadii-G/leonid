@@ -1,6 +1,6 @@
 package com.spacefox.frida.services;
 
-import com.spacefox.frida.domain.DTO.CreateOrderDTO;
+import com.spacefox.frida.domain.DTO.OrderCreateDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.domain.TrampolineHall;
@@ -35,7 +35,7 @@ public interface OrderService {
 
     void update(OrderDTO dto);
 
-    void createOrder(CreateOrderDTO dto);
+    void createOrder(OrderCreateDTO dto);
 
     List<Order> getByHallandDate(TrampolineHall hall, LocalDate date);
 
