@@ -56,7 +56,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void save(DiscountDTO dto) {
-        repository.save(converter.convert(dto));
+        save(converter.convert(dto));
     }
 
     @Override
