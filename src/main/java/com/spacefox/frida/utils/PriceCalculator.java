@@ -6,7 +6,7 @@ public class PriceCalculator {
 
     public static int calculate(Order order){
         int price = 0;
-        int hoursAmount = order.getBookingTo().getHour() - order.getBookingFrom().getHour();
+        int hoursAmount = (order.getBookingTo().getHour() + 1) - order.getBookingFrom().getHour();
         int hallPrice = order.getHall().getPrice();
         price = hoursAmount * (hallPrice * order.getTrampsAmount());
         if(order.getDiscount() != null){
