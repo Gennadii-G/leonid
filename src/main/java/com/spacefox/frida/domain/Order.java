@@ -33,13 +33,14 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="discount_id", referencedColumnName = "id")
     private Discount discount;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private User employee;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     private int price;
+    private int trampsAmount;
     private LocalDate regDate;
     private LocalDateTime bookingFrom;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

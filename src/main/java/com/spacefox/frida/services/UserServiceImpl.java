@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
     @Autowired
     private ModelMapper mapper;
+    private static final String SU = "su";
 
     @Override
     public List<User> getAll() {
@@ -102,7 +103,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getSU() {
-        return repository.findByName("su").orElse(createSU());
+        return repository.findFirstByName(SU).orElse(createSU());
     }
 
     private User createSU(){
@@ -111,7 +112,6 @@ public class UserServiceImpl implements UserService {
         User su = User.builder()
                 .active(true).birthday(LocalDate.now()).name("su").login("su")
                 .password("su").roles(roles).build();
-        repository.save(su);
-        return su;
+        return repository.save(su);
     }
 }

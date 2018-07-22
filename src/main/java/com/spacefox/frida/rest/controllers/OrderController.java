@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+@RestController
 public class OrderController {
 
     @Autowired
@@ -29,9 +30,9 @@ public class OrderController {
         return orderService.getDTO(orders);
     }
 
-    @GetMapping("/orders/date")
+    @GetMapping("/order/date")
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderDTO> allOrdersForDate(Date date){
+    public List<OrderDTO> allOrdersForDate(Date date) {
         List<Order> dtos = orderService.findByDate(LocalDate.now());
         return orderService.getDTO(dtos);
     }
@@ -55,7 +56,7 @@ public class OrderController {
         return orderService.getDTO(orderService.getById(id));
     }
 
-    @PutMapping("/picture/update/")
+    @PutMapping("/order/update/")
     @ResponseStatus(HttpStatus.OK)
     public void updateOrder(OrderDTO dto){
         orderService.update(dto);

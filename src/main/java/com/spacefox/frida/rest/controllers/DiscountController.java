@@ -49,7 +49,7 @@ public class DiscountController {
         return discountService.getDTO(discountService.getById(id));
     }
 
-    @PutMapping("/picture/update/")
+    @PutMapping("/discount/update/")
     @ResponseStatus(HttpStatus.OK)
     public void updateDiscount(DiscountDTO dto){
         discountService.update(dto);

@@ -4,6 +4,7 @@ import com.spacefox.frida.domain.DTO.TestDataDTO;
 import com.spacefox.frida.utils.TestDataCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,26 +15,44 @@ public class AdminContrller {
     @Autowired
     private TestDataCreator dataCreator;
 
-    @PostMapping("/admin/createtestdata/tendiscounts")
+    @PostMapping("/admin/createtestdata/discounts/{amount}")
     @ResponseStatus(HttpStatus.OK)
-    public void createTenDiscounts(){
-        dataCreator.createDiscounts(10);
+    public void createDiscounts(@PathVariable Integer amount){
+        dataCreator.createDiscounts(amount);
     }
 
-    @PostMapping("/admin/createtestdata/tentrampolines")
+    @PostMapping("/admin/createtestdata/trampolines/{amount}")
     @ResponseStatus(HttpStatus.OK)
-    public void createTenTrampolines(){
-        dataCreator.createTrampolines(10);
+    public void createTrampolines(@PathVariable Integer amount){
+        dataCreator.createTrampolines(amount);
     }
 
-    @PostMapping("/admin/createtestdata/tenhalls")
+    @PostMapping("/admin/createtestdata/halls/{amount}")
     @ResponseStatus(HttpStatus.OK)
-    public void createDiscounts(){
-        dataCreator.createTrampolineHalls(10);
+    public void createTrampolineHalls(@PathVariable Integer amount){
+        dataCreator.createTrampolineHalls(amount);
     }
 
-    @PostMapping("/admin/createtestdata")
+    @PostMapping("/admin/createtestdata/orders/{amount}")
     @ResponseStatus(HttpStatus.OK)
+    public void createOrders(@PathVariable Integer amount){
+        dataCreator.createOrdersForLastMonth(amount);
+    }
+
+    @PostMapping("/admin/createtestdata/contacts/{amount}")
+    @ResponseStatus(HttpStatus.OK)
+    public void createContacts(@PathVariable Integer amount){
+        dataCreator.createContacts(amount);
+    }
+
+    @PostMapping("/admin/createtestdata/customers/{amount}")
+    @ResponseStatus(HttpStatus.OK)
+    public void createCustomers(@PathVariable Integer amount){
+        dataCreator.createCustomers(amount);
+    }
+
+//    @PostMapping("/admin/createtestdata")
+//    @ResponseStatus(HttpStatus.OK)
     public void createDiscounts(TestDataDTO dto){
         dataCreator.createDiscounts(dto.getDiscountAmount());
         dataCreator.createTrampolines(dto.getTrampolinesAmount());

@@ -36,5 +36,4 @@ public class PictureController {
     public ResponseEntity deletePicture(@PathVariable String filename){
         return pictureAdapter.deletePicture(filename);
     }
-
 }

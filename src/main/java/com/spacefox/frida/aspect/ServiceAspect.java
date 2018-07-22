@@ -23,14 +23,14 @@ public class ServiceAspect {
     @AfterReturning("allServicesMethods()")
     public void afterRetAdvice(JoinPoint joinPoint){
         String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
         log.debug("class: " + className + ", in method: " + methodName + " worked well.");
     }
 
     @AfterThrowing("allServicesMethods()")
     public void afterThrowing(JoinPoint joinPoint){
         String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
         log.debug("class: " + className + ", in method: " + methodName + " worked not so well.");
     }
 

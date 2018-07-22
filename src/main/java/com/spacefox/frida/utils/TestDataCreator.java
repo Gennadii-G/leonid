@@ -63,10 +63,10 @@ public class TestDataCreator {
         return list;
     }
 
-//    @Transactional(propagation=Propagation.REQUIRED)
+    @Transactional(propagation=Propagation.REQUIRED)
     public void createTrampolineHalls(int amount) {
         for(int i = 0; i < amount; i++){
-            List<Trampoline> trampolines = createTrampolines(random(1, 20));
+            List<Trampoline> trampolines = createTrampolines(random(3, 20));
 
             TrampolineHall hall = TrampolineHall.builder()
                     .name("Ogurez_" + i)
@@ -76,7 +76,7 @@ public class TestDataCreator {
                     .trampolines(trampolines)
                     .build();
             hallService.save(hall);
-//            trampolineService.save(trampolines);
+            trampolineService.save(trampolines);
         }
     }
 
@@ -92,6 +92,7 @@ public class TestDataCreator {
             customer.setContacts(Collections.singletonList(contacts.get(random(0, contacts.size()))));
             customer.setName("some_name" + i);
             customer.setDetails("some_details");
+            customerService.save(customer);
         }
     }
 
@@ -140,14 +141,15 @@ public class TestDataCreator {
                     .bookingTo(from.plusMinutes(random(15, 180)))
                     .comment(String.valueOf(random(20, 4000)))
                     .customer(getRandomObj(customers))
+                    .trampsAmount(random(1, 3))
                     .build();
-
-            orderService.save(order);
+            order.setPrice(PriceCalculator.calculate(order));
+            orderService.saveWithRegDate(order);
         }
     }
 
     private <T> T getRandomObj(List<T> list){
-       return list.get(random(0, list.size()-1));
+       return list.get(random(0, list.size()));
     }
 
     private int random(int from, int to){
@@ -157,14 +159,14 @@ public class TestDataCreator {
     private LocalDateTime randomDayInLastMonth(){
         return LocalDateTime.now()
                 .minusMonths(1)
-                .withDayOfMonth(random(0, 25))
+                .withDayOfMonth(random(1, 27))
                 .withHour(random(9, 21));
     }
 
     private LocalDate randomLocalDate(int fromYear, int toYear){
         int year = random(fromYear, toYear);
         int month = random(1, 12);
-        int day = random(1, 25);
+        int day = random(1, 27);
         return LocalDate.of(year, month, day);
     }
 

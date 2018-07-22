@@ -4,6 +4,7 @@ import com.spacefox.frida.domain.*;
 import com.spacefox.frida.domain.DTO.OrderCreateDTO;
 import com.spacefox.frida.domain.DTO.OrderDTO;
 import com.spacefox.frida.repository.OrderRepository;
+import com.spacefox.frida.utils.PriceCalculator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
     public void update(OrderDTO dto) {
         Order order = mapper.map(dto, Order.class);
         if(repository.existsById(order.getId())){
-            repository.delete(order);
+            repository.save(order);
         }
     }
 
@@ -118,6 +119,7 @@ public class OrderServiceImpl implements OrderService {
                 .hall(hall)
                 .build();
 
+        order.setPrice(PriceCalculator.calculate(order));
         repository.save(order);
     }
 
