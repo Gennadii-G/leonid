@@ -15,7 +15,7 @@ import java.util.Map;
 public class GlobalControllerAdvice {
 
 
-    @Autowired
+//    @Autowired
     private SecUtil secUtil;
 //
 //    @ModelAttribute

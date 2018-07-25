@@ -3,7 +3,8 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.DTO.DiscountDTO;
 import com.spacefox.frida.domain.Discount;
 import com.spacefox.frida.repository.DiscountRepository;
-import com.spacefox.frida.services.converter.DiscountToDiscountDTO;
+import com.spacefox.frida.services.converter.discount.DiscountDTOToDiscount;
+import com.spacefox.frida.services.converter.discount.DiscountToDiscountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class DiscountServiceImpl implements DiscountService {
     private DiscountRepository repository;
     @Autowired
     private DiscountToDiscountDTO converter;
+    @Autowired
+    private DiscountDTOToDiscount converterDTO;
 
 
     @Override
@@ -56,7 +59,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void save(DiscountDTO dto) {
-        save(converter.convert(dto));
+        save(converterDTO.convert(dto));
     }
 
     @Override
@@ -66,7 +69,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void delete(DiscountDTO dto) {
-        Discount discount = converter.convert(dto);
+        Discount discount = converterDTO.convert(dto);
         if(repository.existsById(discount.getId())){
             repository.delete(discount);
         }
@@ -84,7 +87,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void update(DiscountDTO dto) {
-        Discount discount = converter.convert(dto);
+        Discount discount = converterDTO.convert(dto);
         if(repository.existsById(discount.getId())){
             repository.save(discount);
         }

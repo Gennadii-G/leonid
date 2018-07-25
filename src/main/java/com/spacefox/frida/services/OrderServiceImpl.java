@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
                 .hall(hall)
                 .build();
 
-        order.setPrice(PriceCalculator.calculate(order));
+        calculatePrice(order);
         repository.save(order);
     }
 
@@ -148,5 +148,10 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return result;
+    }
+
+    @Override
+    public void calculatePrice(Order order) {
+        PriceCalculator.calculate(order);
     }
 }

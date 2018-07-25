@@ -143,7 +143,7 @@ public class TestDataCreator {
                     .customer(getRandomObj(customers))
                     .trampsAmount(random(1, 3))
                     .build();
-            order.setPrice(PriceCalculator.calculate(order));
+            orderService.calculatePrice(order);
             orderService.saveWithRegDate(order);
         }
     }

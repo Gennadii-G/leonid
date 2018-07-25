@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 //import org.springframework.security.core.context.SecurityContextHolder;
 
-@Component
+//@Component
 public class SecUtil {
 
-    @Autowired
+//    @Autowired
     private UserService userService;
 
     public int accessLevel(){

@@ -21,7 +21,7 @@ public class NewsController {
 
     @JsonView(Transfer.Info.class)
     @GetMapping("/news/all")
-    public List<NewsDTO> addNews(){
+    public List<NewsDTO> addNews() {
         List<News> news = newsService.getAll();
         return newsService.getDTO(news);
     }
