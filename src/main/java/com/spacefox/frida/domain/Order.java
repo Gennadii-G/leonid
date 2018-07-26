@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,9 @@ public class Order {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     private int price;
+    @Column(nullable = false)
     private int trampsAmount;
+    private LocalDate eventDate;
     private LocalDate regDate;
     private LocalDateTime bookingFrom;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

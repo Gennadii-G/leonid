@@ -157,11 +157,15 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
                                    LocalDateTime to,
                                    int requiredAmount,
                                    TrampolineHall hall) {
+        int availableTramps = -1;
 
-            List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
-            long count = orders.stream().filter(ord -> !orderService.hasIntersection(ord, from, to)).count();
+        List<Order> orders = orderService.getByHallandDate(hall, from.toLocalDate());
+        int count = orders.stream().filter(ord -> orderService.hasIntersection(ord, from, to))
+                .mapToInt(Order::getTrampsAmount).sum();
 
-        return count >= requiredAmount;
+        availableTramps = hall.getTrampolines().size() - count;
+
+        return availableTramps >= requiredAmount;
     }
 
     @Override

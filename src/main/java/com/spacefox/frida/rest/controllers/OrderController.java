@@ -46,8 +46,7 @@ public class OrderController {
     @PostMapping("/order/add/neworder")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveOrder(OrderCreateDTO dto) {
-//        orderService.createNew(dto);
-        System.out.println("123");
+        orderService.createOrder(dto);
     }
 
     @GetMapping("/order/{id}")

@@ -108,15 +108,20 @@ public class OrderServiceImpl implements OrderService {
         Discount discount = discountService.getById(dto.getDiscount());
         User employee = userService.getSU();
         Customer customer = customerService.getById(dto.getCustomer());
+        dto.setEventDate(dto.getBookingFrom().toLocalDate());
         validate(dto, hall);
         validate(dto, discount);
 
         Order order = Order.builder()
                 .regDate(LocalDate.now())
+                .eventDate(dto.getEventDate())
+                .trampsAmount(dto.getTrampsAmount())
                 .bookingFrom(dto.getBookingFrom()).bookingTo(dto.getBookingTo())
                 .comment("comment")
-                .discount(discount).employee(employee).hall(hall).customer(customer)
+                .discount(discount)
+                .employee(employee)
                 .hall(hall)
+                .customer(customer)
                 .build();
 
         calculatePrice(order);
@@ -137,13 +142,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getByHallandDate(TrampolineHall hall, LocalDate date) {
-        return repository.findOrdersForDateAndHall(date, hall);
+        return repository.findOrdersForDateAndHall(date, hall.getId());
     }
 
     @Override
     public boolean hasIntersection(Order order, LocalDateTime from, LocalDateTime to) {
         boolean result = true;
-        if(order.getBookingFrom().isBefore(to) || order.getBookingTo().isAfter(from)){
+
+        System.out.println("sostoianie");
+        System.out.println(order.getBookingFrom().isAfter(to) || order.getBookingTo().isBefore(from));
+
+        if(order.getBookingFrom().isAfter(to) || order.getBookingTo().isBefore(from)) {
             result = false;
         }
 
