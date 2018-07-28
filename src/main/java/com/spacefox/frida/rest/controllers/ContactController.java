@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@RestController
 public class ContactController {
 
     @Autowired
@@ -18,27 +19,27 @@ public class ContactController {
     @Autowired
     private ModelMapper mapper;
 
-    @DeleteMapping("/contact/delete")
+    @DeleteMapping("/contact/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deletecontact(ContactDTO dto){
-        contactService.delete(mapper.map(dto, Contact.class));
+    public void deletecontact(@PathVariable Long id){
+        contactService.delete(id);
     }
 
-    @GetMapping("/contacts")
+    @GetMapping("/contact/all")
     public List<ContactDTO> allcontacts() {
-        return contactService.getDTO(contactService.getAll());
+        return contactService.convert(contactService.getAll());
     }
 
     @PostMapping("/contact/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void savecontact(@Valid ContactDTO dto) {
+    public void savecontact(@RequestBody @Valid ContactDTO dto) {
         contactService.save(mapper.map(dto, Contact.class));
     }
 
     @GetMapping("/contact/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ContactDTO contactById(@PathVariable Long id) {
-        return contactService.getDTO(contactService.getById(id));
+        return contactService.convert(contactService.getById(id));
     }
 
     @PutMapping("/picture/update/")
