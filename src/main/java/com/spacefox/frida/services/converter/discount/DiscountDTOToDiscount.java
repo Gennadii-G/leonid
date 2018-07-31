@@ -15,6 +15,8 @@ public class DiscountDTOToDiscount implements Converter<DiscountDTO, Discount> {
                 .description(source.getDescription())
                 .name(source.getName())
                 .discountFactor(source.getDiscountFactor())
+                .startAvailability(source.getStart())
+                .endAvailability(source.getEnd())
                 .build();
     }
 }

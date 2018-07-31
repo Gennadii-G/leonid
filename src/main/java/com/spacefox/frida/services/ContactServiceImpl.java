@@ -26,6 +26,9 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void save(Contact contact) {
+        if(contact.getId() != null){
+            contact.setId(null);
+        }
         repository.save(contact);
     }
 
@@ -56,13 +59,13 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactDTO getDTO(Contact contact) {
+    public ContactDTO convert(Contact contact) {
         return mapper.map(contact, ContactDTO.class);
     }
 
     @Override
-    public List<ContactDTO> getDTO(List<Contact> contact) {
-        return contact.stream().map(this::getDTO).collect(Collectors.toList());
+    public List<ContactDTO> convert(List<Contact> contact) {
+        return contact.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override

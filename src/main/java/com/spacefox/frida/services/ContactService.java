@@ -19,9 +19,9 @@ public interface ContactService {
 
     Contact getById(long id);
 
-    ContactDTO getDTO(Contact contact);
+    ContactDTO convert(Contact contact);
 
-    List<ContactDTO> getDTO(List<Contact> contact);
+    List<ContactDTO> convert(List<Contact> contact);
 
     long contactCount();
 }

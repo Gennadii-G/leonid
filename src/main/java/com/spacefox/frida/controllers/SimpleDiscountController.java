@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/123/discounts")
+//@Controller
+//@RequestMapping("/123/discounts")
 public class SimpleDiscountController {
 
     @Autowired

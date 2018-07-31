@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping(value = "/recordsManagement")
+//@Controller
+//@RequestMapping(value = "/recordsManagement")
 public class RecordsManagementController {
 
     @Autowired

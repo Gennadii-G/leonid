@@ -16,15 +16,17 @@ public interface DiscountService {
 
     void save(Discount discount);
 
-    void save(DiscountDTO dto);
-
     Discount getById(Long id);
 
     void delete(DiscountDTO dto);
 
-    DiscountDTO getDTO(Discount discount);
+    void delete(Long id);
 
-    List<DiscountDTO> getDTO(List<Discount> discounts);
+    DiscountDTO convert(Discount discount);
+
+    Discount convert(DiscountDTO dto);
+
+    List<DiscountDTO> convert(List<Discount> discounts);
 
     void update(DiscountDTO dto);
 

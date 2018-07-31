@@ -3,9 +3,8 @@ package com.spacefox.frida.services;
 import com.spacefox.frida.domain.DTO.DiscountDTO;
 import com.spacefox.frida.domain.Discount;
 import com.spacefox.frida.repository.DiscountRepository;
-import com.spacefox.frida.services.converter.discount.DiscountDTOToDiscount;
-import com.spacefox.frida.services.converter.discount.DiscountToDiscountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,9 +17,7 @@ public class DiscountServiceImpl implements DiscountService {
     @Autowired
     private DiscountRepository repository;
     @Autowired
-    private DiscountToDiscountDTO converter;
-    @Autowired
-    private DiscountDTOToDiscount converterDTO;
+    private ConversionService conversionService;
 
 
     @Override
@@ -33,7 +30,7 @@ public class DiscountServiceImpl implements DiscountService {
         return repository
                 .findAvailableDiscounts(LocalDate.now())
                 .stream()
-                .map(this::getDTO)
+                .map(this::convert)
                 .collect(Collectors.toList());
     }
 
@@ -54,12 +51,10 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void save(Discount discount) {
+        if(discount.getId() != null){
+            discount.setId(null);
+        }
         repository.save(discount);
-    }
-
-    @Override
-    public void save(DiscountDTO dto) {
-        save(converterDTO.convert(dto));
     }
 
     @Override
@@ -69,25 +64,37 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void delete(DiscountDTO dto) {
-        Discount discount = converterDTO.convert(dto);
+        Discount discount = conversionService.convert(dto, Discount.class);
         if(repository.existsById(discount.getId())){
             repository.delete(discount);
         }
     }
 
     @Override
-    public DiscountDTO getDTO(Discount discount) {
-        return converter.convert(discount);
+    public void delete(Long id) {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
     }
 
     @Override
-    public List<DiscountDTO> getDTO(List<Discount> discounts) {
-        return discounts.stream().map(this::getDTO).collect(Collectors.toList());
+    public DiscountDTO convert(Discount discount) {
+        return conversionService.convert(discount, DiscountDTO.class);
+    }
+
+    @Override
+    public Discount convert(DiscountDTO dto) {
+        return conversionService.convert(dto, Discount.class);
+    }
+
+    @Override
+    public List<DiscountDTO> convert(List<Discount> discounts) {
+        return discounts.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override
     public void update(DiscountDTO dto) {
-        Discount discount = converterDTO.convert(dto);
+        Discount discount = conversionService.convert(dto, Discount.class);
         if(repository.existsById(discount.getId())){
             repository.save(discount);
         }
