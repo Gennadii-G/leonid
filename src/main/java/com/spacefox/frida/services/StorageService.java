@@ -1,8 +1,10 @@
 package com.spacefox.frida.services;
 
+import com.spacefox.frida.domain.PictureJH;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public interface StorageService {
 
@@ -16,6 +18,9 @@ public interface StorageService {
 
     Path download(String filename);
 
-    int size(String filename);
+    long size(String filename);
+
+    List<PictureJH> getAllInfo();
+
 
 }

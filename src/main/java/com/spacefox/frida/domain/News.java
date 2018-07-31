@@ -21,14 +21,12 @@ public class News {
     private Long id;
 
     private String picture;
-
     @Column(nullable = false)
     private String title;
-
     @Column(nullable = false)
     private String body;
-
     @Column(nullable = false)
     private LocalDate createdDate;
+    @Column(nullable = false)
     private LocalDateTime publicationDate;
 }

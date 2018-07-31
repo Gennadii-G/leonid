@@ -78,8 +78,7 @@ public class RestPictureAdapterImpl implements RestPictureAdapter {
     @Override
     public ResponseEntity deletePicture(String filename) {
         ResponseEntity resp;
-        boolean isDelete = storageService.delete(filename);
-        if(!storageService.exist(filename)){
+        if(!storageService.exist(filename)) {
             resp = REBuilder.badResponse("Файл с таким именем не найден");
         }else if(storageService.delete(filename)) {
             resp = REBuilder.okResponse("Файл удален");

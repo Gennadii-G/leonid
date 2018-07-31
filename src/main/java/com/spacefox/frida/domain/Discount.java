@@ -4,6 +4,7 @@ package com.spacefox.frida.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Entity
@@ -20,8 +21,11 @@ public class Discount {
     private int discountFactor;
     @ToString.Exclude
     private String description;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private LocalDate startAvailability;
+    @Column(nullable = false)
     private LocalDate endAvailability;
 
 }

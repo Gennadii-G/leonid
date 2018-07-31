@@ -2,6 +2,7 @@ package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.DTO.NewsDTO;
 import com.spacefox.frida.domain.News;
+import com.spacefox.frida.domain.PictureJH;
 import com.spacefox.frida.repository.NewsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -33,27 +34,36 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News save(News news) {
-        return repository.save(news);
-    }
-
-    @Override
-    public boolean save(NewsDTO newsDTO) {
-        News news = mapper.map(newsDTO, News.class);
+    public boolean save(News news) {
         news.setCreatedDate(LocalDate.now());
+        news.setId(null);
         news = repository.save(news);
         return repository.existsById(news.getId());
     }
 
     @Override
-    public NewsDTO getDTO(News news) {
-        NewsDTO newsDTO = mapper.map(news, NewsDTO.class);
+    public boolean update(News news) {
+        if(repository.existsById(news.getId())){
+            News orig = repository.getOne(news.getId());
+            news.setCreatedDate(orig.getCreatedDate());
+            news = repository.save(news);
+        }
+        return repository.existsById(news.getId());
+    }
+
+    @Override
+    public NewsDTO convert(News news) {
         return mapper.map(news, NewsDTO.class);
     }
 
     @Override
-    public List<NewsDTO> getDTO(List<News> news) {
-        return news.stream().map(this::getDTO).collect(Collectors.toList());
+    public News convert(NewsDTO dto) {
+        return mapper.map(dto, News.class);
+    }
+
+    @Override
+    public List<NewsDTO> convert(List<News> news) {
+        return news.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override
@@ -62,15 +72,18 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public NewsDTO getDTOById(long id) {
-        News news = repository.getOne(id);
-        return mapper.map(news, NewsDTO.class);
+    public NewsDTO delete(NewsDTO dto) {
+        News news = mapper.map(dto, News.class);
+        if(repository.existsById(news.getId())){
+            repository.delete(news);
+        }
+        return dto;
     }
 
     @Override
-    public NewsDTO delete(NewsDTO dto) {
-        News news = mapper.map(dto, News.class);
-          repository.delete(news);
-        return dto;
+    public void delete(Long id) {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
     }
 }

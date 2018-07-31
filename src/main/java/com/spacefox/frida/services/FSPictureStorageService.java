@@ -1,8 +1,11 @@
 package com.spacefox.frida.services;
 
+import com.spacefox.frida.domain.PictureJH;
+import com.spacefox.frida.repository.PictureJHRepository;
 import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @NoArgsConstructor
@@ -24,6 +29,8 @@ public class FSPictureStorageService implements StorageService {
     @Value("${pictures.dir.name}")
     private String dirName;
     private String fullDirPath;
+    @Autowired
+    private PictureJHRepository pictureRepository;
 
     @PostConstruct
     private void init() {
@@ -55,9 +62,9 @@ public class FSPictureStorageService implements StorageService {
                 log.warn("нельзя использовать относительный путь при загрузке файла " + filename);
                 throw new IOException();
             }
-            filename = file.getOriginalFilename();
             @Cleanup InputStream inputStream = file.getInputStream();
             Files.copy(inputStream, this.targetDir.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+            genMetadata(filename);
             res = true;
         } catch(IOException e) {
             log.error("Ошибка сохранения файла " + filename);
@@ -74,6 +81,7 @@ public class FSPictureStorageService implements StorageService {
             log.debug("Удаление файла " + pic.getFileName());
             if(Files.exists(pic)) {
                 Files.delete(pic);
+                delMetadata(filename);
                 log.info("файл удален");
                 res = true;
             }
@@ -104,11 +112,11 @@ public class FSPictureStorageService implements StorageService {
     }
 
     @Override
-    public int size(String filename) {
-        int size = 0;
+    public long size(String filename) {
+        long size = 0;
         try {
             Path p = this.targetDir.resolve(filename);
-            size = (int) Files.size(p);
+            size =  Files.size(p);
         }catch(IOException e){
             log.error("ошибка проверки размера файла " + filename);
             e.printStackTrace();
@@ -116,9 +124,32 @@ public class FSPictureStorageService implements StorageService {
         return size;
     }
 
+    private void genMetadata(String filename) {
+        if(exist(filename)) {
+            PictureJH pic = new PictureJH();
+            pic.setSize(size(filename));
+            pic.setFilename(filename);
+            pic.setKey(filename);
+            pic.setWhenSaved(LocalDateTime.now());
+            pictureRepository.save(pic);
+        }
+    }
+
+    private void delMetadata(String filename) throws IOException {
+        PictureJH pic = pictureRepository.findByKey(filename).orElse(null);
+        if(!exist(filename) && pic != null) {
+            pictureRepository.deleteFileDataByKey(filename);
+        }
+    }
+
     @Override
     public boolean exist(String fileName) {
         return Files.exists(this.targetDir.resolve(fileName));
     }
 
+
+    @Override
+    public List<PictureJH> getAllInfo() {
+        return pictureRepository.findAll();
+    }
 }

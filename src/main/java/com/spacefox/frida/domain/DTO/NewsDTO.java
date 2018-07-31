@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter @Setter
@@ -34,8 +35,8 @@ public class NewsDTO {
 
     @JsonView({Transfer.Info.class, Transfer.Update.class})
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date publicationDate;
+    private LocalDateTime publicationDate;
 
     @JsonView({Transfer.Admin.class})
-    private Date createdDate;
+    private LocalDateTime createdDate;
 }

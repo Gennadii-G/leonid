@@ -12,8 +12,8 @@ public class Test {
 
         ModelMapper mapper = new ModelMapper();
 
-        PictureJH pic = new PictureJH();
-        pic.setFilename("fileName2222");
-        pic.setSize(3000000);
+//        PictureJH pic = new PictureJH();
+//        pic.setFilename("fileName2222");
+//        pic.setSize(3000000);
     }
 }

@@ -19,6 +19,7 @@ public class Contact {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String firstName;
     private String lastName;
     private String phoneNumber;
