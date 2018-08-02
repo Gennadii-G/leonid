@@ -37,7 +37,7 @@ public class NewsControllerTest {
         mockNews.setId(1L);
 
 
-        Mockito.when(newsService.getDTOById(Mockito.anyLong())).thenReturn(mockNews);
+        Mockito.when(newsService.convert(newsService.getById(Mockito.anyLong()))).thenReturn(mockNews);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/news/1")
                 .accept(MediaType.APPLICATION_JSON);
