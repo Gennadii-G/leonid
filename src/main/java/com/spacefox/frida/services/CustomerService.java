@@ -19,9 +19,11 @@ public interface CustomerService {
 
     Customer getById(long id);
 
-    CustomerDTO getDTO(Customer customer);
+    CustomerDTO convert(Customer customer);
 
-    List<CustomerDTO> getDTO(List<Customer> customers);
+    Customer convert(CustomerDTO dto);
+
+    List<CustomerDTO> convert(List<Customer> customers);
 
     long customersCount();
 

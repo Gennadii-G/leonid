@@ -32,6 +32,8 @@ public interface UserService {
 
     void delete(User user);
 
+    void delete(Long id);
+
     UserDTO getDTO(User user);
 
     User getSU();

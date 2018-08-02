@@ -90,6 +90,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(Long id) {
+        if(repository.existsById(id)) {
+            repository.deleteById(id);
+        }
+    }
+
+    @Override
     public UserDTO getDTO(User user) {
         return mapper.map(user, UserDTO.class);
     }

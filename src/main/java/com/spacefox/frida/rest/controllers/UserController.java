@@ -17,30 +17,36 @@ public class UserController {
 
     @DeleteMapping("/user/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteDiscount(UserDTO dto){
+    public void deleteUser(UserDTO dto){
         userService.delete(dto);
     }
 
+    @DeleteMapping("/user/delete/id")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(Long id){
+        userService.delete(id);
+    }
+
     @GetMapping("/users")
-    public List<UserDTO> allDiscounts() {
+    public List<UserDTO> allUsers() {
         return userService.getDTO(userService.getAll());
     }
 
     @PostMapping("/user/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveDiscount(@Valid UserDTO dto) {
+    public void saveUser(@Valid UserDTO dto) {
         userService.save(dto);
     }
 
     @GetMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO discountById(@PathVariable Long id) {
+    public UserDTO userById(@PathVariable Long id) {
         return userService.getDTO(userService.getById(id));
     }
 
     @PutMapping("/user/update/")
     @ResponseStatus(HttpStatus.OK)
-    public void updateDiscount(UserDTO dto){
+    public void updateUser(UserDTO dto){
         userService.update(dto);
     }
 }

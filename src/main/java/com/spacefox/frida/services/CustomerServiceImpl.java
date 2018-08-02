@@ -25,6 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void save(Customer customer) {
+        System.out.println(customer);
+        customer.setId(null);
         repository.save(customer);
     }
 
@@ -55,13 +57,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getDTO(Customer customer) {
+    public CustomerDTO convert(Customer customer) {
         return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override
-    public List<CustomerDTO> getDTO(List<Customer> customers) {
-        return customers.stream().map(this::getDTO).collect(Collectors.toList());
+    public Customer convert(CustomerDTO dto) {
+        return mapper.map(dto, Customer.class);
+    }
+
+    @Override
+    public List<CustomerDTO> convert(List<Customer> customers) {
+        return customers.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override

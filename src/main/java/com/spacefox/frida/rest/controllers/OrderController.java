@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -39,13 +40,13 @@ public class OrderController {
 
     @PostMapping("/order/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveOrder(OrderDTO dto) {
+    public void saveOrder(@RequestBody @Valid OrderDTO dto) {
         orderService.save(dto);
     }
 
     @PostMapping("/order/add/neworder")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveOrder(OrderCreateDTO dto) {
+    public void saveOrder(@RequestBody @Valid OrderCreateDTO dto) {
         orderService.createOrder(dto);
     }
 
@@ -57,7 +58,7 @@ public class OrderController {
 
     @PutMapping("/order/update/")
     @ResponseStatus(HttpStatus.OK)
-    public void updateOrder(OrderDTO dto){
+    public void updateOrder(@RequestBody @Valid OrderDTO dto){
         orderService.update(dto);
     }
 

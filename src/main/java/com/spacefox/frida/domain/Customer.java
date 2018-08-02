@@ -14,7 +14,7 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String Name;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name="customer_id", referencedColumnName = "id")
     private List<Contact> contacts;
     private String details;

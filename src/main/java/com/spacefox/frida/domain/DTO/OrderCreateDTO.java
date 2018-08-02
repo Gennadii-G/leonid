@@ -22,8 +22,6 @@ public class OrderCreateDTO {
     @NotNull(message = "Не указана дата записи")
     @Size(max=500, message = "Превышен максимальный размер комментария в 500 символов")
     private String comment;
-    @NotNull(message = "Не указан час посещения")
-    private Integer startHour;
     private LocalDateTime regDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate eventDate;
