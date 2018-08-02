@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,25 +26,25 @@ public class TrampolineHallController {
 
     @PostMapping("trampolineHall/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTrampHall(TrampolineHallDTO hallDTO){
+    public void addTrampHall(@RequestBody @Valid TrampolineHallDTO hallDTO){
         hallService.createTrampolineHall(hallDTO);
     }
 
     @PutMapping("trampolineHall/update")
     @ResponseStatus(HttpStatus.OK)
-    public void updateTrampHall(TrampolineHallDTO hallDTO){
+    public void updateTrampHall(@RequestBody @Valid TrampolineHallDTO hallDTO){
         hallService.update(hallDTO);
     }
 
     @DeleteMapping("trampolineHall/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteTrampHall(TrampolineHallDTO hallDTO){
+    public void deleteTrampHall(@Valid TrampolineHallDTO hallDTO){
         hallService.delete(hallDTO);
     }
 
     @PostMapping("trampolineHall/tramps/add")
     @ResponseStatus(HttpStatus.OK)
-    public void addTramps(IdentifierDTO dto){
+    public void addTramps(@RequestBody @Valid IdentifierDTO dto){
         hallService.addTrampsById(dto.getTargetId(), dto.getIdentifiers());
     }
 }
