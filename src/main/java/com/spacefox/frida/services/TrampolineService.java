@@ -18,13 +18,17 @@ public interface TrampolineService {
 
     void save(TrampolineDTO dto);
 
-    void update(TrampolineDTO dto);
-
     void update(Trampoline tramp);
-
-    void delete(TrampolineDTO dto);
 
     void delete(Trampoline tramp);
 
+    TrampolineDTO convert(Trampoline trampoline);
+
+    Trampoline convert(TrampolineDTO dto);
+
+    List<TrampolineDTO> convert(List<Trampoline> trampolines);
+
     boolean isBooked(Trampoline trampoline, LocalDateTime from, LocalDateTime to);
+
+    void delete(Long id);
 }

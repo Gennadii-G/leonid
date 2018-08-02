@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import javax.transaction.TransactionalException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TrampolineServiceImpl implements TrampolineService {
@@ -38,12 +39,14 @@ public class TrampolineServiceImpl implements TrampolineService {
 
     @Override
     public void save(Trampoline tramp) {
+        tramp.setId(null);
         repository.save(tramp);
     }
 
     @Transactional
     @Override
     public void save(TrampolineDTO dto) {
+        dto.setId(null);
         Trampoline tramp = mapper.map(dto, Trampoline.class);
         long hallId = dto.getHallId();
 
@@ -54,32 +57,35 @@ public class TrampolineServiceImpl implements TrampolineService {
     }
 
     @Override
-    public void update(TrampolineDTO dto) {
-        if(repository.existsById(dto.getId())){
-            save(dto);
-        } else {
-            throw new TransactionalException("зал не найден", new IllegalArgumentException());
-        }
-    }
-
-    @Override
     public void update(Trampoline tramp) {
-        repository.save(tramp);
-    }
-
-    @Override
-    public void delete(TrampolineDTO dto) {
-        Trampoline tramp = mapper.map(dto, Trampoline.class);
         if(repository.existsById(tramp.getId())){
-            repository.delete(tramp);
+            repository.save(tramp);
         }
     }
+
 
     @Override
     public void delete(Trampoline tramp) {
         if(repository.existsById(tramp.getId())){
             repository.delete(tramp);
         }
+    }
+
+    @Override
+    public TrampolineDTO convert(Trampoline trampoline) {
+        TrampolineDTO dto = mapper.map(trampoline, TrampolineDTO.class);
+        return dto;
+    }
+
+    @Override
+    public Trampoline convert(TrampolineDTO dto) {
+        Trampoline trampoline = mapper.map(dto, Trampoline.class);
+        return trampoline;
+    }
+
+    @Override
+    public List<TrampolineDTO> convert(List<Trampoline> trampolines) {
+        return trampolines.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override
@@ -96,5 +102,12 @@ public class TrampolineServiceImpl implements TrampolineService {
         }).count();
 
         return count > 0;
+    }
+
+    @Override
+    public void delete(Long id) {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
     }
 }
