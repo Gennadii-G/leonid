@@ -4,7 +4,6 @@ package com.spacefox.frida.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Entity
