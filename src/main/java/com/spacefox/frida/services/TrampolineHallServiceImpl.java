@@ -5,7 +5,6 @@ import com.spacefox.frida.domain.Order;
 import com.spacefox.frida.domain.Trampoline;
 import com.spacefox.frida.domain.TrampolineHall;
 import com.spacefox.frida.domain.catalogs.TrampolineType;
-import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.repository.TrampolineHallRepository;
 import com.spacefox.frida.utils.builders.TrampolineHallBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -84,13 +83,18 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     }
 
     @Override
-    public TrampolineHallDTO getDTO(TrampolineHall hall) {
+    public TrampolineHallDTO convert(TrampolineHall hall) {
         return mapper.map(hall, TrampolineHallDTO.class);
     }
 
     @Override
-    public List<TrampolineHallDTO> getDTO(List<TrampolineHall> halls) {
-        return halls.stream().map(this::getDTO).collect(Collectors.toList());
+    public TrampolineHall convert(TrampolineHallDTO dto) {
+        return mapper.map(dto, TrampolineHall.class);
+    }
+
+    @Override
+    public List<TrampolineHallDTO> convert(List<TrampolineHall> halls) {
+        return halls.stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override

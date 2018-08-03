@@ -21,7 +21,13 @@ public class TrampolineHallController {
     @ResponseStatus(HttpStatus.OK)
     public List<TrampolineHallDTO> getAllHalls() {
         List<TrampolineHall> halls = hallService.getAll();
-        return hallService.getDTO(halls);
+        return hallService.convert(halls);
+    }
+
+    @GetMapping("/trampolineHall/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TrampolineHallDTO getHall(@PathVariable Long id) {
+        return hallService.convert(hallService.getById(id));
     }
 
     @PostMapping("trampolineHall/add")

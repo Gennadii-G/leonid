@@ -31,9 +31,11 @@ public interface TrampolineHallService {
 
     void delete(TrampolineHallDTO dto);
 
-    TrampolineHallDTO getDTO(TrampolineHall hall);
+    TrampolineHallDTO convert(TrampolineHall hall);
 
-    List<TrampolineHallDTO> getDTO(List<TrampolineHall> halls);
+    TrampolineHall convert(TrampolineHallDTO dto);
+
+    List<TrampolineHallDTO> convert(List<TrampolineHall> halls);
 
     boolean exists(long id);
 
