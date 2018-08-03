@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("/user/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveUser(@Valid UserDTO dto) {
+    public void saveUser(@RequestBody @Valid UserDTO dto) {
         userService.save(dto);
     }
 
@@ -46,7 +46,7 @@ public class UserController {
 
     @PutMapping("/user/update/")
     @ResponseStatus(HttpStatus.OK)
-    public void updateUser(UserDTO dto){
+    public void updateUser(@RequestBody @Valid UserDTO dto){
         userService.update(dto);
     }
 }

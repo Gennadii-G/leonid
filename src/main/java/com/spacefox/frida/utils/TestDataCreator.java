@@ -34,7 +34,7 @@ public class TestDataCreator {
     private OrderService orderService;
 
     @Transactional
-    public void createDiscounts(int amount){
+    public void createDiscounts(int amount) {
         for(int i = 0; i < amount; i++) {
             Discount discount = Discount.builder()
                     .name("Discount_" + i)
@@ -148,11 +148,11 @@ public class TestDataCreator {
         }
     }
 
-    private <T> T getRandomObj(List<T> list){
+    private <T> T getRandomObj(List<T> list) {
        return list.get(random(0, list.size()));
     }
 
-    private int random(int from, int to){
+    private int random(int from, int to) {
         return rand.nextInt((to - from)) + from;
     }
 
