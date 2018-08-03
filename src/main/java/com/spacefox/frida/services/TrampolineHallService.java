@@ -48,4 +48,6 @@ public interface TrampolineHallService {
     long hallsCount();
 
     TrampolineHall getByTrampoline(Trampoline trampoline);
+
+    Long profit(Long id);
 }

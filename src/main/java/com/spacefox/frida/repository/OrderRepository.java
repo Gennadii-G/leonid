@@ -21,4 +21,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             nativeQuery = true)
     List<Order> findOrdersForDateAndHall(@Param("eventDate") LocalDate eveDate,
                                          @Param("hallId") Long hallId);
+
+    List<Order> findByHall(TrampolineHall hall);
 }

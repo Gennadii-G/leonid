@@ -181,4 +181,14 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     public TrampolineHall getByTrampoline(Trampoline trampoline) {
         return repository.findByTrampoline(trampoline.getId());
     }
+
+    @Override
+    public Long profit(Long id) {
+        if(!repository.existsById(id)){
+            throw new IllegalArgumentException("hall not found");
+        }
+        TrampolineHall hall = repository.getOne(id);
+        List<Order> orders = orderService.getByHall(hall);
+        return (long) orders.stream().mapToInt(Order::getPrice).sum();
+    }
 }

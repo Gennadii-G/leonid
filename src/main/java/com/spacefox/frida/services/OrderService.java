@@ -42,4 +42,6 @@ public interface OrderService {
     boolean hasIntersection(Order order, LocalDateTime from, LocalDateTime to);
 
     void calculatePrice(Order order);
+
+    List<Order> getByHall(TrampolineHall hall);
 }

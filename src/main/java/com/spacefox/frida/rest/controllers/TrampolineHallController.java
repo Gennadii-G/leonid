@@ -17,40 +17,42 @@ public class TrampolineHallController {
     @Autowired
     private TrampolineHallService hallService;
 
-    @GetMapping("/trampolineHalls")
+    @GetMapping("/trampolinehalls")
     @ResponseStatus(HttpStatus.OK)
     public List<TrampolineHallDTO> getAllHalls() {
         List<TrampolineHall> halls = hallService.getAll();
         return hallService.convert(halls);
     }
 
-    @GetMapping("/trampolineHall/{id}")
+    @GetMapping("/trampolinehall/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TrampolineHallDTO getHall(@PathVariable Long id) {
         return hallService.convert(hallService.getById(id));
     }
 
-    @PostMapping("trampolineHall/add")
+    @PostMapping("trampolinehall/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addTrampHall(@RequestBody @Valid TrampolineHallDTO hallDTO){
         hallService.createTrampolineHall(hallDTO);
     }
 
-    @PutMapping("trampolineHall/update")
+    @PutMapping("trampolinehall/update")
     @ResponseStatus(HttpStatus.OK)
     public void updateTrampHall(@RequestBody @Valid TrampolineHallDTO hallDTO){
         hallService.update(hallDTO);
     }
 
-    @DeleteMapping("trampolineHall/delete")
+    @DeleteMapping("trampolinehall/delete")
     @ResponseStatus(HttpStatus.OK)
     public void deleteTrampHall(@Valid TrampolineHallDTO hallDTO){
         hallService.delete(hallDTO);
     }
 
-    @PostMapping("trampolineHall/tramps/add")
+    @GetMapping("/trampolinehall/profit/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void addTramps(@RequestBody @Valid IdentifierDTO dto){
-        hallService.addTrampsById(dto.getTargetId(), dto.getIdentifiers());
+    public Long getHallProfit(@PathVariable Long id) {
+        return hallService.profit(id);
     }
+
+//    profit
 }

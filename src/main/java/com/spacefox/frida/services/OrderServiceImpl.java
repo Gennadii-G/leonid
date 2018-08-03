@@ -163,4 +163,10 @@ public class OrderServiceImpl implements OrderService {
     public void calculatePrice(Order order) {
         PriceCalculator.calculate(order);
     }
+
+    @Override
+    public List<Order> getByHall(TrampolineHall hall) {
+        List<Order> orders = repository.findByHall(hall);
+        return orders;
+    }
 }
