@@ -24,10 +24,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void save(Customer customer) {
-        System.out.println(customer);
+    public Customer save(Customer customer) {
         customer.setId(null);
-        repository.save(customer);
+        return repository.save(customer);
     }
 
     @Override
@@ -74,5 +73,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public long customersCount() {
         return repository.count();
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
     }
 }

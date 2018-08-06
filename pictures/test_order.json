@@ -1,0 +1,87 @@
+{
+  "bookingFrom": "2018-08-06T12:41:27.504Z",
+  "bookingTo": "2018-08-06T12:41:27.504Z",
+  "comment": "The best client",
+  "customer": {
+    "contacts": [
+      {
+        "address": "ubileinaia 31 fdhber",
+        "age": 23,
+        "firstName": "Vasilii",
+        "lastName": "Popovich",
+        "phoneNumber": "12-12-12"
+      }
+    ],
+    "details": "Lubit shelkovistie vechy",
+    "name": "Vasek"
+  },
+  "discount": {
+    "description": "DR",
+    "discountFactor": 10,
+    "end": "2020-08-06",
+    "name": "DR",
+    "start": "2015-08-06"
+  },
+  "employee": {
+    "active": true,
+    "contacts": [
+      {
+        "address": "ubileinaia 31 dfhrt",
+        "age": 20,
+        "firstName": "Ivan",
+        "lastName": "Drozd",
+        "phoneNumber": "345-345"
+      }
+    ],
+    "lastName": "string",
+    "login": "string",
+    "name": "string",
+    "password": "string",
+    "roles": [
+      "ODMEN"
+    ],
+    "secondName": "string"
+  },
+  "hall": {
+    "address": "ubileina 23dfgh",
+    "name": "Obednia",
+    "phone": "234-234",
+    "price": 200,
+    "trampolines": [
+      {
+        "broken": true,
+        "description": "string",
+        "lastMaintenance": "2010-08-06",
+        "name": "string",
+        "nextMaintenance": "2020-08-06",
+        "type": "BIG"
+      },
+	  {
+        "broken": true,
+        "description": "string",
+        "lastMaintenance": "2010-08-06",
+        "name": "string",
+        "nextMaintenance": "2020-08-06",
+        "type": "BIG"
+      },
+	  {
+        "broken": true,
+        "description": "string",
+        "lastMaintenance": "2010-08-06",
+        "name": "string",
+        "nextMaintenance": "2020-08-06",
+        "type": "BIG"
+      },
+	  {
+        "broken": true,
+        "description": "string",
+        "lastMaintenance": "2010-08-06",
+        "name": "string",
+        "nextMaintenance": "2020-08-06",
+        "type": "BIG"
+      }
+    ],
+    "trampsAmount": 0
+  },
+  "trampsAmount": 2
+}

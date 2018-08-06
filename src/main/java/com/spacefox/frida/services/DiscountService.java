@@ -14,7 +14,7 @@ public interface DiscountService {
 
     Discount getByName(String name);
 
-    void save(Discount discount);
+    Discount save(Discount discount);
 
     Discount getById(Long id);
 
@@ -33,4 +33,6 @@ public interface DiscountService {
     List<Discount> availableDiscounts(LocalDate date);
 
     long discountCount();
+
+    boolean exist(Long id);
 }

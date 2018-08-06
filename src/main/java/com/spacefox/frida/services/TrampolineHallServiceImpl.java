@@ -45,8 +45,8 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
     }
 
     @Override
-    public void save(TrampolineHall hall) {
-        repository.save(hall);
+    public TrampolineHall save(TrampolineHall hall) {
+        return repository.save(hall);
     }
 
     @Override
@@ -190,5 +190,10 @@ public class TrampolineHallServiceImpl implements TrampolineHallService {
         TrampolineHall hall = repository.getOne(id);
         List<Order> orders = orderService.getByHall(hall);
         return (long) orders.stream().mapToInt(Order::getPrice).sum();
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
     }
 }

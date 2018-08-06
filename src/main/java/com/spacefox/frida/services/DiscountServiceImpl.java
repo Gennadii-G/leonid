@@ -50,11 +50,11 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public void save(Discount discount) {
+    public Discount save(Discount discount) {
         if(discount.getId() != null){
             discount.setId(null);
         }
-        repository.save(discount);
+        return repository.save(discount);
     }
 
     @Override
@@ -103,5 +103,10 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public long discountCount() {
         return repository.count();
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
     }
 }

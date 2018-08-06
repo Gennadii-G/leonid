@@ -1,15 +1,16 @@
 package com.spacefox.frida.services;
 
 import com.spacefox.frida.domain.*;
-import com.spacefox.frida.domain.DTO.OrderCreateDTO;
-import com.spacefox.frida.domain.DTO.OrderDTO;
+import com.spacefox.frida.domain.DTO.*;
 import com.spacefox.frida.repository.OrderRepository;
 import com.spacefox.frida.utils.PriceCalculator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,10 +59,22 @@ public class OrderServiceImpl implements OrderService {
         repository.deleteById(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void save(OrderDTO orderDTO) {
         Order order = mapper.map(orderDTO, Order.class);
-        save(order);
+        Customer customer = checkCustomer(orderDTO.getCustomer());
+        User emp = checkUser(orderDTO.getEmployee());
+        TrampolineHall hall = checkHall(orderDTO.getHall());
+        Discount discount = checkDiscount(orderDTO.getDiscount());
+
+        order.setCustomer(customer);
+        order.setEmployee(emp);
+        order.setHall(hall);
+        order.setDiscount(discount);
+
+        PriceCalculator.calculate(order);
+        saveWithRegDate(order);
     }
 
     @Override
@@ -168,5 +181,47 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getByHall(TrampolineHall hall) {
         List<Order> orders = repository.findByHall(hall);
         return orders;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    private Customer checkCustomer(@Valid CustomerDTO dto){
+        Customer cus;
+        Long id = dto.getId();
+        if(id == null || !customerService.exist(dto.getId())) {
+           cus = customerService.save(customerService.convert(dto));
+
+        }else {
+            cus = customerService.convert(dto);
+        }
+        return cus;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    private TrampolineHall checkHall(@Valid TrampolineHallDTO dto) {
+        TrampolineHall hall;
+        Long id = dto.getId();
+        if(id == null || !hallService.exist(dto.getId())) {
+            hall = hallService.save(hallService.convert(dto));
+        } else {
+            hall = hallService.convert(dto);
+        }
+        return hall;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    private User checkUser(@Valid UserDTO dto) {
+        User user;
+        return userService.getSU();
+    }
+
+    private Discount checkDiscount(DiscountDTO dto) {
+        Discount discount;
+        Long id = dto.getId();
+        if(id == null || !discountService.exist(dto.getId())) {
+            discount = discountService.save(discountService.convert(dto));
+        } else {
+            discount = discountService.convert(dto);
+        }
+        return discount;
     }
 }

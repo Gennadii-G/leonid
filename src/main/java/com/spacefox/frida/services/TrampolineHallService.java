@@ -14,7 +14,7 @@ public interface TrampolineHallService {
 
     TrampolineHall getByName(String name);
 
-    void save(TrampolineHall hall);
+    TrampolineHall save(TrampolineHall hall);
 
     void save(TrampolineHall hall, int trampsAmount);
 
@@ -50,4 +50,6 @@ public interface TrampolineHallService {
     TrampolineHall getByTrampoline(Trampoline trampoline);
 
     Long profit(Long id);
+
+    boolean exist(Long id);
 }
